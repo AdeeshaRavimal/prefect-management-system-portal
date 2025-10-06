@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prefects' Guild - Eheliyagoda Central College</title>
+    <link rel="icon" href="meroon Transparent logo prefect.png" type="image/png">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/main.min.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+
+        :root {
+            --primary-color: #8C1C13;
+            --secondary-color: #C6A98F;
+            --text-color: #3b3b3b;
+            --text-light: #5f5f5f;
+            --card-bg-color: #FFFAF0;
+            --light-text-color: #ffffff;
+            --glass-bg: rgba(255, 250, 240, 0.7);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #FFFBF5 0%, #FFF5E1 100%);
+            background-attachment: fixed;
+        }
+        
+        #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--card-bg-color); display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s ease-out, visibility 0.5s ease-out; text-align: center; }
+        #loader img { width: 100px; height: 100px; animation: pulsate 1.5s ease-in-out infinite; margin-bottom: 1rem; }
+        #loader-text { color: var(--primary-color); font-weight: 600; font-size: 1.2rem; margin: 0; }
+        @keyframes pulsate { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        #loader.hidden { opacity: 0; visibility: hidden; }
+
+        .portfolio-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 1rem 2rem; 
+            position: sticky; 
+            top: 0; 
+            z-index: 998;
+            transition: background-color 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+            background-color: transparent;
+            border-bottom: 1px solid transparent;
+            height: 50px;
+        }
+        .portfolio-header img {
+            transition: filter 0.4s ease;
+            filter: brightness(0) invert(1);
+        }
+        .portfolio-header h1 { margin: 0; font-size: 1.5rem; color: var(--light-text-color); transition: color 0.4s ease; }
+        .main-nav a { color: var(--light-text-color); text-decoration: none; font-weight: 600; padding-bottom: 5px; border-bottom: 2px solid transparent; transition: color 0.4s ease, border-color 0.3s; }
+        .main-nav a:hover { border-color: var(--light-text-color); }
+        #menu-toggle { color: var(--light-text-color); transition: color 0.4s ease; }
+
+        .portfolio-header.header-scrolled {
+            background-color: rgba(255, 250, 240, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        .portfolio-header.header-scrolled img {
+            filter: none;
+        }
+        .portfolio-header.header-scrolled h1 { color: var(--primary-color); }
+        .portfolio-header.header-scrolled .main-nav a { color: var(--text-color); }
+        .portfolio-header.header-scrolled .main-nav a:hover { color: var(--primary-color); border-color: var(--primary-color); }
+        .portfolio-header.header-scrolled #menu-toggle { color: var(--primary-color); }
+
+        .portfolio-header-left { display: flex; align-items: center; }
+        .main-nav ul { margin: 0; padding: 0; list-style: none; display: flex; }
+        .main-nav li { margin-left: 2rem; }
+        .header-right { display: flex; align-items: center; }
+        .login-btn { 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: all 0.2s ease-in-out; 
+            text-transform: uppercase;
+            border-radius: 8px;
+        }
+        .login-btn:hover { transform: translateY(-2px); }
+        
+        .hero-login-btn {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            color: var(--light-text-color);
+            padding: 0.8rem 2.5rem;
+            margin-top: 2.5rem;
+        }
+        .hero-login-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        #menu-toggle { display: none; }
+
+        .hero-section { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            min-height: 90vh; 
+            padding: 2rem; 
+            position: relative; 
+            color: var(--light-text-color); 
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('edit 2.jpg'); 
+            background-size: cover; 
+            background-position: center; 
+            background-attachment: fixed;
+            margin-top: -82px;
+        }
+        .hero-content { z-index: 2; max-width: 800px; }
+        .hero-greeting { font-size: 1.2rem; font-weight: 600; color: rgba(255, 255, 255, 0.9); margin: 0; }
+        .hero-title { font-size: 4rem; font-weight: 600; color: var(--light-text-color); margin: 0.5rem 0; line-height: 1.2; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .hero-divider { width: 80px; height: 4px; background-color: var(--light-text-color); margin: 1.5rem auto; }
+        .hero-description { font-size: 1.1rem; line-height: 1.7; color: rgba(255, 255, 255, 0.9); }
+
+        .portfolio-container { max-width: 1200px; margin: auto; padding: 2rem; }
+        .portfolio-section { background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); padding: 2.5rem; margin-bottom: 2rem; border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); }
+        .portfolio-section h3 { font-size: 2rem; color: var(--primary-color); text-align: center; margin-top: 0; margin-bottom: 2rem; }
+        
+        .vision-mission-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            list-style: none;
+            padding: 0;
+            margin-top: 2rem;
+        }
+        .vision-mission-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            height: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+        .vision-mission-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.15);
+        }
+        .vision-mission-card h4 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+        }
+        .vision-mission-card p {
+            margin: 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .prefects-layout { display: flex; gap: 2rem; }
+        .prefects-sidebar { flex: 0 0 220px; }
+        .prefects-sidebar h4 { margin-top: 0; color: var(--primary-color); border-bottom: 2px solid var(--secondary-color); padding-bottom: 0.5rem; }
+        #category-filter-list { list-style: none; padding: 0; margin: 0; }
+        #category-filter-list li button { width: 100%; padding: 0.8rem 1rem; margin-bottom: 0.5rem; border-radius: 8px; border: 1px solid transparent; background-color: rgba(0,0,0,0.02); text-align: left; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s; }
+        #category-filter-list li button:hover { background-color: var(--secondary-color); color: var(--primary-color); }
+        #category-filter-list li button.active { background-color: var(--primary-color); color: white; }
+        .prefects-main-content { flex: 1; }
+        .prefects-controls { margin-bottom: 1.5rem; }
+        .prefects-controls input { width: 100%; box-sizing: border-box; padding: 0.8rem; border-radius: 8px; border: 1px solid #ddd; font-size: 1rem; }
+        
+        .prefects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.5rem; }
+        .prefect-card { background: #fff; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .prefect-card:hover { transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
+        .prefect-card img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--secondary-color); }
+        .prefect-card h4 { margin: 0.8rem 0 0.2rem; font-size: 1rem; color: var(--text-color); }
+        .prefect-card p { margin: 0; color: var(--primary-color); font-weight: 600; font-size: 0.9rem; }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .gallery-item {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 0.75rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+        .gallery-item:hover {
+            transform: translateY(-8px);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        .contact-details-list {
+            list-style: none;
+            padding: 0;
+        }
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+        .contact-item .icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-right: 1.5rem;
+            width: 30px;
+            text-align: center;
+        }
+        .contact-item-content h4 {
+            margin: 0 0 0.25rem 0;
+            color: var(--primary-color);
+        }
+        .contact-item-content p, .contact-item-content a {
+            margin: 0;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .contact-item-content a:hover {
+            text-decoration: underline;
+        }
+        .contact-map iframe {
+            width: 100%;
+            height: 350px;
+            border-radius: 12px;
+            border: 0;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .show-more-container { text-align: center; margin-top: 2rem; display: flex; justify-content: center; gap: 1rem; }
+        #show-more-btn, #show-less-btn { background-color: var(--primary-color); color: var(--light-text-color); border: none; padding: 0.8rem 2rem; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; text-transform: uppercase; display: none; transition: all 0.3s; }
+        #show-more-btn:hover, #show-less-btn:hover { background-color: #70160F; }
+        #show-less-btn { background-color: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); }
+        #show-less-btn:hover { background-color: var(--primary-color); color: var(--light-text-color); }
+
+        .portfolio-footer {
+            padding: 2.5rem 1rem;
+            text-align: center;
+            background: var(--card-bg-color); 
+            color: var(--text-light); 
+            border-top: 1px solid #eee;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .social-icons a {
+            color: var(--primary-color);
+            background-color: rgba(140, 28, 19, 0.1);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            border-radius: 50%;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            transform: translateY(-5px);
+        }
+        .copyright-main {
+            margin: 0.5rem 0;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        .copyright-credits {
+            margin: 0;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+        .animate-on-scroll.is-visible .animate-child {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .animate-child {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); }
+        .modal-content-wrapper { display: flex; justify-content: center; align-items: center; min-height: 100%; }
+        
+        @keyframes fadeInScaleUp {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .modal-content-wrapper > .auth-card,
+        .modal-content-wrapper > #auth-container {
+            animation: fadeInScaleUp 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+
+        #auth-container { position: relative; }
+        .close-button { position: absolute; top: 10px; right: 25px; color: #aaa; font-size: 32px; font-weight: bold; cursor: pointer; }
+        .close-button:hover { color: black; }
+        .auth-card { background-color: var(--card-bg-color); padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1); width: 100%; max-width: 420px; margin: 1rem; }
+        .input-group { margin-bottom: 1.5rem; text-align: left; }
+        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #555; }
+        .input-group input, .input-group select, textarea { width: 100%; padding: 0.85rem; border: 1px solid #E0E0E0; border-radius: 8px; box-sizing: border-box; background-color: white; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); transition: all 0.3s; }
+        .input-group input:focus, .input-group select:focus, textarea:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 8px rgba(140, 28, 19, 0.2); }
+        .btn { width: 100%; padding: 0.9rem; background: var(--primary-color); color: var(--light-text-color); border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; transition: all 0.2s; text-transform: uppercase; }
+        .btn:hover { transform: translateY(-3px); background-color: #70160F; }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .testimonial-card {
+            background: var(--card-bg-color);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+        .testimonial-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        .testimonial-card h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+        }
+        .testimonial-card .quote {
+            font-style: italic;
+            color: var(--text-light);
+            margin: 0;
+            position: relative;
+        }
+        .testimonial-card .quote::before {
+            content: '“';
+            font-family: Georgia, serif;
+            font-size: 2.5rem;
+            position: absolute;
+            top: -10px;
+            left: -15px;
+            color: var(--secondary-color);
+            opacity: 0.8;
+        }
+        .testimonial-card .quote::after {
+            content: '”';
+            font-family: Georgia, serif;
+            font-size: 2.5rem;
+            position: absolute;
+            bottom: -25px;
+            right: -15px;
+            color: var(--secondary-color);
+            opacity: 0.8;
+        }
+
+        .creators-fab {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 990;
+            animation: bounce 2s infinite ease-in-out;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .creators-modal-content {
+            text-align: center;
+        }
+        .creators-modal-content h3 {
+            color: var(--primary-color);
+        }
+        .creators-modal-content p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        #main-app { display: none; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 2rem; background-color: var(--primary-color); color: var(--light-text-color); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .header-left-content { display: flex; align-items: center; }
+        .header h2 { color: var(--light-text-color); font-size: 1.5rem; }
+        #logout-btn { background-color: rgba(255,255,255,0.9); border: none; color: var(--primary-color); padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 700; transition: all 0.2s; text-transform: uppercase; }
+        #logout-btn:hover { background-color: #fff; transform: translateY(-2px); }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .page-content { margin-top: 2rem; display: none; }
+        .page-content.active { display: block; }
+        .card { background-color: var(--card-bg-color); padding: 1.5rem; border-radius: 16px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); border: 1px solid rgba(255, 255, 255, 0.6); }
+        .card h3 { color: var(--primary-color); border-bottom: 2px solid var(--secondary-color); padding-bottom: 0.5rem; margin-bottom: 1rem; font-size: 1.2rem; }
+        .nav { display: flex; justify-content: center; background-color: rgba(255,255,255,0.2); padding: 0.5rem; margin-bottom: 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .nav a { color: var(--primary-color); text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; transition: all 0.3s; }
+        .nav a.active, .nav a:hover { background-color: var(--primary-color); color: #fff; }
+        .container { padding: 2rem; }
+        
+        /* CORRECTED AND MERGED MEDIA QUERIES */
+        @media (max-width: 992px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+            .main-nav { 
+                display: none; 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                width: 100%; 
+                background-color: var(--card-bg-color); 
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+                z-index: 100; 
+            }
+            .portfolio-header.header-scrolled .main-nav { 
+                background-color: var(--card-bg-color); 
+            }
+            .portfolio-header:not(.header-scrolled) .main-nav { 
+                background-color: var(--primary-color); 
+            }
+            .main-nav.mobile-nav-active { 
+                display: block; 
+            }
+            .main-nav ul { 
+                flex-direction: column; 
+                padding: 1rem 0; 
+            }
+            .main-nav li { 
+                margin: 0; 
+                text-align: center; 
+            }
+            .main-nav a { 
+                display: block; 
+                padding: 1rem; 
+                border: none; 
+            }
+            .portfolio-header.header-scrolled .main-nav a { 
+                color: var(--text-color); 
+            }
+            .portfolio-header:not(.header-scrolled) .main-nav a { 
+                color: var(--light-text-color); 
+            }
+            #menu-toggle { 
+                display: block; 
+                background: none; 
+                border: none; 
+                font-size: 2rem; 
+                cursor: pointer; 
+                margin-left: 1rem; 
+            }
+            .portfolio-header { 
+                justify-content: space-between; 
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Responsive fixes for mobile */
+            .portfolio-section {
+                padding: 1.5rem;
+            }
+            .portfolio-section h3 {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            .vision-mission-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .portfolio-header h1 { display: none; }
+            .hero-section { padding: 2rem 1rem; }
+            .hero-title { font-size: 2.2rem; }
+            .container, .portfolio-container { padding: 1rem; }
+            .prefects-layout { flex-direction: column; }
+            .prefects-sidebar { flex: 0 0 auto; margin-bottom: 2rem; }
+            #category-filter-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+            #category-filter-list li button { width: auto; }
+            #main-app .header { flex-direction: column; padding: 1rem; text-align: center; }
+            #main-app .header-left-content { margin-bottom: 1rem; }
+            #attendance-table thead { display: none; }
+            #attendance-table tr { margin-bottom: 1.5rem; border: 1px solid #ddd; border-radius: 8px; padding: 1rem; background-color: rgba(255,255,255,0.5); }
+            #attendance-table, #attendance-table tbody, #attendance-table tr, #attendance-table td { display: block; width: 100%; }
+            #attendance-table td { text-align: right; position: relative; padding-left: 50%; padding-top: 8px; padding-bottom: 8px; border-bottom: 1px dotted #ccc; }
+            #attendance-table td:last-child { border-bottom: none; }
+            #attendance-table td::before { content: attr(data-label); position: absolute; left: 10px; width: calc(50% - 20px); text-align: left; font-weight: bold; color: var(--primary-color); }
+            .announcement-item {
+                background-color: rgba(255,255,255,0.6);
+                padding: 1rem;
+                border-radius: 8px;
+                margin-bottom: 1rem;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                border-left: 5px solid var(--secondary-color);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .announcement-item:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+                border-left-color: var(--primary-color);
+            }
+            .warning-item {
+                background-color: #fff5f5;
+                padding: 1rem;
+                border-radius: 8px;
+                margin-bottom: 1rem;
+                border-left: 5px solid #dc3545;
+            }
+            .warning-item strong {
+                color: #721c24;
+            }
+            .warning-item p {
+                margin: 5px 0 0 0;
+                color: #555;
+            }
+            .announcement-item {
+                background-color: rgba(255,255,255,0.6);
+                padding: 1rem;
+                border-radius: 8px;
+                margin-bottom: 1rem;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                border-left: 5px solid var(--secondary-color);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .announcement-item:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+                border-left-color: var(--primary-color);
+            }
+            .warning-item {
+                background-color: #fff5f5;
+                padding: 1rem;
+                border-radius: 8px;
+                margin-bottom: 1rem;
+                border-left: 5px solid #dc3545;
+            }
+            .warning-item strong {
+                color: #721c24;
+            }
+            .warning-item p {
+                margin: 5px 0 0 0;
+                color: #555;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <div>
+            <img src="meroon Transparent logo prefect.png" alt="Loading...">
+            <p id="loader-text">Loading...</p>
+        </div>
+    </div>
+
+    <div id="public-portfolio">
+        <header class="portfolio-header" id="portfolio-header">
+            <div class="portfolio-header-left">
+                <img src="meroon Transparent logo prefect.png" alt="School Logo" style="height: 50px; margin-right: 15px;">
+                <h1>ECC Prefects' Guild</h1>
+            </div>
+            <div class="header-right">
+                <nav class="main-nav" id="main-nav">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#about-us">About Us</a></li>
+                        <li><a href="#prefects-list">Our Prefects</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </nav>
+                <button id="menu-toggle">☰</button>
+            </div>
+        </header>
+
+        <section class="hero-section animate-on-scroll" id="hero">
+             <div class="hero-content">
+                <p class="hero-greeting">Welcome to the</p>
+                <h2 class="hero-title">ECC PREFECTS' GUILD</h2>
+                <div class="hero-divider"></div>
+                <p class="hero-description">Leading with integrity and dedication. We are committed to upholding the values of our college and serving the student community.</p>
+                <button id="show-login-modal-btn" class="login-btn hero-login-btn">Login</button>
+            </div>
+        </section>
+
+        <div class="portfolio-container">
+            <section id="about-us" class="portfolio-section animate-on-scroll">
+                <h3>About Us: Vision & Mission</h3>
+                <p style="text-align: center;">As the Prefects' Guild of Eheliyagoda Central College, our primary objectives are:</p>
+                
+                <ul class="vision-mission-list">
+                    <li class="vision-mission-card animate-child">
+                        <h4>Our Vision</h4>
+                        <p>Our main vision is to provide proper guidance and support to the entire student community by setting an example of leadership.</p>
+                    </li>
+                    <li class="vision-mission-card animate-child">
+                        <h4>Maintaining Discipline</h4>
+                        <p>We are dedicated to maintaining the school's discipline at a high level and encouraging students to wear the uniform correctly and neatly.</p>
+                    </li>
+                    <li class="vision-mission-card animate-child">
+                        <h4>Core Duties</h4>
+                        <p>We are committed to performing our duties at the main gate, during morning assemblies, and at all other special school events.</p>
+                    </li>
+                    <li class="vision-mission-card animate-child">
+                        <h4>Leadership Contribution</h4>
+                        <p>Our guild actively undertakes leadership responsibilities from the initial planning stages to the conclusion of every program organized by the school.</p>
+                    </li>
+                </ul>
+            </section>
+            
+            <section id="testimonials" class="portfolio-section animate-on-scroll">
+                <h3>What Our Students Say</h3>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card animate-child">
+                        <img src="https://i.pravatar.cc/100?u=nimal" alt="Nimal Perera">
+                        <h4>Nimal Perera</h4>
+                        <p class="quote">The Prefects' Guild has been a great source of inspiration. Their dedication is admirable and helps all of us be better students.</p>
+                    </div>
+                    <div class="testimonial-card animate-child">
+                        <img src="https://i.pravatar.cc/100?u=anusha" alt="Anusha Silva">
+                        <h4>Anusha Silva</h4>
+                        <p class="quote">I really appreciate the work they do to maintain discipline in the school. It creates a positive and safe learning environment for everyone.</p>
+                    </div>
+                    <div class="testimonial-card animate-child">
+                        <img src="https://i.pravatar.cc/100?u=sameera" alt="Sameera Dias">
+                        <h4>Sameera Dias</h4>
+                        <p class="quote">Seeing the prefects manage school events so professionally is amazing. It motivates me to take on leadership roles in the future.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="prefects-list" class="portfolio-section animate-on-scroll">
+                <h3>Our Prefects</h3>
+                <div class="prefects-layout">
+                    <div class="prefects-sidebar">
+                        <h4>Categories</h4>
+                        <ul id="category-filter-list"></ul>
+                    </div>
+                    <div class="prefects-main-content">
+                         <div class="prefects-controls">
+                            <input type="search" id="prefect-search-bar" placeholder="Search by name...">
+                        </div>
+                        <div id="prefects-grid" class="prefects-grid"></div>
+                        <div class="show-more-container">
+                            <button id="show-more-btn">Show More</button>
+                            <button id="show-less-btn">Show Less</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="gallery" class="portfolio-section animate-on-scroll">
+                <h3>Gallery</h3>
+                <div class="gallery-grid">
+                    <div class="gallery-item animate-child">
+                        <img src="https://via.placeholder.com/300x200.png?text=Event+1" alt="Event 1">
+                    </div>
+                    <div class="gallery-item animate-child">
+                        <img src="https://via.placeholder.com/300x200.png?text=Event+2" alt="Event 2">
+                    </div>
+                    <div class="gallery-item animate-child">
+                        <img src="https://via.placeholder.com/300x200.png?text=Event+3" alt="Event 3">
+                    </div>
+                    <div class="gallery-item animate-child">
+                        <img src="https://via.placeholder.com/300x200.png?text=Event+4" alt="Event 4">
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="portfolio-section animate-on-scroll">
+                <h3>Contact Us</h3>
+                <div class="contact-layout">
+                    <div class="contact-details">
+                        <ul class="contact-details-list">
+                            <li class="contact-item animate-child">
+                                <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                                <div class="contact-item-content">
+                                    <h4>Address</h4>
+                                    <p>Eheliyagoda Central College, Eheliyagoda, Sri Lanka</p>
+                                </div>
+                            </li>
+                            <li class="contact-item animate-child">
+                                <div class="icon"><i class="fas fa-envelope"></i></div>
+                                <div class="contact-item-content">
+                                    <h4>Email</h4>
+                                    <p><a href="mailto:emmvprefects@gmail.com">emmvprefects@gmail.com</a></p>
+                                </div>
+                            </li>
+                            <li class="contact-item animate-child">
+                                <div class="icon"><i class="fas fa-phone"></i></div>
+                                <div class="contact-item-content">
+                                    <h4>Phone</h4>
+                                    <p>+94 XX XXX XXXX</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="contact-map animate-child">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.3139841487673!2d80.26017487397701!3d6.8529164192497145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae3af5a91c6cd8f%3A0x47e3265ed36bb8ac!2sI.G.M%20Higher%20Education%20Center%20-%20Eheliyagoda!5e0!3m2!1sen!2ssg!4v1759686856304!5m2!1sen!2ssg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer class="portfolio-footer">
+            <div class="social-icons">
+                <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p class="copyright-main">P.M.S © 2025 Hansaka P. Fernando</p>
+            <p class="copyright-credits">Adeesha Ravimal Kannangara | Thevindu Thisev Rajapaksha | Hansaka Fernando</p>
+        </footer>
+    </div>
+    
+    <div id="login-modal" class="modal">
+        <div class="modal-content-wrapper">
+             <div id="auth-container">
+                <span class="close-button" id="close-login-modal-btn">×</span>
+                <div id="login-view" class="auth-card">
+                    <img src="meroon Transparent logo prefect.png" alt="School Logo" style="height: 80px; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;">
+                    <h2>Eheliyagoda Central College</h2>
+                    <h3>Prefects' Login Portal</h3>
+                    <form id="login-form"><div class="input-group"><label for="email">Email Address</label><input type="email" id="email" required></div><div class="input-group"><label for="password">Password</label><input type="password" id="password" required></div><button type="submit" class="btn">Login</button></form>
+                    <p>Don't have an account? <a href="#" id="show-register">Register here</a></p>
+                </div>
+                <div id="register-view" class="auth-card" style="display: none;">
+                    <img src="meroon Transparent logo prefect.png" alt="School Logo" style="height: 80px; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;">
+                    <h2>Eheliyagoda Central College</h2><h3>Prefects' Registration Portal</h3>
+                    <form id="register-form"><div class="input-group"><label for="register-email">Email</label><input type="email" id="register-email" required></div><div class="input-group"><label for="register-password">Password</label><input type="password" id="register-password" required></div><div class="input-group"><label for="barcode_id">Unique ID</label><input type="text" id="barcode_id" required></div><button type="submit" class="btn">Register</button></form>
+                    <p>Already have an account? <a href="#" id="show-login">Login here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="creators-modal" class="modal">
+        <div class="modal-content-wrapper">
+             <div class="auth-card creators-modal-content">
+                <span class="close-button">×</span>
+                <h3>System Creators</h3>
+                <p>
+                    Adeesha Ravimal Kannangara<br>
+                    Thevindu Thisev Rajapaksha<br>
+                    Hansaka P. Fernando
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="creators-fab" id="creators-fab">
+        <i class="fas fa-code"></i>
+    </div>
+
+    <div id="main-app" style="display: none;">
+        <div class="header">
+            <div class="header-left-content">
+                <img src="meroon Transparent logo prefect.png" alt="School Logo" style="height: 50px; margin-right: 15px;">
+                <h2>ECC PREFECTS' GUILD</h2>
+            </div>
+            <button id="logout-btn">Logout</button>
+        </div>
+        <div class="nav">
+            <a href="#" data-page="dashboard" class="nav-link active">Dashboard</a>
+            <a href="#" data-page="attendance" class="nav-link">Attendance</a>
+            <a href="#" data-page="ideas" class="nav-link">Ideas & Proposals</a>
+            <a href="#" data-page="warnings" class="nav-link">Warning Letters</a>
+            <a href="#" data-page="announcements" class="nav-link">Announcements</a>
+            <a href="#" data-page="calendar" class="nav-link">Duty Roster</a>
+        </div>
+        <div class="container">
+            <div id="dashboard-page" class="page-content active">
+                <div class="dashboard-grid">
+                    <div class="card"><img id="prefect-picture" src="https://via.placeholder.com/150" alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px; display: block;"><h3>Welcome, <span id="prefect-name"></span></h3><p><strong>Role:</strong> <span id="prefect-role"></span></p><p><strong>Class:</strong> <span id="prefect-class"></span></p></div>
+                    <div class="card"><h3>Key Stats</h3><p><strong>Total Points:</strong> <span id="total-points"></span></p><p><strong>Absences:</strong> <span id="total-absences"></span></p><p><strong>Late Arrivals:</strong> <span id="total-lates"></span></p></div>
+                    <div class="card"><h3>Recent Attendance</h3><ul id="attendance-list" style="list-style: none; padding: 0;"></ul></div>
+                    <div class="card"><h3>Recent Points</h3><ul id="points-list" style="list-style: none; padding: 0;"></ul></div>
+                </div>
+            </div>
+            <div id="attendance-page" class="page-content">
+                <div class="card"><h3>Your Attendance Record</h3><table id="attendance-table" style="width: 100%; border-collapse: collapse;"><thead><tr style="text-align: left; border-bottom: 2px solid var(--primary-color);"><th style="padding: 8px;">Date</th><th style="padding: 8px;">Status</th><th style="padding: 8px;">Time</th><th style="padding: 8px;">Reason</th></tr></thead><tbody></tbody></table></div>
+            </div>
+            <div id="ideas-page" class="page-content"><div class="card"><h3>Submit a New Idea</h3><form id="idea-form"><div class="input-group"><textarea id="idea-text" placeholder="Write your idea..." required rows="5"></textarea></div><button type="submit" class="btn">Submit Idea</button></form></div><div class="card"><h3>Your Submitted Ideas</h3><ul id="ideas-list" style="list-style: none; padding: 0;"></ul></div></div>
+            <div id="warnings-page" class="page-content"><div class="card"><h3>Your Warning Letters</h3><ul id="warnings-list" style="list-style: none; padding: 0;"></ul></div></div>
+            <div id="announcements-page" class="page-content"><div class="card"><h3>Announcement History</h3><ul id="announcements-list" style="list-style: none; padding: 0;"></ul></div></div>
+            <div id="calendar-page" class="page-content"><div class="card"><h3>Duty Roster</h3><div id='calendar'></div></div></div>
+        </div>
+    </div>
+    
+    <div id="announcement-modal" class="modal">
+        <div class="modal-content-wrapper">
+            <div class="auth-card">
+                <span class="close-button">&times;</span>
+                <h2 id="announcement-title"></h2>
+                <p id="announcement-content"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.js'></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js";
+        import { getFirestore, collection, getDocs, onSnapshot, query, where, doc, updateDoc, runTransaction, initializeFirestore, orderBy } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js";
+        
+        let loaderInterval;
+        window.onload = () => {
+            const loader = document.getElementById('loader');
+            if(loader) loader.classList.add('hidden');
+            if (loaderInterval) clearInterval(loaderInterval);
+        };
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyCEvF1sD56pmtYlbno4QAY_Kr5xeFrTAvU",
+            authDomain: "prefect-management-syste-e1575.firebaseapp.com",
+            projectId: "prefect-management-syste-e1575",
+            storageBucket: "prefect-management-syste-e1575.appspot.com",
+            messagingSenderId: "973932803095",
+            appId: "1:973932803095:web:a7f2db386cafb53330d852",
+            measurementId: "G-FLF7R3B8J3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = initializeFirestore(app, { experimentalForceLongPolling: true });
+
+        const loaderText = document.getElementById('loader-text');
+        if (loaderText) {
+            const messages = ["Loading...", "Initializing...", "Please Wait...", "Almost Done..."];
+            let messageIndex = 0;
+            loaderInterval = setInterval(() => {
+                loaderText.textContent = messages[messageIndex];
+                messageIndex = (messageIndex + 1) % messages.length;
+            }, 1800);
+        }
+        
+        const header = document.getElementById('portfolio-header');
+        if (header) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+            });
+        }
+
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        if (window.IntersectionObserver) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        const children = entry.target.querySelectorAll('.animate-child');
+                        children.forEach((child, index) => {
+                            child.style.transitionDelay = `${index * 100}ms`;
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            animatedElements.forEach(el => observer.observe(el));
+        }
+
+        const menuToggle = document.getElementById('menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        if(menuToggle && mainNav) {
+            menuToggle.addEventListener('click', () => mainNav.classList.toggle('mobile-nav-active'));
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => mainNav.classList.remove('mobile-nav-active'));
+            });
+        }
+        
+        const publicPortfolio = document.getElementById('public-portfolio');
+        const mainApp = document.getElementById('main-app');
+        const loginModal = document.getElementById('login-modal');
+        const showLoginModalBtn = document.getElementById('show-login-modal-btn');
+        const closeLoginModalBtn = document.getElementById('close-login-modal-btn');
+        const loginView = document.getElementById('login-view');
+        const registerView = document.getElementById('register-view');
+        const showRegister = document.getElementById('show-register');
+        const showLogin = document.getElementById('show-login');
+
+        if(showLoginModalBtn) showLoginModalBtn.addEventListener('click', () => { if(loginModal) loginModal.style.display = 'block'; });
+        if(closeLoginModalBtn) closeLoginModalBtn.addEventListener('click', () => { if(loginModal) loginModal.style.display = 'none'; });
+        window.addEventListener('click', (event) => { if (event.target == loginModal) loginModal.style.display = "none"; });
+        if(showRegister) showRegister.addEventListener('click', (e) => { e.preventDefault(); if(loginView && registerView) { loginView.style.display = 'none'; registerView.style.display = 'block'; } });
+        if(showLogin) showLogin.addEventListener('click', (e) => { e.preventDefault(); if(loginView && registerView) { registerView.style.display = 'none'; loginView.style.display = 'block'; } });
+
+        const creatorsFab = document.getElementById('creators-fab');
+        const creatorsModal = document.getElementById('creators-modal');
+        const closeCreatorsModalBtn = creatorsModal.querySelector('.close-button');
+        creatorsFab.addEventListener('click', () => { creatorsModal.style.display = 'block'; });
+        closeCreatorsModalBtn.addEventListener('click', () => { creatorsModal.style.display = 'none'; });
+        window.addEventListener('click', (event) => { 
+            if (event.target == creatorsModal) creatorsModal.style.display = "none";
+        });
+
+        let fetchedPrefects = [];
+        const prefectsGrid = document.getElementById('prefects-grid');
+        const searchBar = document.getElementById('prefect-search-bar');
+        const categoryFilterList = document.getElementById('category-filter-list');
+        const showMoreBtn = document.getElementById('show-more-btn');
+        const showLessBtn = document.getElementById('show-less-btn');
+        let currentCategory = 'All';
+        const initialVisibleCount = 8;
+        let visiblePrefectCount = initialVisibleCount;
+
+        async function loadAndDisplayPrefects() {
+            if (!prefectsGrid) return;
+            prefectsGrid.innerHTML = '<p>Loading Prefects...</p>';
+            try {
+                const prefectsCollection = collection(db, "prefects");
+                const querySnapshot = await getDocs(prefectsCollection);
+                fetchedPrefects = [];
+                querySnapshot.forEach((doc) => fetchedPrefects.push(doc.data()));
+                populateCategories();
+                renderPrefects();
+            } catch (error) {
+                console.error("Error fetching prefects: ", error);
+                prefectsGrid.innerHTML = `<p>Error loading prefects. Check console for details.</p>`;
+            }
+        }
+
+        function populateCategories() {
+            if (!categoryFilterList) return;
+            const sections = [...new Set(fetchedPrefects.map(p => p.section).filter(Boolean))];
+            categoryFilterList.innerHTML = `<li><button class="active" data-category="All">All</button></li>`;
+            sections.forEach(section => {
+                categoryFilterList.innerHTML += `<li><button data-category="${section}">${section}</button></li>`;
+            });
+        }
+
+        function renderPrefects() {
+            if (!prefectsGrid) return;
+            const searchValue = searchBar ? searchBar.value.toLowerCase() : "";
+            prefectsGrid.innerHTML = '';
+            const filteredPrefects = fetchedPrefects.filter(p => {
+                const matchesCategory = currentCategory === 'All' || p.section === currentCategory;
+                const hasName = p.name && typeof p.name === 'string';
+                const matchesSearch = hasName && p.name.toLowerCase().includes(searchValue);
+                return matchesCategory && matchesSearch;
+            });
+            
+            const prefectsToDisplay = filteredPrefects.slice(0, visiblePrefectCount);
+
+            if (prefectsToDisplay.length === 0) {
+                prefectsGrid.innerHTML = '<p>No prefects found matching your criteria.</p>'; 
+            } else {
+                prefectsToDisplay.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'prefect-card';
+                    card.innerHTML = `<img src="${p.picture || 'https://via.placeholder.com/150'}" alt="${p.name}"><h4>${p.name}</h4><p>${p.destiny || 'Prefect'}</p>`;
+                    prefectsGrid.appendChild(card);
+                });
+            }
+
+            if (showMoreBtn && showLessBtn) {
+                const totalMatches = filteredPrefects.length;
+                showMoreBtn.style.display = (totalMatches > visiblePrefectCount) ? 'inline-block' : 'none';
+                showLessBtn.style.display = (visiblePrefectCount > initialVisibleCount && totalMatches > initialVisibleCount) ? 'inline-block' : 'none';
+            }
+        }
+        
+        if (prefectsGrid) {
+            searchBar.addEventListener('input', () => { visiblePrefectCount = initialVisibleCount; renderPrefects(); });
+            categoryFilterList.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON') {
+                    visiblePrefectCount = initialVisibleCount;
+                    currentCategory = e.target.dataset.category;
+                    categoryFilterList.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                    renderPrefects();
+                }
+            });
+            showMoreBtn.addEventListener('click', () => { visiblePrefectCount = fetchedPrefects.length; renderPrefects(); });
+            showLessBtn.addEventListener('click', () => {
+                visiblePrefectCount = initialVisibleCount;
+                renderPrefects();
+                const prefectsListSection = document.getElementById('prefects-list');
+                if (prefectsListSection) prefectsListSection.scrollIntoView({ behavior: 'smooth' });
+            });
+            loadAndDisplayPrefects();
+        }
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                if(publicPortfolio) publicPortfolio.style.display = 'none';
+                if(loginModal) loginModal.style.display = 'none';
+                if(mainApp) mainApp.style.display = 'block';
+                initializeDashboard(user, db, auth);
+            } else {
+                if(publicPortfolio) publicPortfolio.style.display = 'block';
+                if(mainApp) mainApp.style.display = 'none';
+                if(loginModal) loginModal.style.display = 'none';
+            }
+        });
+
+        const loginForm = document.getElementById('login-form');
+        if(loginForm) loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            signInWithEmailAndPassword(auth, email, password).catch((error) => alert(error.message));
+        });
+
+        const registerForm = document.getElementById('register-form');
+        if(registerForm) registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const barcodeId = document.getElementById('barcode_id').value;
+
+            if (!email || !password || !barcodeId) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            try {
+                const prefectsRef = collection(db, "prefects");
+                const q = query(prefectsRef, where("barcode_id", "==", barcodeId));
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    throw new Error("Invalid Unique ID. Please check and try again.");
+                }
+
+                const prefectDoc = querySnapshot.docs[0];
+                if (prefectDoc.data().uid) {
+                    throw new Error("This prefect profile has already been registered. Please login.");
+                }
+
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                const prefectDocRef = doc(db, "prefects", prefectDoc.id);
+                await updateDoc(prefectDocRef, { uid: user.uid });
+
+                if(publicPortfolio) publicPortfolio.style.display = 'none';
+                if(loginModal) loginModal.style.display = 'none';
+                if(mainApp) mainApp.style.display = 'block';
+                initializeDashboard(user, db, auth);
+
+            } catch (error) {
+                console.error("Registration Error: ", error);
+                alert(`Registration failed: ${error.message}`);
+            }
+        });
+        
+        function initializeAnnouncements(user, db) {
+            const announcementsList = document.getElementById('announcements-list');
+            if (!announcementsList) return;
+
+            const modal = document.getElementById('announcement-modal');
+            const titleEl = document.getElementById('announcement-title');
+            const contentEl = document.getElementById('announcement-content');
+            const closeBtn = modal.querySelector('.close-button');
+
+            const q = query(collection(db, "announcements"), orderBy("timestamp", "desc"));
+
+            onSnapshot(q, (querySnapshot) => {
+                announcementsList.innerHTML = '';
+                if (querySnapshot.empty) {
+                    announcementsList.innerHTML = '<li>No announcements found.</li>';
+                    return;
+                }
+                querySnapshot.forEach((doc) => {
+                    const announcement = { id: doc.id, ...doc.data() };
+                    const li = document.createElement('li');
+                    li.className = 'announcement-item';
+                    li.innerHTML = `
+                        <strong>${announcement.title}</strong>
+                        <small>${new Date(announcement.timestamp.seconds * 1000).toLocaleDateString()}</small>
+                    `;
+                    li.addEventListener('click', () => {
+                        titleEl.textContent = announcement.title;
+                        contentEl.textContent = announcement.content;
+                        modal.style.display = 'block';
+                    });
+                    announcementsList.appendChild(li);
+                });
+            }, (error) => {
+                console.error("Error fetching announcements: ", error);
+                announcementsList.innerHTML = '<li>Error loading announcements.</li>';
+            });
+
+            closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
+            window.addEventListener('click', (event) => {
+                if (event.target == modal) modal.style.display = 'none';
+            });
+        }
+
+        function initializeWarnings(user, db, prefectProfile) {
+            const warningsList = document.getElementById('warnings-list');
+            if (!warningsList) return;
+
+            const q = query(collection(db, "warning"), where("prefect_id", "==", prefectProfile.id), orderBy("issue_date", "desc"));
+
+            onSnapshot(q, (querySnapshot) => {
+                warningsList.innerHTML = '';
+                if (querySnapshot.empty) {
+                    warningsList.innerHTML = '<li>You have no warnings on record.</li>';
+                    return;
+                }
+                querySnapshot.forEach((doc) => {
+                    const warning = { id: doc.id, ...doc.data() };
+                    const li = document.createElement('li');
+                    li.className = 'warning-item';
+                    li.innerHTML = `
+                        <div>
+                            <strong>Issued on:</strong> ${new Date(warning.issue_date.seconds * 1000).toLocaleDateString()}
+                            <p>${warning.details}</p>
+                        </div>
+                    `;
+                    warningsList.appendChild(li);
+                });
+            }, (error) => {
+                console.error("Error fetching warnings: ", error);
+                warningsList.innerHTML = '<li>Error loading warnings.</li>';
+            });
+        }
+
+        async function initializeCalendar(user, db, prefectProfile) {
+            const calendarEl = document.getElementById('calendar');
+            if (!calendarEl) return;
+
+            let calendarInstance = null;
+
+            onSnapshot(query(collection(db, 'events')), (eventSnapshot) => {
+                onSnapshot(query(collection(db, 'event_duties')), (dutySnapshot) => {
+                    const events = eventSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    const duties = dutySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+                    const calendarEvents = duties.map(duty => {
+                        const event = events.find(e => e.id === duty.eventId);
+                        const isTaken = !!duty.assignedPrefectId;
+                        const isTakenByCurrentUser = duty.assignedPrefectId === prefectProfile.id;
+
+                        return {
+                            id: duty.id,
+                            title: duty.title,
+                            start: event ? event.date : null,
+                            allDay: true,
+                            backgroundColor: isTaken ? (isTakenByCurrentUser ? '#28a745' : '#6c757d') : '#007bff',
+                            borderColor: isTaken ? (isTakenByCurrentUser ? '#28a745' : '#6c757d') : '#007bff',
+                            extendedProps: { duty, event, isTaken, isTakenByCurrentUser }
+                        };
+                    }).filter(e => e.start);
+
+                    if (calendarInstance) calendarInstance.destroy();
+
+                    calendarInstance = new FullCalendar.Calendar(calendarEl, {
+                        initialView: 'dayGridMonth',
+                        headerToolbar: { left: 'prev,next today', center: 'title', right: 'dayGridMonth,timeGridWeek,listWeek' },
+                        events: calendarEvents,
+                        eventClick: async function(info) {
+                            const { duty, isTaken } = info.event.extendedProps;
+                            if (isTaken) {
+                                alert(duty.assignedPrefectId === prefectProfile.id ? `You have already taken this duty.` : `This duty has already been taken by ${duty.assignedPrefectName}.`);
+                                return;
+                            }
+                            if (confirm(`Do you want to take on the duty: "${info.event.title}"?`)) {
+                                const dutyRef = doc(db, "event_duties", duty.id);
+                                try {
+                                    await runTransaction(db, async (transaction) => {
+                                        const dutyDoc = await transaction.get(dutyRef);
+                                        if (!dutyDoc.exists() || dutyDoc.data().assignedPrefectId) throw "This duty has just been taken by someone else!";
+                                        transaction.update(dutyRef, { assignedPrefectId: prefectProfile.id, assignedPrefectName: prefectProfile.name });
+                                    });
+                                } catch (error) {
+                                    console.error("Error taking duty: ", error);
+                                    alert(`Failed to take duty: ${error}`);
+                                }
+                            }
+                        }
+                    });
+                    calendarInstance.render();
+                });
+            });
+        }
+
+        async function initializeDashboard(user, db, auth) {
+            const logoutBtn = document.getElementById('logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => signOut(auth).catch((error) => console.error('Sign out error', error)));
+            }
+
+            let prefectProfile = null;
+            try {
+                const q = query(collection(db, "prefects"), where("uid", "==", user.uid));
+                const querySnapshot = await getDocs(q);
+                if (!querySnapshot.empty) {
+                    const prefectDoc = querySnapshot.docs[0];
+                    prefectProfile = { id: prefectDoc.id, ...prefectDoc.data() };
+                }
+            } catch (e) {
+                console.error("Error fetching prefect profile: ", e);
+            }
+
+            if (!prefectProfile) {
+                alert("Could not find your prefect profile. Some features may be disabled.");
+                return;
+            }
+            
+            if (!window.navInitialized) {
+                const navLinks = document.querySelectorAll('.nav-link');
+                const pages = document.querySelectorAll('.page-content');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const pageId = link.dataset.page;
+                        pages.forEach(page => page.classList.remove('active'));
+                        document.getElementById(`${pageId}-page`).classList.add('active');
+                        navLinks.forEach(navLink => navLink.classList.remove('active'));
+                        link.classList.add('active');
+                    });
+                });
+                window.navInitialized = true;
+            }
+
+            document.getElementById('prefect-name').textContent = prefectProfile.name || '';
+            document.getElementById('prefect-role').textContent = prefectProfile.destiny || 'N/A';
+            document.getElementById('prefect-class').textContent = prefectProfile.class || 'N/A';
+            document.getElementById('total-points').textContent = prefectProfile.total_points !== undefined ? prefectProfile.total_points : 0;
+            
+            const prefectPicture = document.getElementById('prefect-picture');
+            if (prefectProfile.picture) prefectPicture.src = prefectProfile.picture;
+
+            initializeCalendar(user, db, prefectProfile);
+            initializeAnnouncements(user, db);
+            initializeWarnings(user, db, prefectProfile);
+        }
+    </script>
+</body>
+</html>
