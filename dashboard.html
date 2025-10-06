@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Prefects' Guild</title>
+    <link rel="icon" href="meroon Transparent logo prefect.png" type="image/png">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+
+        :root {
+            --primary-color: #8C1C13;
+            --secondary-color: #C6A98F;
+            --text-color: #3b3b3b;
+            --text-light: #5f5f5f;
+            --card-bg-color: #FFFAF0;
+            --light-text-color: #ffffff;
+            --glass-bg: rgba(255, 250, 240, 0.7);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #FFFBF5 0%, #FFF5E1 100%);
+            background-attachment: fixed;
+        }
+
+        .portfolio-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 1rem 2rem; 
+            position: sticky; 
+            top: 0; 
+            z-index: 998;
+            transition: background-color 0.4s ease, box-shadow 0.4s ease;
+        }
+        .portfolio-header.header-scrolled {
+            background-color: rgba(255, 250, 240, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        .portfolio-header.header-scrolled img { filter: none; }
+        .portfolio-header.header-scrolled h1 { color: var(--primary-color); }
+        .portfolio-header.header-scrolled .main-nav a { color: var(--text-color); }
+        .portfolio-header.header-scrolled .main-nav a:hover { color: var(--primary-color); border-color: var(--primary-color); }
+        .portfolio-header.header-scrolled #menu-toggle { color: var(--primary-color); }
+        .portfolio-header.header-scrolled #logout-btn {
+             background-color: var(--primary-color);
+             color: #fff;
+        }
+        .portfolio-header.header-scrolled #logout-btn:hover {
+            background-color: #70160F;
+        }
+
+        .portfolio-header-left { display: flex; align-items: center; }
+        .portfolio-header-left img { height: 50px; margin-right: 15px; }
+        .portfolio-header-left h1 { margin: 0; font-size: 1.5rem; color: var(--primary-color); }
+
+        .main-nav ul { margin: 0; padding: 0; list-style: none; display: flex; }
+        .main-nav li { margin-left: 2rem; }
+        .main-nav a { color: var(--text-color); text-decoration: none; font-weight: 600; padding-bottom: 5px; border-bottom: 2px solid transparent; transition: border-color 0.3s; }
+        .main-nav a:hover { border-color: var(--primary-color); }
+
+        .header-right { display: flex; align-items: center; }
+        #logout-btn {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-right: 1rem;
+        }
+        #logout-btn:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        #menu-toggle { display: none; }
+
+        .portfolio-container { max-width: 1200px; margin: auto; padding: 2rem; }
+        .portfolio-section { background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); padding: 2.5rem; margin-bottom: 2rem; border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); }
+        .portfolio-section h3 { font-size: 2rem; color: var(--primary-color); text-align: center; margin-top: 0; margin-bottom: 2rem; }
+        .card { background-color: var(--card-bg-color); padding: 1.5rem; border-radius: 16px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); border: 1px solid rgba(255, 255, 255, 0.6); }
+        .card h3 { font-size: 1.2rem; text-align: left; }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+
+        @media (max-width: 992px) {
+            .main-nav { display: none; position: absolute; top: 100%; left: 0; width: 100%; background-color: rgba(255, 250, 240, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 100; }
+            .main-nav.mobile-nav-active { display: block; }
+            .main-nav ul { flex-direction: column; padding: 1rem 0; }
+            .main-nav li { margin: 0; text-align: center; }
+            .main-nav a { display: block; padding: 1rem; border: none; color: var(--text-color); }
+            #menu-toggle { display: block; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--primary-color); }
+            .portfolio-header { justify-content: space-between; }
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-header h1 { display: none; }
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="portfolio-header header-scrolled" id="portfolio-header">
+        <div class="portfolio-header-left">
+            <img src="meroon Transparent logo prefect.png" alt="School Logo">
+            <h1>ECC Prefects' Guild</h1>
+        </div>
+        <div class="header-right">
+            <nav class="main-nav" id="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    </ul>
+            </nav>
+            <button id="logout-btn">Logout</button>
+            <button id="menu-toggle">☰</button>
+        </div>
+    </header>
+
+    <div id="dashboard-content" style="display: none;">
+        <div class="portfolio-container">
+            <section class="portfolio-section">
+                <h3 id="welcome-message" style="text-align: left; border-bottom: 2px solid var(--secondary-color); padding-bottom: 1rem; margin-bottom: 2rem;">Welcome, Prefect!</h3>
+                <div class="dashboard-grid">
+                     <div class="card">
+                        <h3>My Profile</h3>
+                        <p>View and edit your profile information.</p>
+                    </div>
+                     <div class="card">
+                        <h3>Attendance</h3>
+                        <p>Mark and view attendance records.</p>
+                    </div>
+                     <div class="card">
+                        <h3>Events</h3>
+                        <p>Check upcoming school events and duties.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <div id="loading-state" style="text-align: center; padding-top: 150px;">
+        <h2>Loading Dashboard...</h2>
+        <p>Please wait, redirecting if not logged in.</p>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCEvF1sD56pmtYlbno4QAY_Kr5xeFrTAvU",
+            authDomain: "prefect-management-syste-e1575.firebaseapp.com",
+            projectId: "prefect-management-syste-e1575",
+            storageBucket: "prefect-management-syste-e1575.appspot.com",
+            messagingSenderId: "973932803095",
+            appId: "1:973932803095:web:a7f2db386cafb53330d852",
+            measurementId: "G-FLF7R3B8J3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const dashboardContent = document.getElementById('dashboard-content');
+        const loadingState = document.getElementById('loading-state');
+        const welcomeMessage = document.getElementById('welcome-message');
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                loadingState.style.display = 'none';
+                dashboardContent.style.display = 'block';
+                welcomeMessage.textContent = `Welcome, ${user.email}!`;
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+        
+        const logoutBtn = document.getElementById('logout-btn');
+        logoutBtn.addEventListener('click', () => {
+            signOut(auth).then(() => {
+                window.location.href = 'index.html';
+            }).catch((error) => {
+                console.error('Sign out error', error);
+            });
+        });
+
+        const menuToggle = document.getElementById('menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        if(menuToggle && mainNav) {
+            menuToggle.addEventListener('click', () => mainNav.classList.toggle('mobile-nav-active'));
+        }
+    </script>
+</body>
+</html>
