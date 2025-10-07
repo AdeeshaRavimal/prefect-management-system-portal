@@ -57,7 +57,10 @@
             color: var(--primary-color);
         }
 
-        .main-nav {
+        .main-nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
             display: flex;
             align-items: center;
             gap: 2rem;
@@ -244,6 +247,8 @@
             grid-column: span 2;
         }
 
+        #menu-toggle { display: none; }
+
         /* Loading State */
         #loading-state {
             text-align: center;
@@ -265,16 +270,19 @@
             }
         }
         
+        @media (max-width: 992px) {
+            .main-nav { display: none; position: absolute; top: 70px; /* Adjust based on header height */ left: 0; width: 100%; background-color: rgba(255, 250, 240, 0.98); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 999; }
+            .main-nav.mobile-nav-active { display: block; }
+            .main-nav ul { flex-direction: column; padding: 1rem 0; gap: 0; }
+            .main-nav li { margin: 0; text-align: center; }
+            .main-nav a { display: block; padding: 1rem; border: none; }
+            .main-nav a.active { background-color: rgba(140, 28, 19, 0.1); }
+            #menu-toggle { display: block; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--primary-color); margin-left: 1rem; position: relative; z-index: 1000; }
+            .header-right { gap: 0.5rem; /* Reduce gap to fit menu toggle */ }
+        }
+
         @media (max-width: 768px) {
-            .main-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-            .main-nav {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
+            .school-name { display: none; } /* Hide school name on small screens */
             .dashboard-container {
                 grid-template-columns: 1fr;
             }
@@ -294,10 +302,12 @@
                 <span class="school-name">R/Eheliyagoda Central College</span>
             </a>
         </div>
-        <nav class="main-nav">
-            <a href="dashboard.html" class="active">Dashboard</a>
-            <a href="events.html">Events</a>
-            <a href="ideas.html">Ideas & Proposals</a>
+        <nav class="main-nav" id="main-nav">
+            <ul>
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="ideas.html">Ideas & Proposals</a></li>
+            </ul>
         </nav>
         <div class="header-right">
             <div class="notification-container">
@@ -313,6 +323,7 @@
                     </div>
                 </div>
             </div>
+            <button id="menu-toggle">☰</button>
             <button id="logout-btn">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Logout</span>
@@ -398,6 +409,22 @@
                 return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
             }
             return 'Invalid Date'; // Fallback for unknown formats
+        }
+
+        // --- MOBILE MENU LOGIC ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        if(menuToggle && mainNav) {
+            menuToggle.addEventListener('click', () => {
+                const isActive = mainNav.classList.toggle('mobile-nav-active');
+                menuToggle.innerHTML = isActive ? '&times;' : '☰';
+            });
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mainNav.classList.remove('mobile-nav-active');
+                    menuToggle.innerHTML = '☰';
+                });
+            });
         }
 
         // --- ANNOUNCEMENT LOGIC ---
