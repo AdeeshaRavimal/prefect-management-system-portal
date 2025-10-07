@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Prefects' Guild</title>
     <link rel="icon" href="meroon Transparent logo prefect.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
@@ -12,153 +13,360 @@
         :root {
             --primary-color: #8C1C13;
             --secondary-color: #C6A98F;
+            --accent-color: #FFA500; /* Orange accent for underlines */
             --text-color: #3b3b3b;
             --text-light: #5f5f5f;
-            --card-bg-color: #FFFAF0;
-            --light-text-color: #ffffff;
-            --glass-bg: rgba(255, 250, 240, 0.7);
+            --bg-color: #FFFBEB; /* Light yellow background */
+            --card-bg-color: #FFFFFF;
+            --border-color: #EAEAEA;
         }
-
-        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             color: var(--text-color);
-            background: linear-gradient(135deg, #FFFBF5 0%, #FFF5E1 100%);
-            background-attachment: fixed;
+            background-color: var(--bg-color);
         }
 
-        .portfolio-header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 1rem 2rem; 
-            position: sticky; 
-            top: 0; 
-            z-index: 998;
-            transition: background-color 0.4s ease, box-shadow 0.4s ease;
-        }
-        .portfolio-header.header-scrolled {
-            background-color: rgba(255, 250, 240, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
-        .portfolio-header.header-scrolled img { filter: none; }
-        .portfolio-header.header-scrolled h1 { color: var(--primary-color); }
-        .portfolio-header.header-scrolled .main-nav a { color: var(--text-color); }
-        .portfolio-header.header-scrolled .main-nav a:hover { color: var(--primary-color); border-color: var(--primary-color); }
-        .portfolio-header.header-scrolled #menu-toggle { color: var(--primary-color); }
-        .portfolio-header.header-scrolled #logout-btn {
-             background-color: var(--primary-color);
-             color: #fff;
-        }
-        .portfolio-header.header-scrolled #logout-btn:hover {
-            background-color: #70160F;
+        /* --- New Header Styles --- */
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2.5rem;
+            background-color: var(--card-bg-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .portfolio-header-left { display: flex; align-items: center; }
-        .portfolio-header-left img { height: 50px; margin-right: 15px; }
-        .portfolio-header-left h1 { margin: 0; font-size: 1.5rem; color: var(--primary-color); }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
 
-        .main-nav ul { margin: 0; padding: 0; list-style: none; display: flex; }
-        .main-nav li { margin-left: 2rem; }
-        .main-nav a { color: var(--text-color); text-decoration: none; font-weight: 600; padding-bottom: 5px; border-bottom: 2px solid transparent; transition: border-color 0.3s; }
-        .main-nav a:hover { border-color: var(--primary-color); }
+        .header-left img {
+            height: 50px;
+        }
 
-        .header-right { display: flex; align-items: center; }
-        #logout-btn {
-            background-color: transparent;
-            border: 2px solid var(--primary-color);
+        .header-left .school-name {
+            font-size: 1.5rem;
+            font-weight: 700;
             color: var(--primary-color);
-            padding: 0.6rem 1.2rem;
+        }
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 1rem;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s, border-color 0.3s;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .notification-bell {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            cursor: pointer;
+            position: relative; /* For positioning the badge */
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            border: 2px solid var(--card-bg-color);
+        }
+
+        .notification-panel {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            width: 350px;
+            max-height: 400px;
+            overflow-y: auto;
+            background-color: var(--card-bg-color);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border: 1px solid var(--border-color);
+            z-index: 1001;
+        }
+
+        .notification-header {
+            padding: 1rem;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .notification-header h4 { margin: 0; }
+
+        #notification-list .notification-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        #notification-list .notification-item:last-child { border-bottom: none; }
+        #notification-list .notification-item h5 { margin: 0 0 0.25rem 0; font-size: 1rem; }
+        #notification-list .notification-item p { margin: 0; font-size: 0.9rem; color: var(--text-light); }
+
+        #logout-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
             border-radius: 8px;
             cursor: pointer;
-            font-weight: 700;
-            transition: all 0.2s;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            margin-right: 1rem;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s;
         }
+
         #logout-btn:hover {
-            background-color: var(--primary-color);
-            color: #fff;
-            transform: translateY(-2px);
+            background-color: #70160F;
         }
-        #menu-toggle { display: none; }
-
-        .portfolio-container { max-width: 1200px; margin: auto; padding: 2rem; }
-        .portfolio-section { background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); padding: 2.5rem; margin-bottom: 2rem; border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); }
-        .portfolio-section h3 { font-size: 2rem; color: var(--primary-color); text-align: center; margin-top: 0; margin-bottom: 2rem; }
-        .card { background-color: var(--card-bg-color); padding: 1.5rem; border-radius: 16px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); border: 1px solid rgba(255, 255, 255, 0.6); }
-        .card h3 { font-size: 1.2rem; text-align: left; }
-        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-
-        @media (max-width: 992px) {
-            .main-nav { display: none; position: absolute; top: 100%; left: 0; width: 100%; background-color: rgba(255, 250, 240, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 100; }
-            .main-nav.mobile-nav-active { display: block; }
-            .main-nav ul { flex-direction: column; padding: 1rem 0; }
-            .main-nav li { margin: 0; text-align: center; }
-            .main-nav a { display: block; padding: 1rem; border: none; color: var(--text-color); }
-            #menu-toggle { display: block; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--primary-color); }
-            .portfolio-header { justify-content: space-between; }
+        
+        /* --- New Dashboard Layout --- */
+        .dashboard-container {
+            padding: 2rem 2.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
         }
 
+        .dashboard-card {
+            background-color: var(--card-bg-color);
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+            border: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-top: 0;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        /* Profile Card Specific Styles */
+        .profile-card {
+            grid-row: span 2; /* Make profile card taller */
+            text-align: center;
+        }
+        
+        #profile-picture {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        #welcome-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin: 0.5rem 0;
+        }
+
+        .profile-details p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+        
+        .profile-details p strong {
+            color: var(--text-color);
+        }
+        
+        .profile-divider {
+            height: 2px;
+            background-color: var(--accent-color);
+            border: none;
+            margin: 1rem 0;
+        }
+        
+        /* Key Stats Card Styles */
+        .stats-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .stats-list li {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stats-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .stats-list li span {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Span "Recent Points" card */
+        .card-span-2 {
+            grid-column: span 2;
+        }
+
+        /* Loading State */
+        #loading-state {
+            text-align: center;
+            padding-top: 150px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .dashboard-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            .profile-card {
+                grid-row: auto;
+                grid-column: span 2; /* Profile card takes full width */
+            }
+             .card-span-2 {
+                grid-column: span 2;
+            }
+        }
+        
         @media (max-width: 768px) {
-            .portfolio-header h1 { display: none; }
-            .dashboard-grid { grid-template-columns: 1fr; }
+            .main-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            .main-nav {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+            .profile-card, .card-span-2 {
+                grid-column: auto;
+            }
         }
+
     </style>
 </head>
 <body>
-    <header class="portfolio-header header-scrolled" id="portfolio-header">
-        <div class="portfolio-header-left">
-            <img src="meroon Transparent logo prefect.png" alt="School Logo">
-            <h1>ECC Prefects' Guild</h1>
+
+    <header class="main-header">
+        <div class="header-left">
+            <a href="index.html" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                <img src="meroon Transparent logo prefect.png" alt="School Logo">
+                <span class="school-name">R/Eheliyagoda Central College</span>
+            </a>
         </div>
+        <nav class="main-nav">
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="events.html">Events</a>
+            <a href="ideas.html">Ideas & Proposals</a>
+        </nav>
         <div class="header-right">
-            <nav class="main-nav" id="main-nav">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    </ul>
-            </nav>
-            <button id="logout-btn">Logout</button>
-            <button id="menu-toggle">☰</button>
+            <div class="notification-container">
+                <i class="fas fa-bell notification-bell">
+                    <span class="notification-badge" style="display: none;"></span>
+                </i>
+                <div class="notification-panel" style="display: none;">
+                    <div class="notification-header">
+                        <h4>Announcements</h4>
+                    </div>
+                    <div id="notification-list">
+                        <!-- Announcements will be loaded here -->
+                    </div>
+                </div>
+            </div>
+            <button id="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </button>
         </div>
     </header>
 
-    <div id="dashboard-content" style="display: none;">
-        <div class="portfolio-container">
-            <section class="portfolio-section">
-                <h3 id="welcome-message" style="text-align: left; border-bottom: 2px solid var(--secondary-color); padding-bottom: 1rem; margin-bottom: 2rem;">Welcome, Prefect!</h3>
-                <div class="dashboard-grid">
-                     <div class="card">
-                        <h3>My Profile</h3>
-                        <p>View and edit your profile information.</p>
-                    </div>
-                     <div class="card">
-                        <h3>Attendance</h3>
-                        <p>Mark and view attendance records.</p>
-                    </div>
-                     <div class="card">
-                        <h3>Events</h3>
-                        <p>Check upcoming school events and duties.</p>
-                    </div>
+    <main id="dashboard-content" style="display: none;">
+        <div class="dashboard-container">
+            <div class="dashboard-card profile-card">
+                <img id="profile-picture" src="https://via.placeholder.com/120" alt="Profile Picture">
+                <p>Welcome,</p>
+                <h2 id="welcome-name">Prefect Name</h2>
+                <hr class="profile-divider">
+                <div class="profile-details">
+                    <p><strong>Role:</strong> <span id="profile-role">Prefect</span></p>
+                    <p><strong>Class:</strong> <span id="profile-class">13-B</span></p>
                 </div>
-            </section>
+            </div>
+
+            <div class="dashboard-card">
+                <h3 class="card-title">Key Stats</h3>
+                <ul class="stats-list">
+                    <li>Total Points: <span id="total-points">0</span></li>
+                    <li>Absences: <span id="total-absences">0</span></li>
+                    <li>Late Arrivals: <span id="total-late">0</span></li>
+                </ul>
+            </div>
+
+            <div class="dashboard-card">
+                <h3 class="card-title">Recent Attendance</h3>
+                <div id="recent-attendance-list">
+                    <p>No recent attendance records found.</p>
+                </div>
+            </div>
+
+            <div class="dashboard-card card-span-2">
+                <h3 class="card-title">Recent Points</h3>
+                <div id="recent-points-list">
+                    <p>No recent points awarded.</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </main>
     
-    <div id="loading-state" style="text-align: center; padding-top: 150px;">
+    <div id="loading-state">
         <h2>Loading Dashboard...</h2>
-        <p>Please wait, redirecting if not logged in.</p>
+        <p>Please wait while we fetch your details.</p>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js";
+        import { getFirestore, collection, query, where, getDocs, limit, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCEvF1sD56pmtYlbno4QAY_Kr5xeFrTAvU",
@@ -172,20 +380,189 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
 
         const dashboardContent = document.getElementById('dashboard-content');
         const loadingState = document.getElementById('loading-state');
-        const welcomeMessage = document.getElementById('welcome-message');
 
-        onAuthStateChanged(auth, (user) => {
+        // --- Helper function to format Firestore Timestamps ---
+        function formatDate(timestamp) {
+            if (!timestamp) return 'N/A';
+            // Check if it's a Firestore Timestamp object
+            if (timestamp.toDate) {
+                return timestamp.toDate().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+            }
+            // Check if it's a string or number that can be converted to a Date
+            const date = new Date(timestamp);
+            if (!isNaN(date.getTime())) {
+                return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+            }
+            return 'Invalid Date'; // Fallback for unknown formats
+        }
+
+        // --- ANNOUNCEMENT LOGIC ---
+        const notificationBell = document.querySelector('.notification-bell');
+        const notificationPanel = document.querySelector('.notification-panel');
+        const notificationBadge = document.querySelector('.notification-badge');
+        const notificationList = document.getElementById('notification-list');
+
+        notificationBell.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent click from closing panel immediately
+            const isVisible = notificationPanel.style.display === 'block';
+            notificationPanel.style.display = isVisible ? 'none' : 'block';
+            
+            if (!isVisible) {
+                notificationBadge.style.display = 'none';
+                const latestTimestamp = notificationList.firstChild?.dataset.timestamp;
+                if (latestTimestamp) {
+                    localStorage.setItem('lastSeenAnnouncement', latestTimestamp);
+                }
+            }
+        });
+
+        // Close panel if clicking outside
+        document.addEventListener('click', (e) => {
+            if (!notificationPanel.contains(e.target) && !notificationBell.contains(e.target)) {
+                notificationPanel.style.display = 'none';
+            }
+        });
+
+        function loadAnnouncements() {
+            const q = query(collection(db, "announcements"), orderBy("timestamp", "desc"), limit(10));
+
+            onSnapshot(q, (snapshot) => {
+                if (snapshot.empty) {
+                    notificationList.innerHTML = '<div class="notification-item"><p>No announcements right now.</p></div>';
+                    return;
+                }
+
+                notificationList.innerHTML = '';
+                let latestTimestamp = snapshot.docs[0].data().timestamp?.toMillis();
+
+                snapshot.forEach(doc => {
+                    notificationList.appendChild(renderAnnouncement(doc.data()));
+                });
+
+                const lastSeenTimestamp = localStorage.getItem('lastSeenAnnouncement');
+                if (latestTimestamp && (!lastSeenTimestamp || latestTimestamp > lastSeenTimestamp)) {
+                    notificationBadge.style.display = 'block';
+                }
+            });
+        }
+
+        function renderAnnouncement(announcement) {
+            const item = document.createElement('div');
+            item.className = 'notification-item';
+            item.dataset.timestamp = announcement.timestamp?.toMillis();
+            
+            item.innerHTML = `
+                <h5>${announcement.title}</h5>
+                <p>${announcement.content}</p>
+                <small style="color: var(--accent-color)">${announcement.timestamp ? announcement.timestamp.toDate().toLocaleString() : ''}</small>
+            `;
+            return item;
+        }
+
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
+                loadAnnouncements(); // Load announcements for logged-in user
+
+                const prefectsRef = collection(db, "prefects");
+                const q = query(prefectsRef, where("uid", "==", user.uid));
+                const querySnapshot = await getDocs(q);
+
+                if (!querySnapshot.empty) {
+                    const prefectDoc = querySnapshot.docs[0];
+                    const prefectData = prefectDoc.data();
+                    const prefectId = prefectDoc.id;
+
+                    document.getElementById('profile-picture').src = prefectData.picture || 'https://via.placeholder.com/120';
+                    document.getElementById('welcome-name').textContent = prefectData.name || 'Prefect Name';
+                    document.getElementById('profile-role').textContent = prefectData.destiny || 'N/A';
+                    document.getElementById('profile-class').textContent = prefectData.class || 'N/A';
+
+                    await fetchKeyStats(prefectId);
+                    await fetchRecentPoints(prefectId);
+                    await fetchRecentAttendance(prefectId);
+
+                } else {
+                    console.error("Could not find a prefect profile linked to this user.");
+                    document.getElementById('welcome-name').textContent = user.email;
+                }
+
                 loadingState.style.display = 'none';
                 dashboardContent.style.display = 'block';
-                welcomeMessage.textContent = `Welcome, ${user.email}!`;
+
             } else {
                 window.location.href = 'login.html';
             }
         });
+
+        async function fetchKeyStats(prefectId) {
+            // Fetch Total Points
+            const pointsQuery = query(collection(db, "points"), where("prefect_id", "==", prefectId));
+            const pointsSnapshot = await getDocs(pointsQuery);
+            let totalPoints = 0;
+            pointsSnapshot.forEach(doc => {
+                totalPoints += doc.data().points || 0;
+            });
+            document.getElementById('total-points').textContent = totalPoints;
+
+            // Fetch Attendance Stats
+            const attendanceQuery = query(collection(db, "attendance"), where("prefect_id", "==", prefectId));
+            const attendanceSnapshot = await getDocs(attendanceQuery);
+            let totalAbsences = 0;
+            let totalLate = 0;
+            attendanceSnapshot.forEach(doc => {
+                const record = doc.data();
+                if (record.status === 'absent') {
+                    totalAbsences++;
+                } else if (record.status === 'late') {
+                    totalLate++;
+                }
+            });
+            document.getElementById('total-absences').textContent = totalAbsences;
+            document.getElementById('total-late').textContent = totalLate;
+        }
+
+        async function fetchRecentPoints(prefectId) {
+            const pointsList = document.getElementById('recent-points-list');
+            const q = query(collection(db, "points"), where("prefect_id", "==", prefectId), orderBy("date", "desc"), limit(5));
+            const querySnapshot = await getDocs(q);
+
+            if (querySnapshot.empty) {
+                pointsList.innerHTML = '<p>No recent points awarded.</p>';
+                return;
+            }
+
+            let html = '<ul class="stats-list">';
+            querySnapshot.forEach(doc => {
+                const point = doc.data();
+                html += `<li>${point.reason || 'No reason'} <span>+${point.points || 0}</span></li>`;
+            });
+            html += '</ul>';
+            pointsList.innerHTML = html;
+        }
+
+        async function fetchRecentAttendance(prefectId) {
+            const attendanceList = document.getElementById('recent-attendance-list');
+            const q = query(collection(db, "attendance"), where("prefect_id", "==", prefectId), orderBy("date", "desc"), limit(5));
+            const querySnapshot = await getDocs(q);
+
+            if (querySnapshot.empty) {
+                attendanceList.innerHTML = '<p>No recent attendance records found.</p>';
+                return;
+            }
+
+            let html = '<ul class="stats-list">';
+            querySnapshot.forEach(doc => {
+                const record = doc.data();
+                html += `<li>${formatDate(record.date)} <span>${record.status || 'N/A'}</span></li>`;
+            });
+            html += '</ul>';
+            attendanceList.innerHTML = html;
+        }
+
         
         const logoutBtn = document.getElementById('logout-btn');
         logoutBtn.addEventListener('click', () => {
@@ -195,12 +572,6 @@
                 console.error('Sign out error', error);
             });
         });
-
-        const menuToggle = document.getElementById('menu-toggle');
-        const mainNav = document.getElementById('main-nav');
-        if(menuToggle && mainNav) {
-            menuToggle.addEventListener('click', () => mainNav.classList.toggle('mobile-nav-active'));
-        }
     </script>
 </body>
 </html>
