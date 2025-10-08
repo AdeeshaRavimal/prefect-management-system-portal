@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prefects' Guild - Eheliyagoda Central College</title>
+    <link rel="icon" href="meroon Transparent logo prefect.png" type="image/png">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/main.min.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+
+        :root {
+            --primary-color: #8C1C13;
+            --secondary-color: #C6A98F;
+            --text-color: #3b3b3b;
+            --text-light: #5f5f5f;
+            --card-bg-color: #FFFAF0;
+            --light-text-color: #ffffff;
+            --glass-bg: rgba(255, 250, 240, 0.7);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #FFFBF5 0%, #FFF5E1 100%);
+            background-attachment: fixed;
+        }
+        
+        #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--card-bg-color); display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s ease-out, visibility 0.5s ease-out; text-align: center; }
+        #loader img { width: 100px; height: 100px; animation: pulsate 1.5s ease-in-out infinite; margin-bottom: 1rem; }
+        #loader-text { color: var(--primary-color); font-weight: 600; font-size: 1.2rem; margin: 0; }
+        @keyframes pulsate { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        #loader.hidden { opacity: 0; visibility: hidden; }
+
+        .portfolio-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 1rem 2rem; 
+            position: sticky; 
+            top: 0; 
+            z-index: 998;
+            transition: background-color 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+            background-color: transparent;
+            border-bottom: 1px solid transparent;
+            height: 50px;
+        }
+        .portfolio-header img {
+            transition: filter 0.4s ease;
+            filter: brightness(0) invert(1);
+        }
+        .portfolio-header h1 { margin: 0; font-size: 1.5rem; color: var(--light-text-color); transition: color 0.4s ease; }
+        .main-nav a { color: var(--light-text-color); text-decoration: none; font-weight: 600; padding-bottom: 5px; border-bottom: 2px solid transparent; transition: color 0.4s ease, border-color 0.3s; }
+        .main-nav a:hover { border-color: var(--light-text-color); }
+        #menu-toggle { color: var(--light-text-color); transition: color 0.4s ease; }
+
+        .portfolio-header.header-scrolled {
+            background-color: rgba(255, 250, 240, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        .portfolio-header.header-scrolled img { filter: none; }
+        .portfolio-header.header-scrolled h1 { color: var(--primary-color); }
+        .portfolio-header.header-scrolled .main-nav a { color: var(--text-color); }
+        .portfolio-header.header-scrolled .main-nav a:hover { color: var(--primary-color); border-color: var(--primary-color); }
+        .portfolio-header.header-scrolled #menu-toggle { color: var(--primary-color); }
+
+        .portfolio-header-left { display: flex; align-items: center; }
+        .main-nav ul { margin: 0; padding: 0; list-style: none; display: flex; }
+        .main-nav li { margin-left: 2rem; }
+        .header-right { display: flex; align-items: center; }
+        .login-btn { 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: all 0.2s ease-in-out; 
+            text-transform: uppercase;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+        .login-btn:hover { transform: translateY(-2px); }
+        
+        .hero-login-btn {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            color: var(--light-text-color);
+            padding: 0.8rem 2.5rem;
+            margin-top: 2.5rem;
+            display: inline-block;
+        }
+        .hero-login-btn:hover { background: rgba(255, 255, 255, 0.3); }
+        
+        #menu-toggle { display: none; }
+
+        .hero-section { 
+            display: flex; justify-content: center; align-items: center; text-align: center; 
+            min-height: 90vh; padding: 2rem; position: relative; color: var(--light-text-color); 
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('edit 2.jpg'); 
+            background-size: cover; background-position: center; background-attachment: fixed;
+            margin-top: -82px;
+        }
+        .hero-content { z-index: 2; max-width: 800px; }
+        .hero-greeting { font-size: 1.2rem; font-weight: 600; color: rgba(255, 255, 255, 0.9); margin: 0; }
+        .hero-title { font-size: 4rem; font-weight: 600; color: var(--light-text-color); margin: 0.5rem 0; line-height: 1.2; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .hero-divider { width: 80px; height: 4px; background-color: var(--light-text-color); margin: 1.5rem auto; }
+        .hero-description { font-size: 1.1rem; line-height: 1.7; color: rgba(255, 255, 255, 0.9); }
+
+        .portfolio-container { max-width: 1200px; margin: auto; padding: 2rem; }
+        .portfolio-section { background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); padding: 2.5rem; margin-bottom: 2rem; border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); }
+        .portfolio-section h3 { font-size: 2rem; color: var(--primary-color); text-align: center; margin-top: 0; margin-bottom: 2rem; }
+        
+        .vision-mission-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; list-style: none; padding: 0; margin-top: 2rem; }
+        .vision-mission-card { background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); padding: 1.5rem; height: 100%; transition: transform 0.3s ease, box-shadow 0.3s ease; text-align: left; }
+        .vision-mission-card:hover { transform: translateY(-8px); box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.15); }
+        .vision-mission-card h4 { color: var(--primary-color); margin-top: 0; margin-bottom: 0.75rem; font-size: 1.1rem; border-bottom: 2px solid var(--secondary-color); padding-bottom: 0.5rem; }
+        .vision-mission-card p { margin: 0; color: var(--text-light); font-size: 0.9rem; line-height: 1.6; }
+
+        .prefects-layout { display: flex; gap: 2rem; }
+        .prefects-sidebar { flex: 0 0 220px; }
+        .prefects-sidebar h4 { margin-top: 0; color: var(--primary-color); border-bottom: 2px solid var(--secondary-color); padding-bottom: 0.5rem; }
+        #category-filter-list { list-style: none; padding: 0; margin: 0; }
+        #category-filter-list li button { width: 100%; padding: 0.8rem 1rem; margin-bottom: 0.5rem; border-radius: 8px; border: 1px solid transparent; background-color: rgba(0,0,0,0.02); text-align: left; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s; }
+        #category-filter-list li button:hover { background-color: var(--secondary-color); color: var(--primary-color); }
+        #category-filter-list li button.active { background-color: var(--primary-color); color: white; }
+        .prefects-main-content { flex: 1; }
+        .prefects-controls { margin-bottom: 1.5rem; }
+        .prefects-controls input { width: 100%; box-sizing: border-box; padding: 0.8rem; border-radius: 8px; border: 1px solid #ddd; font-size: 1rem; }
+        
+        .prefects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.5rem; }
+        .prefect-card { background: #fff; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .prefect-card:hover { transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
+        .prefect-card img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--secondary-color); }
+        .prefect-card h4 { margin: 0.8rem 0 0.2rem; font-size: 1rem; color: var(--text-color); }
+        .prefect-card p { margin: 0; color: var(--primary-color); font-weight: 600; font-size: 0.9rem; }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .gallery-item {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.4s ease;
+        }
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        .gallery-item::after {
+            content: '\f00e';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(140, 28, 19, 0.7);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        .contact-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 2rem; align-items: center; }
+        .contact-details-list { list-style: none; padding: 0; }
+        .contact-item { display: flex; align-items: flex-start; margin-bottom: 2rem; }
+        .contact-item .icon { font-size: 1.5rem; color: var(--primary-color); margin-right: 1.5rem; width: 30px; text-align: center; }
+        .contact-item-content h4 { margin: 0 0 0.25rem 0; color: var(--primary-color); }
+        .contact-item-content p, .contact-item-content a { margin: 0; color: var(--text-light); text-decoration: none; font-size: 0.9rem; }
+        .contact-item-content a:hover { text-decoration: underline; }
+        .contact-map iframe { width: 100%; height: 350px; border-radius: 12px; border: 0; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); }
+
+        .show-more-container { text-align: center; margin-top: 2rem; display: flex; justify-content: center; gap: 1rem; }
+        #show-more-btn, #show-less-btn { background-color: var(--primary-color); color: var(--light-text-color); border: none; padding: 0.8rem 2rem; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; text-transform: uppercase; display: none; transition: all 0.3s; }
+        #show-more-btn:hover, #show-less-btn:hover { background-color: #70160F; }
+        #show-less-btn { background-color: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); }
+        #show-less-btn:hover { background-color: var(--primary-color); color: var(--light-text-color); }
+
+        .portfolio-footer { padding: 2.5rem 1rem; text-align: center; background: var(--card-bg-color); color: var(--text-light); border-top: 1px solid #eee; }
+        .social-icons { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .social-icons a { color: var(--primary-color); background-color: rgba(140, 28, 19, 0.1); width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; text-decoration: none; border-radius: 50%; font-size: 1rem; transition: all 0.3s ease; }
+        .social-icons a:hover { background-color: var(--primary-color); color: var(--light-text-color); transform: translateY(-5px); }
+        .copyright-main { margin: 0.5rem 0; font-weight: 600; color: var(--text-color); }
+        .copyright-credits { margin: 0; font-size: 0.8rem; color: var(--text-light); }
+
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+        .animate-on-scroll.is-visible .animate-child { opacity: 1; transform: translateY(0); }
+        .animate-child { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .testimonial-card { background: var(--card-bg-color); padding: 2rem; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .testimonial-card:hover { transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
+        .testimonial-card img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 4px solid var(--secondary-color); margin-bottom: 1rem; }
+        .testimonial-card h4 { margin: 0 0 0.5rem 0; color: var(--primary-color); }
+        .testimonial-card .quote { font-style: italic; color: var(--text-light); margin: 0; position: relative; }
+        .testimonial-card .quote::before { content: '“'; font-family: Georgia, serif; font-size: 2.5rem; position: absolute; top: -10px; left: -15px; color: var(--secondary-color); opacity: 0.8; }
+        .testimonial-card .quote::after { content: '”'; font-family: Georgia, serif; font-size: 2.5rem; position: absolute; bottom: -25px; right: -15px; color: var(--secondary-color); opacity: 0.8; }
+
+        .creators-fab { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background-color: var(--primary-color); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; animation: bounce 2s infinite ease-in-out; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); }
+        .modal-content-wrapper { display: flex; justify-content: center; align-items: center; min-height: 100%; }
+        .auth-card { background-color: var(--card-bg-color); padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1); width: 100%; max-width: 420px; margin: 1rem; }
+        .close-button { position: absolute; top: 10px; right: 25px; color: #aaa; font-size: 32px; font-weight: bold; cursor: pointer; }
+        .close-button:hover { color: black; }
+        
+        @keyframes fadeInScaleUp { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .modal-content-wrapper > .auth-card { animation: fadeInScaleUp 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+
+        /* --- Enhanced Creators Modal Styles --- */
+        .creators-card {
+            max-width: 900px;
+            background: rgba(255, 250, 240, 0.75);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        .creators-card h3 {
+            margin-bottom: 2.5rem;
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+        .developer-cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .developer-card {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 1.5rem;
+            border-radius: 15px;
+            flex: 1;
+            min-width: 220px;
+            max-width: 250px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .developer-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(140, 28, 19, 0.15), 0 0 15px rgba(140, 28, 19, 0.1);
+        }
+        .developer-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        .developer-card h4 {
+            margin: 0 0 0.25rem 0;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+        .developer-card .role {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin: 0;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+        .dev-social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .dev-social-icons a {
+            color: var(--text-light);
+            font-size: 1rem;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0,0,0,0.05);
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .dev-social-icons a:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.15);
+        }
+
+
+        @media (max-width: 992px) {
+            .contact-layout { grid-template-columns: 1fr; }
+            .main-nav { display: none; position: absolute; top: 100%; left: 0; width: 100%; background-color: rgba(255, 250, 240, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 100; }
+            .main-nav.mobile-nav-active { display: block; }
+            .main-nav ul { flex-direction: column; padding: 1rem 0; }
+            .main-nav li { margin: 0; text-align: center; }
+            .main-nav a { display: block; padding: 1rem; border: none; }
+            .portfolio-header.header-scrolled .main-nav a { color: var(--text-color); }
+            .portfolio-header:not(.header-scrolled) .main-nav a { color: var(--text-color); }
+            #menu-toggle { display: block; background: none; border: none; font-size: 2rem; cursor: pointer; margin-left: 1rem; }
+            .portfolio-header { justify-content: space-between; }
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-section { padding: 1.5rem; }
+            .portfolio-section h3 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+            .vision-mission-list { grid-template-columns: 1fr; }
+            .portfolio-header h1 { display: none; }
+            .hero-section { padding: 2rem 1rem; }
+            .hero-title { font-size: 2.2rem; }
+            .container, .portfolio-container { padding: 1rem; }
+            .prefects-layout { flex-direction: column; }
+            .prefects-sidebar { flex: 0 0 auto; margin-bottom: 2rem; }
+            #category-filter-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+            #category-filter-list li button { width: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <div>
+            <img src="meroon Transparent logo prefect.png" alt="Loading...">
+            <p id="loader-text">Loading...</p>
+        </div>
+    </div>
+
+    <div id="public-portfolio">
+        <header class="portfolio-header" id="portfolio-header">
+            <div class="portfolio-header-left">
+                <img src="meroon Transparent logo prefect.png" alt="School Logo" style="height: 50px; margin-right: 15px;">
+                <h1>ECC Prefects' Guild</h1>
+            </div>
+            <div class="header-right">
+                <nav class="main-nav" id="main-nav">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#about-us">About Us</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#prefects-list">Our Prefects</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </nav>
+                <button id="menu-toggle">☰</button>
+            </div>
+        </header>
+
+        <section class="hero-section animate-on-scroll" id="hero">
+             <div class="hero-content">
+                <p class="hero-greeting">Welcome to the</p>
+                <h2 class="hero-title">ECC PREFECTS' GUILD</h2>
+                <div class="hero-divider"></div>
+                <p class="hero-description">Leading with integrity and dedication. We are committed to upholding the values of our college and serving the student community.</p>
+                <a href="login.html" class="login-btn hero-login-btn">Login As Prefect</a>
+            </div>
+        </section>
+
+        <div class="portfolio-container">
+            <section id="about-us" class="portfolio-section animate-on-scroll">
+                <h3>About Us: Vision & Mission</h3>
+                <p style="text-align: center;">As the Prefects' Guild of Eheliyagoda Central College, our primary objectives are:</p>
+                <ul class="vision-mission-list">
+                    <li class="vision-mission-card animate-child">
+                        <h4>Our Vision</h4>
+                        <p>Our main vision is to provide proper guidance and support to the entire student community by setting an example of leadership.</p>
+                    </li>
+                    <li class="vision-mission-card animate-child">
+                        <h4>Maintaining Discipline</h4>
+                        <p>We are dedicated to maintaining the school's discipline at a high level and encouraging students to wear the uniform correctly and neatly.</p>
+                    </li>
+                    <li class="vision-mission-card animate-child">
+                        <h4>Core Duties</h4>
+                        <p>We are committed to performing our duties at the main gate, during morning assemblies, and at all other special school events.</p>
+                    </li>
+                    <li class="vision-mission-card animate-child">
+                        <h4>Leadership Contribution</h4>
+                        <p>Our guild actively undertakes leadership responsibilities from the initial planning stages to the conclusion of every program organized by the school.</p>
+                    </li>
+                </ul>
+            </section>
+            
+            <section id="testimonials" class="portfolio-section animate-on-scroll">
+                <h3>What Our Students Say</h3>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card animate-child">
+                        <img src="Piyumira.jpg" alt="Piyumira">
+                        <h4>Piyumira Manahari</h4>
+                        <h4>[Head prefect In 2021 / 2022]</h4>
+                        <p class="quote">Being part of the Prefects’ Guild was an experience that truly shaped my growth and leadership. It’s inspiring to see the Guild continue guiding and empowering students to lead with dedication, teamwork, and integrity.</p>
+                    </div>
+                    <div class="testimonial-card animate-child">
+                        <img src="Ranindu.jpg" alt="Ranindu">
+                        <h4>Ranindu Hansaka</h4>
+                        <h4>[D.H.P. In 2024 / 2025]</h4>
+                        <p class="quote">A leader is not someone who always goes ahead...he goes with others towards the same goal, towards the same dream. We have the same goal in our hearts, to elevate the name of the school. I am honored to be a part of this board, to walk this journey with love, dedication, and unity.</p>
+                    </div>
+                    <div class="testimonial-card animate-child">
+                        <img src="" alt="Sameera Dias">
+                        <h4>Sameera Dias</h4>
+                        <p class="quote">Seeing the prefects manage school events so professionally is amazing. It motivates me to take on leadership roles in the future.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="prefects-list" class="portfolio-section animate-on-scroll">
+                <h3>Our Prefects</h3>
+                <div class="prefects-layout">
+                    <div class="prefects-sidebar">
+                        <h4>Categories</h4>
+                        <ul id="category-filter-list"></ul>
+                    </div>
+                    <div class="prefects-main-content">
+                         <div class="prefects-controls">
+                            <input type="search" id="prefect-search-bar" placeholder="Search by name...">
+                        </div>
+                        <div id="prefects-grid" class="prefects-grid"></div>
+                        <div class="show-more-container">
+                            <button id="show-more-btn">Show More</button>
+                            <button id="show-less-btn">Show Less</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="gallery" class="portfolio-section animate-on-scroll">
+                <h3>Gallery</h3>
+                <div class="gallery-grid">
+                    <div class="gallery-item animate-child"><img src="Gallerry/1.jpg" alt="Event 1"></div>
+                    <div class="gallery-item animate-child"><img src="Gallerry/2.jpg" alt="Event 2"></div>
+                    <div class="gallery-item animate-child"><img src="Gallerry/3.jpg" alt="Event 3"></div>
+                    <div class="gallery-item animate-child"><img src="Gallerry/4.jpg" alt="Event 4"></div>
+                    <div class="gallery-item animate-child"><img src="Gallerry/5.jpg" alt="Event 5"></div>
+                    <div class="gallery-item animate-child"><img src="Gallerry/6.jpg" alt="Event 6"></div>
+                    <div class="gallery-item animate-child"><img src="Gallerry/7.jpg" alt="Event 7"></div>
+                    <div class="gallery-item animate-child"><img src="Gallerry/8.jpg" alt="Event 8"></div>
+                    <div class="gallery-item animate-child"><img src="Gallerry/9.jpg" alt="Event 9"></div>
+                    <div class="gallery-item animate-child"><img src="Gallerry/10.jpg" alt="Event 10"></div>
+                    <div class="gallery-item animate-child"><img src="Gallerry/11.jpg" alt="Event 11"></div>
+                    <div class="gallery-item animate-child"><img src="Gallerry/12.jpg" alt="Event 12"></div>
+                </div>
+            </section>
+
+            <section id="contact" class="portfolio-section animate-on-scroll">
+                <h3>Contact Us</h3>
+                <div class="contact-layout">
+                    <div class="contact-details">
+                        <ul class="contact-details-list">
+                            <li class="contact-item animate-child">
+                                <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                                <div class="contact-item-content">
+                                    <h4>Address</h4>
+                                    <p>Eheliyagoda Central College, Eheliyagoda, Sri Lanka</p>
+                                </div>
+                            </li>
+                            <li class="contact-item animate-child">
+                                <div class="icon"><i class="fas fa-envelope"></i></div>
+                                <div class="contact-item-content">
+                                    <h4>Email</h4>
+                                    <p><a href="mailto:emmvprefects@gmail.com">emmvprefects@gmail.com</a></p>
+                                </div>
+                            </li>
+                            <li class="contact-item animate-child">
+                                <div class="icon"><i class="fas fa-phone"></i></div>
+                                <div class="contact-item-content">
+                                    <h4>Phone</h4>
+                                    <p>+94 77 991 2589</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="contact-map animate-child">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.3139841487673!2d80.26017487397701!3d6.8529164192497145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae3af908a1d272f%3A0xe33a51c52eca2ec!2sEheliyagoda%20Central%20College!5e0!3m2!1sen!2ssg!4v1759766622909!5m2!1sen!2ssg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer class="portfolio-footer">
+            <div class="social-icons">
+                <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" aria-label="Instagram"><i class="fa-solid fa-phone"></i></a>
+                <a href="#" target="_blank" aria-label="WhatsApp"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+            <p class="copyright-main">P.M.S © 2025 Hansaka P. Fernando</p>
+            <p class="copyright-credits">Adeesha Ravimal Kannangara | Thevindu Thisev Rajapaksha | Hansaka Fernando</p>
+        </footer>
+    </div>
+    
+    <div id="creators-modal" class="modal">
+        <div class="modal-content-wrapper">
+             <div class="auth-card creators-card">
+                <span class="close-button">×</span>
+                <h3>PMS Development Team</h3>
+                <div class="developer-cards-container">
+                    <div class="developer-card">
+                        <img src="Developer Team/Adeesha.jpg" alt="Adeesha Ravimal">
+                        <h4>Adeesha Ravimal</h4>
+                        <p class="role">UI/UX Designer & System Developer</p>
+                        <div class="dev-social-icons">
+                            <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="mailto:adeesharavimal@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    <div class="developer-card">
+                        <img src="Developer Team/thevindu.JPG" alt="Thevindu Thisev">
+                        <h4>Thevindu Thisev</h4>
+                        <p class="role">Back-End & Database</p>
+                         <div class="dev-social-icons">
+                            <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="mailto:#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    <div class="developer-card">
+                        <img src="Developer Team/Hansaka.png" alt="Hansaka Fernando">
+                        <h4>Hansaka Fernando</h4>
+                        <p class="role">UI/UX Designer & Front-End</p>
+                         <div class="dev-social-icons">
+                            <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="mailto:hansakafranando7@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="creators-fab" id="creators-fab">
+        <i class="fas fa-code"></i>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, initializeFirestore } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyCEvF1sD56pmtYlbno4QAY_Kr5xeFrTAvU",
+            authDomain: "prefect-management-syste-e1575.firebaseapp.com",
+            projectId: "prefect-management-syste-e1575",
+            storageBucket: "prefect-management-syste-e1575.appspot.com",
+            messagingSenderId: "973932803095",
+            appId: "1:973932803095:web:a7f2db386cafb53330d852",
+            measurementId: "G-FLF7R3B8J3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = initializeFirestore(app, { experimentalForceLongPolling: true });
+
+        // --- Loader Logic ---
+        window.onload = () => {
+            const loader = document.getElementById('loader');
+            if(loader) loader.classList.add('hidden');
+        };
+        
+        // --- Header Scroll Logic ---
+        const header = document.getElementById('portfolio-header');
+        if (header) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+            });
+        }
+
+        // --- Animate on Scroll Logic ---
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        if (window.IntersectionObserver) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        const children = entry.target.querySelectorAll('.animate-child');
+                        children.forEach((child, index) => {
+                            child.style.transitionDelay = `${index * 100}ms`;
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            animatedElements.forEach(el => observer.observe(el));
+        }
+
+        // --- Mobile Menu Logic ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        if(menuToggle && mainNav) {
+            menuToggle.addEventListener('click', () => mainNav.classList.toggle('mobile-nav-active'));
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => mainNav.classList.remove('mobile-nav-active'));
+            });
+        }
+        
+        // --- Creators Modal Logic ---
+        const creatorsFab = document.getElementById('creators-fab');
+        const creatorsModal = document.getElementById('creators-modal');
+        const closeCreatorsModalBtn = creatorsModal.querySelector('.close-button');
+        creatorsFab.addEventListener('click', () => { creatorsModal.style.display = 'block'; });
+        closeCreatorsModalBtn.addEventListener('click', () => { creatorsModal.style.display = 'none'; });
+        window.addEventListener('click', (event) => { 
+            if (event.target == creatorsModal) creatorsModal.style.display = "none";
+        });
+
+        // --- Prefects List Logic ---
+        let fetchedPrefects = [];
+        const prefectsGrid = document.getElementById('prefects-grid');
+        const searchBar = document.getElementById('prefect-search-bar');
+        const categoryFilterList = document.getElementById('category-filter-list');
+        const showMoreBtn = document.getElementById('show-more-btn');
+        const showLessBtn = document.getElementById('show-less-btn');
+        let currentCategory = 'All';
+        const initialVisibleCount = 8;
+        let visiblePrefectCount = initialVisibleCount;
+
+        async function loadAndDisplayPrefects() {
+            if (!prefectsGrid) return;
+            prefectsGrid.innerHTML = '<p>Loading Prefects...</p>';
+            try {
+                const prefectsCollection = collection(db, "prefects");
+                const querySnapshot = await getDocs(prefectsCollection);
+                fetchedPrefects = [];
+                querySnapshot.forEach((doc) => fetchedPrefects.push(doc.data()));
+                populateCategories();
+                renderPrefects();
+            } catch (error) {
+                console.error("Error fetching prefects: ", error);
+                prefectsGrid.innerHTML = `<p>Error loading prefects. Please check the connection.</p>`;
+            }
+        }
+
+        function populateCategories() {
+            if (!categoryFilterList) return;
+            const sections = [...new Set(fetchedPrefects.map(p => p.section).filter(Boolean))];
+            categoryFilterList.innerHTML = `<li><button class="active" data-category="All">All</button></li>`;
+            sections.forEach(section => {
+                categoryFilterList.innerHTML += `<li><button data-category="${section}">${section}</button></li>`;
+            });
+        }
+
+        function renderPrefects() {
+            if (!prefectsGrid) return;
+            const searchValue = searchBar ? searchBar.value.toLowerCase() : "";
+            prefectsGrid.innerHTML = '';
+            const filteredPrefects = fetchedPrefects.filter(p => {
+                const matchesCategory = currentCategory === 'All' || p.section === currentCategory;
+                const hasName = p.name && typeof p.name === 'string';
+                const matchesSearch = hasName && p.name.toLowerCase().includes(searchValue);
+                return matchesCategory && matchesSearch;
+            });
+            
+            const prefectsToDisplay = filteredPrefects.slice(0, visiblePrefectCount);
+
+            if (prefectsToDisplay.length === 0) {
+                prefectsGrid.innerHTML = '<p>No prefects found matching your criteria.</p>'; 
+            } else {
+                prefectsToDisplay.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'prefect-card';
+                    card.innerHTML = `<img src="${p.picture || 'https://via.placeholder.com/150'}" alt="${p.name}"><h4>${p.name}</h4><p>${p.destiny || 'Prefect'}</p>`;
+                    prefectsGrid.appendChild(card);
+                });
+            }
+
+            if (showMoreBtn && showLessBtn) {
+                const totalMatches = filteredPrefects.length;
+                showMoreBtn.style.display = (totalMatches > visiblePrefectCount) ? 'inline-block' : 'none';
+                showLessBtn.style.display = (visiblePrefectCount > initialVisibleCount && totalMatches > initialVisibleCount) ? 'inline-block' : 'none';
+            }
+        }
+        
+        if (prefectsGrid) {
+            searchBar.addEventListener('input', () => { visiblePrefectCount = initialVisibleCount; renderPrefects(); });
+            categoryFilterList.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON') {
+                    visiblePrefectCount = initialVisibleCount;
+                    currentCategory = e.target.dataset.category;
+                    categoryFilterList.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                    renderPrefects();
+                }
+            });
+            showMoreBtn.addEventListener('click', () => { visiblePrefectCount = fetchedPrefects.length; renderPrefects(); });
+            showLessBtn.addEventListener('click', () => {
+                visiblePrefectCount = initialVisibleCount;
+                renderPrefects();
+                const prefectsListSection = document.getElementById('prefects-list');
+                if (prefectsListSection) prefectsListSection.scrollIntoView({ behavior: 'smooth' });
+            });
+            loadAndDisplayPrefects();
+        }
+    </script>
+</body>
+</html>
