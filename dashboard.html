@@ -244,6 +244,13 @@
                     <p>No recent points awarded.</p>
                 </div>
             </div>
+
+            <div class="dashboard-card card-span-2">
+                <h3 class="card-title">Performance Issues</h3>
+                <div id="bad-work-list">
+                    <p>No performance issues recorded.</p>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -414,6 +421,7 @@
                     await fetchRecentPoints(prefectId);
                     await fetchRecentAttendance(prefectId);
                     await checkForAbsenceReason(prefectId);
+                    await fetchBadWork(prefectId);
                 } else {
                     console.error("Could not find a prefect profile linked to this user.");
                     document.getElementById('welcome-name').textContent = user.email;
@@ -521,6 +529,23 @@
                     });
                 }
             }
+        }
+
+        async function fetchBadWork(prefectId) {
+            const badWorkList = document.getElementById('bad-work-list');
+            const q = query(collection(db, "bad_work"), where("prefect_id", "==", prefectId), orderBy("date", "desc"));
+            const querySnapshot = await getDocs(q);
+            if (querySnapshot.empty) {
+                badWorkList.innerHTML = '<p>No performance issues recorded.</p>';
+                return;
+            }
+            let html = '<ul class="stats-list">';
+            querySnapshot.forEach(doc => {
+                const record = doc.data();
+                html += `<li>${formatDate(record.date)}: ${record.description}</li>`;
+            });
+            html += '</ul>';
+            badWorkList.innerHTML = html;
         }
         
         document.getElementById('logout-btn').addEventListener('click', () => {
