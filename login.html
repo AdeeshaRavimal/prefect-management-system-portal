@@ -79,6 +79,21 @@
 
         form { background-color: var(--card-bg-color); display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 0 50px; height: 100%; text-align: center; }
         input { background-color: #eee; border: none; padding: 12px 15px; margin: 8px 0; width: 100%; border-radius: 8px; }
+        
+        /* New Styles for Password Container */
+        .password-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .password-container i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--text-light);
+        }
 
         .container {
             background-color: var(--card-bg-color);
@@ -359,7 +374,10 @@
                     <img src="meroon Transparent logo prefect.png" alt="School Logo" style="height: 70px; margin-bottom: 15px;">
                     <h1>Create Account</h1>
                     <input type="email" id="register-email" placeholder="Email" required />
-                    <input type="password" id="register-password" placeholder="Password" required />
+                    <div class="password-container">
+                        <input type="password" id="register-password" placeholder="Password" required />
+                        <i class="fa-solid fa-eye" id="toggle-register-password"></i>
+                    </div>
                     <input type="text" id="barcode_id" placeholder="Barcode ID" required />
                     <button type="submit">Register</button>
                     <a href="#" class="mobile-toggle-btn" id="mobile-signIn">Already have an account? Login</a>
@@ -371,7 +389,10 @@
                     <img src="meroon Transparent logo prefect.png" alt="School Logo" style="height: 70px; margin-bottom: 15px;">
                     <h1>Login</h1>
                     <input type="email" id="email" placeholder="Email" required />
-                    <input type="password" id="password" placeholder="Password" required />
+                    <div class="password-container">
+                        <input type="password" id="password" placeholder="Password" required />
+                        <i class="fa-solid fa-eye" id="toggle-login-password"></i>
+                    </div>
                     <button type="submit">Login</button>
                     <a href="#" class="mobile-toggle-btn" id="mobile-signUp">Don't have an account? Register</a>
                 </form>
@@ -492,6 +513,29 @@
                 if (event.target == creatorsModal) creatorsModal.style.display = "none";
             });
         }
+        
+        // --- Show/Hide Password Logic (New) ---
+        const togglePasswordVisibility = (inputId, toggleId) => {
+            const passwordInput = document.getElementById(inputId);
+            const toggleIcon = document.getElementById(toggleId);
+
+            if (passwordInput && toggleIcon) {
+                toggleIcon.addEventListener('click', function () {
+                    // Toggle the type attribute
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    
+                    // Toggle the icon class
+                    this.classList.toggle('fa-eye');
+                    this.classList.toggle('fa-eye-slash');
+                });
+            }
+        };
+
+        // Apply to both login and register password fields
+        togglePasswordVisibility('password', 'toggle-login-password');
+        togglePasswordVisibility('register-password', 'toggle-register-password');
+
 
         // --- Firebase Config ---
         const firebaseConfig = {
