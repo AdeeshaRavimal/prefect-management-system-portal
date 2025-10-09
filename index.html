@@ -103,7 +103,8 @@
 
         .hero-section { 
             display: flex; justify-content: center; align-items: center; text-align: center; 
-            min-height: 90vh; padding: 2rem; position: relative; color: var(--light-text-color); 
+            min-height: 100vh; /* FIX: Changed from 90vh to 100vh */
+            padding: 2rem; position: relative; color: var(--light-text-color); 
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('edit 2.jpg'); 
             background-size: cover; background-position: center; background-attachment: fixed;
             margin-top: -82px;
@@ -334,17 +335,77 @@
         }
 
         @media (max-width: 768px) {
-            .portfolio-section { padding: 1.5rem; }
-            .portfolio-section h3 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+            .portfolio-section { padding: 1.5rem; text-align: center; }
+            .portfolio-section h3 { font-size: 1.8rem; margin-bottom: 1.5rem; }
             .vision-mission-list { grid-template-columns: 1fr; }
+            .vision-mission-card { text-align: center; }
+            .vision-mission-card h4 { border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem; }
             .portfolio-header h1 { display: none; }
             .hero-section { padding: 2rem 1rem; }
-            .hero-title { font-size: 2.2rem; }
+            .hero-title { font-size: 2.8rem; }
+            .hero-greeting { font-size: 1rem; }
+            .hero-description { font-size: 0.9rem; }
             .container, .portfolio-container { padding: 1rem; }
             .prefects-layout { flex-direction: column; }
             .prefects-sidebar { flex: 0 0 auto; margin-bottom: 2rem; }
-            #category-filter-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-            #category-filter-list li button { width: auto; }
+            #category-filter-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
+            #category-filter-list li button { width: auto; flex-grow: 1; }
+            .prefects-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+            .contact-layout { grid-template-columns: 1fr; }
+            .contact-item { justify-content: center; text-align: center; flex-direction: column; align-items: center; }
+            .contact-item .icon { margin-right: 0; margin-bottom: 0.5rem; }
+            .developer-cards-container { flex-direction: column; align-items: center; }
+            .developer-card { max-width: 300px; }
+        }
+
+        @media (max-width: 480px) {
+            .portfolio-header { padding: 1rem; height: auto; }
+            .portfolio-header img { height: 40px; margin-right: 10px; }
+            #menu-toggle { font-size: 1.5rem; }
+
+            .hero-section { 
+                min-height: 100vh; /* FIX: Changed from 70vh to 100vh */
+                padding: 1.5rem 0.5rem; 
+            }
+            .hero-title { font-size: 2rem; }
+            .hero-greeting { font-size: 0.9rem; }
+            .hero-description { font-size: 0.8rem; }
+            .hero-login-btn { padding: 0.6rem 2rem; margin-top: 1.5rem; font-size: 0.9rem; }
+
+            .portfolio-container { padding: 0.5rem; }
+            .portfolio-section { padding: 1rem; margin-bottom: 1.5rem; }
+            .portfolio-section h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+
+            .prefects-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 1rem; }
+            .prefect-card img { width: 80px; height: 80px; }
+            .prefect-card h4 { font-size: 0.9rem; }
+            .prefect-card p { font-size: 0.8rem; }
+
+            .gallery-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .gallery-item img { height: 200px; }
+
+            .contact-map iframe { height: 250px; }
+            .contact-item { margin-bottom: 1.5rem; }
+            .contact-item .icon { font-size: 1.2rem; }
+            .contact-item-content h4 { font-size: 1rem; }
+            .contact-item-content p, .contact-item-content a { font-size: 0.8rem; }
+
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .testimonial-card { padding: 1.5rem; }
+            .testimonial-card img { width: 60px; height: 60px; }
+            .testimonial-card h4 { font-size: 1rem; }
+            .testimonial-card .quote { font-size: 0.9rem; }
+
+            .developer-card { min-width: unset; max-width: 90%; }
+            .developer-card img { width: 80px; height: 80px; }
+            .developer-card h4 { font-size: 1rem; }
+            .developer-card .role { font-size: 0.8rem; }
+            .dev-social-icons a { width: 30px; height: 30px; font-size: 0.9rem; }
+
+            .social-icons a { width: 35px; height: 35px; font-size: 0.9rem; }
+            .copyright-main { font-size: 0.9rem; }
+            .copyright-credits { font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -368,6 +429,7 @@
                     <ul>
                         <li><a href="#">Home</a></li>
                         <li><a href="#about-us">About Us</a></li>
+                        <li><a href="#teachers-in-charge">Teachers</a></li>
                         <li><a href="#testimonials">Testimonials</a></li>
                         <li><a href="#prefects-list">Our Prefects</a></li>
                         <li><a href="#gallery">Gallery</a></li>
@@ -412,6 +474,34 @@
                 </ul>
             </section>
             
+            <section id="teachers-in-charge" class="portfolio-section animate-on-scroll">
+                <h3>Teachers in Charge</h3>
+                <div class="prefects-grid">
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 1"><h4>W.A. Lasantha Weerasinghe</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 2"><h4>K.K. Kusum Malani</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 3"><h4>R.A.P.S. Rajapaksha</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 4"><h4>M.H. Janitha Chandani</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 5"><h4>R.P. Pramila Jayarathna</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 6"><h4>K.N.B.B.M. Lahiru Bandaranayake</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 7"><h4>D.G.A. Damith Weerasinghe</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 8"><h4>S.K. Upeksha Sewwandi</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 9"><h4>J.L. Nishanthimala</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 10"><h4>S.G.T.P.O. Ranasinghe</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 11"><h4>J.M. Deepani Jayaruwan</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 12"><h4>J.A.S.K. Jayasinghe</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 13"><h4>W.M. Janaki Rathnayake</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 14"><h4>W.M. Mihiri Weerasinghe</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 15"><h4>K.A.K. Saman Priyadarshana</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 16"><h4>D.M. Ruwan Dasanayaka</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 17"><h4>Y. Desika Kumari</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 18"><h4>H.P.S. Nishani</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 19"><h4>H.A.V.S. Jayawardhana</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 20"><h4>M.D.A.I. Kumara</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 21"><h4>A.P. Buddika Mihirani</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 22"><h4>M.M. Fathima Maheesha</h4><p>Teacher in Charge</p></div>
+                    <div class="prefect-card animate-child"><img src="25.jpg" alt="Teacher Name 23"><h4>P.R.I. Vihara Hemarathna</h4><p>Teacher in Charge</p></div>
+                </div>
+            </section>
             <section id="testimonials" class="portfolio-section animate-on-scroll">
                 <h3>What Our Students Say</h3>
                 <div class="testimonials-grid">
@@ -428,8 +518,7 @@
                         <p class="quote">A leader is not someone who always goes ahead...he goes with others towards the same goal, towards the same dream. We have the same goal in our hearts, to elevate the name of the school. I am honored to be a part of this board, to walk this journey with love, dedication, and unity.</p>
                     </div>
                     <div class="testimonial-card animate-child">
-                        <img src="" alt="Sameera Dias">
-                        <h4>Sameera Dias</h4>
+                        <img src="placeholder.jpg" alt="Sameera Dias"> <h4>Sameera Dias</h4>
                         <p class="quote">Seeing the prefects manage school events so professionally is amazing. It motivates me to take on leadership roles in the future.</p>
                     </div>
                 </div>
@@ -502,7 +591,7 @@
                         </ul>
                     </div>
                     <div class="contact-map animate-child">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.3139841487673!2d80.26017487397701!3d6.8529164192497145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae3af908a1d272f%3A0xe33a51c52eca2ec!2sEheliyagoda%20Central%20College!5e0!3m2!1sen!2ssg!4v1759766622909!5m2!1sen!2ssg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.3139841487673!2d80.26017487397701!3d6.8529164192497145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae3af908a1d272f%3A0xe33a51c52eca2ec!2sEheliyagoda%20Central%20College!5e0!3m2!1sen!2ssg!4v1759766622909!5m2!1sen!2ssg" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </section>
