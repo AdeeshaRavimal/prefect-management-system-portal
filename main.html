@@ -18,7 +18,7 @@
             --text-light: #5f5f5f;
             --card-bg-color: #FFFAF0;
             --light-text-color: #ffffff;
-            --glass-bg: rgba(255, 250, 240, 0.911);
+            --glass-bg: rgba(255, 250, 240, 0.75);
             --success-color: #28a745;
         }
         html { scroll-behavior: smooth; }
@@ -67,7 +67,7 @@
         .hero-divider { width: 80px; height: 4px; background-color: var(--light-text-color); margin: 1.5rem auto; }
         .hero-description { font-size: 1.1rem; line-height: 1.7; color: rgba(255, 255, 255, 0.9); }
         .portfolio-container { max-width: 1200px; margin: auto; padding: 2rem; }
-        .portfolio-section { background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); padding: 2.5rem; margin-bottom: 2rem; border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); }
+        .portfolio-section { background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.2); padding: 2.5rem; margin-bottom: 2rem; border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); }
         .portfolio-section h3 { font-size: 2rem; color: var(--primary-color); text-align: center; margin-top: 0; margin-bottom: 2rem; }
         .section-title { font-size: 1.5rem; color: var(--primary-color); text-align: center; margin-top: 2rem; margin-bottom: 1.5rem; }
         .principal-card-container { display: flex; justify-content: center; margin-bottom: 2rem; }
@@ -114,7 +114,7 @@
         #show-more-teachers-btn:hover, #show-less-teachers-btn:hover { background-color: #70160F; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
         #show-less-teachers-btn { background-color: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); box-shadow: none; }
         #show-less-teachers-btn:hover { background-color: var(--primary-color); color: var(--light-text-color); transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
-        .portfolio-footer { padding: 2.5rem 1rem; text-align: center; background: var(--card-bg-color); color: var(--text-light); border-top: 1px solid #eee; }
+        .portfolio-footer { padding: 2.5rem 1rem; text-align: center; background: var(--card-bg-color); color: var(--text-light); border-top: 1px solid #eee; border-top-left-radius: 25px; border-top-right-radius: 25px; }
         .social-icons { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; }
         .social-icons a { color: var(--primary-color); background-color: rgba(140, 28, 19, 0.1); width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; text-decoration: none; border-radius: 50%; font-size: 1rem; transition: all 0.3s ease; }
         .social-icons a:hover { background-color: var(--primary-color); color: var(--light-text-color); transform: translateY(-5px); }
@@ -126,6 +126,23 @@
         .animate-child { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
         .testimonials-grid { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; position: relative; width: 100%; }
         .testimonials-grid::-webkit-scrollbar { display: none; }
+        .testimonials-grid.auto-scroll {
+            overflow: hidden;
+            -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+            mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+        }
+        .testimonials-grid.auto-scroll .testimonials-scroller {
+            width: max-content;
+            animation: scroll-animation 160s linear infinite;
+        }
+        .testimonials-grid.auto-scroll .testimonials-scroller:hover {
+            animation-play-state: paused;
+        }
+        @keyframes scroll-animation {
+            to {
+                transform: translateX(calc(-50% - 0.75rem));
+            }
+        }
         .testimonials-scroller { display: flex; gap: 1.5rem; padding-bottom: 1rem; flex-wrap: nowrap; }
         .testimonial-card { background: var(--card-bg-color); padding: 2rem; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; min-width: 280px; flex-basis: 280px; flex-shrink: 0; }
         .testimonial-card:hover { transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
@@ -159,7 +176,7 @@
         .toast-notification { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background-color: var(--success-color); color: white; padding: 12px 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); font-weight: 600; z-index: 1001; visibility: hidden; opacity: 0; transition: all 0.4s ease-in-out; }
         .toast-notification.show { visibility: visible; animation: toast-in-out 3s ease-in-out forwards; }
         @keyframes toast-in-out { 0% { opacity: 0; transform: translate(-50%, -40px); } 15%, 85% { opacity: 1; transform: translate(-50%, 0); } 100% { opacity: 0; transform: translate(-50%, -40px); } }
-        @media (max-width: 1150px) and (min-width: 993px) { .portfolio-header h1 { display: none; } }
+
         @media (max-width: 992px) {
             .contact-layout { grid-template-columns: 1fr; }
             .main-nav { position: absolute; top: 130px; left: 0; width: 100%; background-color: rgba(255, 250, 240, 0.7); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); z-index: 100; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.4s ease-out, opacity 0.4s ease-out; }
@@ -233,7 +250,7 @@
             .copyright-main { font-size: 0.9rem; }
             .copyright-credits { font-size: 0.7rem; }
         }
-        .chat-fab { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background-color: var(--primary-color); color: var(--light-text-color); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); cursor: pointer; z-index: 995; transition: all 0.3s ease; animation: pulse-chat-fab 2s infinite ease-in-out; }
+        .chat-fab { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background-color: var(--primary-color); color: var(--light-text-color); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); cursor: pointer; z-index: 995; transition: all 0.3s ease; animation: pulse-chat-fab 2s infinite ease-in-out; border: none; }
         .chat-fab:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); }
         .chat-container { position: fixed; bottom: 90px; right: 20px; width: 350px; height: 400px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-radius: 15px; box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16); display: none; flex-direction: column; z-index: 995; animation: slideUp 0.3s ease-out; }
         .chat-container.active { display: flex; }
@@ -258,9 +275,81 @@
             .chat-container { width: calc(100% - 20px); height: 70vh; bottom: 80px; right: 10px; left: 10px; margin: 0; border-radius: 15px; }
             .message-content { max-width: 85%; }
         }
+
+        .background-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .background-particles li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(140, 28, 19, 0.15);
+            border-radius: 50%;
+            animation: particle-animation 25s linear infinite;
+            bottom: -150px;
+        }
+
+        .background-particles li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+        .background-particles li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+        .background-particles li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+        .background-particles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+        .background-particles li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+        .background-particles li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
+        .background-particles li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
+        .background-particles li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+        .background-particles li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
+        .background-particles li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
+
+        @keyframes particle-animation {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0.8;
+                border-radius: 50%;
+            }
+            20% {
+                transform: translateY(-20vh) translateX(5vw) rotate(144deg);
+            }
+            40% {
+                transform: translateY(-40vh) translateX(-5vw) rotate(288deg);
+            }
+            60% {
+                transform: translateY(-60vh) translateX(8vw) rotate(432deg);
+            }
+            80% {
+                transform: translateY(-80vh) translateX(-3vw) rotate(576deg);
+            }
+            100% {
+                transform: translateY(-105vh) translateX(0) rotate(720deg);
+                opacity: 0;
+                border-radius: 25%;
+            }
+        }
     </style>
 </head>
 <body>
+<ul class="background-particles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
 
     <div id="loader">
         <div>
@@ -275,7 +364,6 @@
         <header class="portfolio-header" id="portfolio-header">
             <div class="portfolio-header-left">
                 <img src="meroon Transparent logo prefect.png" alt="School Logo" style="height: 50px; margin-right: 15px;">
-                <h1>ECC Prefects' Guild</h1>
             </div>
             <div class="header-right">
                 <nav class="main-nav" id="main-nav">
@@ -990,6 +1078,59 @@
     closeCreatorsModalBtn.addEventListener('click', () => { creatorsModal.style.display = 'none'; });
     window.addEventListener('click', (event) => { if (event.target == creatorsModal) creatorsModal.style.display = "none"; });
 
+    // Auto-scrolling testimonials
+    const testimonialGridForScroll = document.querySelector('#testimonials .testimonials-grid');
+    if (testimonialGridForScroll) {
+        const scroller = testimonialGridForScroll.querySelector('.testimonials-scroller');
+        if (scroller) {
+            // To prevent re-running this logic on hot-reloads or other changes
+            if (!testimonialGridForScroll.classList.contains('auto-scroll')) {
+                const scrollerContent = Array.from(scroller.children);
+                scrollerContent.forEach(item => {
+                    const duplicatedItem = item.cloneNode(true);
+                    duplicatedItem.setAttribute('aria-hidden', true);
+                    scroller.appendChild(duplicatedItem);
+                });
+                testimonialGridForScroll.classList.add('auto-scroll');
+            }
+        }
+    }
+
+    // --- Show More/Less for Teachers ---
+    const teachersGrid = document.getElementById('teachers-grid');
+    if (teachersGrid) {
+        const showMoreTeachersBtn = document.getElementById('show-more-teachers-btn');
+        const showLessTeachersBtn = document.getElementById('show-less-teachers-btn');
+        const allTeachers = Array.from(teachersGrid.children);
+        const initialTeacherCount = 8; // Number of teachers to show initially
+
+        const updateTeacherVisibility = (showAll) => {
+            allTeachers.forEach((teacher, index) => {
+                // The principal card is not in this grid, so no need to check for it.
+                if (showAll || index < initialTeacherCount) {
+                    teacher.classList.remove('element-hidden');
+                } else {
+                    teacher.classList.add('element-hidden');
+                }
+            });
+            showMoreTeachersBtn.style.display = !showAll && allTeachers.length > initialTeacherCount ? 'inline-block' : 'none';
+            showLessTeachersBtn.style.display = showAll && allTeachers.length > initialTeacherCount ? 'inline-block' : 'none';
+        };
+
+        if (allTeachers.length > initialTeacherCount) {
+            updateTeacherVisibility(false); // Initially show limited teachers
+
+            showMoreTeachersBtn.addEventListener('click', () => {
+                updateTeacherVisibility(true);
+            });
+
+            showLessTeachersBtn.addEventListener('click', () => {
+                updateTeacherVisibility(false);
+                document.getElementById('teachers-in-charge').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+    }
+
     // ===================================================
     // === 4. DYNAMIC DATA LOADING (Prefects & Gallery) ===
     // ===================================================
@@ -1021,12 +1162,111 @@
         }
     }
 
-    function populateCategories() { /* ... function from previous file ... */ }
-    function initializePrefectCards() { /* ... function from previous file ... */ }
-    function updatePrefectCardVisibility() { /* ... function from previous file ... */ }
+    function populateCategories() {
+        if (!categoryFilterList) return;
+        const categories = ['All', ...new Set(fetchedPrefects.map(p => p.section).filter(Boolean))];
+        categoryFilterList.innerHTML = '';
+        categories.forEach(category => {
+            const li = document.createElement('li');
+            const button = document.createElement('button');
+            button.textContent = category;
+            button.dataset.category = category;
+            if (category === 'All') {
+                button.classList.add('active');
+            }
+            li.appendChild(button);
+            categoryFilterList.appendChild(li);
+        });
+    }
+
+    function initializePrefectCards() {
+        if (!prefectsGrid) return;
+        prefectsGrid.innerHTML = ''; // Clear loading message
+        fetchedPrefects.forEach((prefect, index) => {
+            const card = document.createElement('div');
+            card.className = 'prefect-card animate-child element-hidden';
+            card.dataset.name = (prefect.name || '').toLowerCase();
+            card.dataset.category = prefect.section || '';
+            card.innerHTML = `
+                <img src="${prefect.picture || '25.jpg'}" alt="${prefect.name || 'Prefect'}">
+                <h4>${prefect.name || 'No Name'}</h4>
+                <p>${prefect.destiny || 'No Position'}</p>
+            `;
+            prefectsGrid.appendChild(card);
+        });
+    }
+
+    function updatePrefectCardVisibility() {
+        if (!prefectsGrid) return;
+        const searchTerm = searchBar.value.toLowerCase();
+        
+        const allCards = Array.from(prefectsGrid.children).filter(child => child.classList.contains('prefect-card'));
+        let visibleCards = [];
+
+        allCards.forEach(card => {
+            const nameMatch = card.dataset.name.includes(searchTerm);
+            const categoryMatch = currentCategory === 'All' || card.dataset.category === currentCategory;
+
+            if (nameMatch && categoryMatch) {
+                visibleCards.push(card);
+            }
+        });
+
+        // Hide all cards first
+        allCards.forEach(card => card.classList.add('element-hidden'));
+
+        // Show only the ones that should be visible up to the limit
+        const cardsToShow = visibleCards.slice(0, visiblePrefectCount);
+        cardsToShow.forEach(card => card.classList.remove('element-hidden'));
+
+        // Manage Show More/Less buttons
+        showMoreBtn.style.display = visibleCards.length > visiblePrefectCount ? 'inline-block' : 'none';
+        showLessBtn.style.display = visiblePrefectCount > initialVisibleCount && visibleCards.length > 0 ? 'inline-block' : 'none';
+        
+        // Handle no results message
+        const noResultsMsg = prefectsGrid.querySelector('.no-results-message');
+        if (visibleCards.length === 0) {
+            if (!noResultsMsg) {
+                const p = document.createElement('p');
+                p.textContent = 'No prefects found matching your criteria.';
+                p.className = 'no-results-message';
+                prefectsGrid.appendChild(p);
+            }
+        } else {
+            if (noResultsMsg) {
+                noResultsMsg.remove();
+            }
+        }
+    }
     
     if (prefectsGrid) {
-        // ... event listeners from previous file ...
+        searchBar.addEventListener('input', () => {
+            visiblePrefectCount = initialVisibleCount; // Reset count on new search
+            updatePrefectCardVisibility();
+        });
+
+        categoryFilterList.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                currentCategory = e.target.dataset.category;
+                visiblePrefectCount = initialVisibleCount; // Reset count on category change
+                
+                categoryFilterList.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                updatePrefectCardVisibility();
+            }
+        });
+
+        showMoreBtn.addEventListener('click', () => {
+            visiblePrefectCount += initialVisibleCount;
+            updatePrefectCardVisibility();
+        });
+
+        showLessBtn.addEventListener('click', () => {
+            visiblePrefectCount = initialVisibleCount;
+            updatePrefectCardVisibility();
+            document.getElementById('prefects-list').scrollIntoView({ behavior: 'smooth' });
+        });
     }
 
     // --- Dynamic Public Gallery Logic ---
