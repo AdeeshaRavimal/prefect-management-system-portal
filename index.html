@@ -3,9 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon - ECC Prefects' Guild</title>
+    
+    <!-- Primary Meta Tags -->
+    <title>ECC Prefects' Guild - Eheliyagoda Central College Student Leadership</title>
+    <meta name="title" content="ECC Prefects' Guild - Eheliyagoda Central College Student Leadership">
+    <meta name="description" content="Official Prefects' Guild of Eheliyagoda Central College (ECC). Student leadership, school prefects information, and digital platform for ECC community in Sri Lanka.">
+    <meta name="keywords" content="Eheliyagoda Central College, ECC, ECC Prefects, Eheliyagoda school, central college prefects, student leadership, school prefects Sri Lanka, Ratnapura schools, Sabaragamuwa education">
+    <meta name="author" content="ECC Prefects' Guild">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Sinhala, English">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="LK-91">
+    <meta name="geo.placename" content="Eheliyagoda">
+    <meta name="geo.position" content="6.8580;80.2670">
+    <meta name="ICBM" content="6.8580, 80.2670">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://eccprefects.online/">
+    <meta property="og:title" content="ECC Prefects' Guild - Eheliyagoda Central College">
+    <meta property="og:description" content="Official Prefects' Guild of Eheliyagoda Central College. Student leadership and digital platform for ECC community.">
+    <meta property="og:image" content="https://eccprefects.online/meroon Transparent logo prefect.png">
+    <meta property="og:locale" content="si_LK">
+    <meta property="og:site_name" content="ECC Prefects' Guild">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://eccprefects.online/">
+    <meta property="twitter:title" content="ECC Prefects' Guild - Eheliyagoda Central College">
+    <meta property="twitter:description" content="Official Prefects' Guild of Eheliyagoda Central College. Student leadership and digital platform.">
+    <meta property="twitter:image" content="https://eccprefects.online/meroon Transparent logo prefect.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://eccprefects.online/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="meroon Transparent logo prefect.png">
+    <link rel="apple-touch-icon" href="meroon Transparent logo prefect.png">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Eheliyagoda Central College Prefects' Guild",
+        "alternateName": "ECC Prefects Guild",
+        "url": "https://eccprefects.online",
+        "logo": "https://eccprefects.online/meroon Transparent logo prefect.png",
+        "description": "Official Prefects' Guild of Eheliyagoda Central College, providing student leadership and digital services for the ECC community.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Eheliyagoda",
+            "addressRegion": "Ratnapura",
+            "addressCountry": "LK"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "6.8580",
+            "longitude": "80.2670"
+        },
+        "parentOrganization": {
+            "@type": "EducationalOrganization",
+            "name": "Eheliyagoda Central College"
+        },
+        "sameAs": [
+            "https://www.facebook.com/eccprefects",
+            "https://www.instagram.com/eccprefects"
+        ]
+    }
+    </script>
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
@@ -58,8 +131,29 @@
         .logo-container { perspective: 1000px; margin-bottom: 20px; }
         .logo { width: 120px; height: 120px; background-image: url('meroon Transparent logo prefect.png'); background-size: contain; background-position: center; background-repeat: no-repeat; margin: 0 auto; animation: rotateLogo 15s infinite linear; transform-style: preserve-3d; }
         @keyframes rotateLogo { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
-        h1 { font-size: 2.5em; color: #810000; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 2px; }
-        p { font-size: 1.05em; line-height: 1.7; margin: 0 0 30px 0; max-width: 500px; color: #333; }
+        
+        h1 { 
+            font-size: 2.5em; 
+            color: #810000; 
+            margin: 0 0 15px 0; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            color: #810000;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        p { 
+            font-size: 1.05em; 
+            line-height: 1.7; 
+            margin: 0 0 30px 0; 
+            max-width: 500px; 
+            color: #333; 
+        }
 
         .button-container {
             display: flex;
@@ -177,6 +271,7 @@
             .container { padding: 25px; width: 90%; }
             .logo { width: 100px; height: 100px; }
             h1 { font-size: 1.8em; letter-spacing: 1px; }
+            .subtitle { font-size: 1em; }
             p { font-size: 0.95em; }
             .button-container { flex-direction: column; gap: 15px; }
             footer { margin: 0 10px 10px 10px; }
@@ -188,41 +283,48 @@
     <div id="particles-js"></div>
 
     <main>
-        <div class="container">
-            <div class="logo-container">
-                <div class="logo"></div>
-            </div>
-            <h1>We Are Launching Soon</h1>
-            <p><b>Our new digital platform is under construction.</b></p>
-            <div class="button-container">
-                <a href="https://www.shorturl.at/Equ5J" class="action-button primary">View Prefects</a>
-                <a href="#" id="admin-login-btn" class="action-button secondary">Login as Admin</a>
-            </div>
-        </div>
+        <article class="container" itemscope itemtype="https://schema.org/WebPage">
+            <header>
+                <div class="logo-container">
+                    <div class="logo" role="img" aria-label="ECC Prefects' Guild Logo"></div>
+                </div>
+                <h1 itemprop="headline">We Are Launching Soon</h1>
+                <p class="subtitle" itemprop="description">Eheliyagoda Central College Prefects' Guild</p>
+            </header>
+            <p><strong>Our new digital platform is under construction.</strong> Stay connected with ECC student leadership and prefect information system.</p>
+            <nav class="button-container">
+                <a href="https://www.shorturl.at/Equ5J" class="action-button primary" aria-label="View ECC Prefects List">View Prefects</a>
+                <a href="#" id="admin-login-btn" class="action-button secondary" aria-label="Admin Login Portal">Login as Admin</a>
+            </nav>
+        </article>
     </main>
 
-    <footer>
+    <footer role="contentinfo">
         <div class="footer-social">
-            <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-google"></i></a>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook Page"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Contact"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Email Contact"><i class="fab fa-google"></i></a>
         </div>
         <div class="footer-copyright">
-            © 2025 Prefect Information System.<br>
+            © 2025 Eheliyagoda Central College Prefect Information System.<br>
             All rights reserved.<br>
             Designed by ECC Prefects' Guild.<br>
             Version 1.0.0
         </div>
     </footer>
 
-    <div id="login-modal" class="modal-overlay">
+    <div id="login-modal" class="modal-overlay" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
         <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>Admin Login</h2>
-            <p id="error-message" class="error-text"></p>
-            <input type="text" id="username" placeholder="Username" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button id="login-submit-btn" class="modal-button">Login</button>
+            <span class="close-button" aria-label="Close">&times;</span>
+            <h2 id="modal-title">Admin Login</h2>
+            <p id="error-message" class="error-text" role="alert"></p>
+            <form id="login-form" onsubmit="return false;">
+                <label for="username" class="sr-only">Username</label>
+                <input type="text" id="username" name="username" placeholder="Username" required autocomplete="username">
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" id="password" name="password" placeholder="Password" required autocomplete="current-password">
+                <button type="submit" id="login-submit-btn" class="modal-button">Login</button>
+            </form>
         </div>
     </div>
 
@@ -269,15 +371,18 @@
             usernameInput.value = '';
             passwordInput.value = '';
             loginModal.style.display = "flex";
+            loginModal.setAttribute('aria-hidden', 'false');
         }
 
         closeBtn.onclick = function() {
             loginModal.style.display = "none";
+            loginModal.setAttribute('aria-hidden', 'true');
         }
 
         window.onclick = function(event) {
             if (event.target == loginModal) {
                 loginModal.style.display = "none";
+                loginModal.setAttribute('aria-hidden', 'true');
             }
         }
 
