@@ -9,7 +9,6 @@
     
     <style>
         /* All CSS styles from your previous file are included here... */
-        /* No changes needed in CSS */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
         :root {
             --primary-color: #8C1C13;
@@ -37,21 +36,30 @@
         .portfolio-header { display: flex; justify-content: space-between; align-items: center; padding: 2.5rem 2rem; position: sticky; top: 0; z-index: 998; transition: all 0.5s ease-in-out; height: 50px; box-sizing: border-box; width: 95%; max-width: 1200px; margin: 0 auto; border-radius: 12px; background-color: transparent; }
         .portfolio-header img { transition: filter 0.4s ease; filter: brightness(0) invert(1); }
         .portfolio-header h1 { margin: 0; font-size: 1.5rem; color: var(--light-text-color); transition: color 0.4s ease, font-size 0.3s ease; }
-        .main-nav a { color: var(--light-text-color); text-decoration: none; font-weight: 600; padding-bottom: 5px; border-bottom: 2px solid transparent; transition: color 0.4s ease, border-color 0.3s; }
-        .main-nav a:hover { border-color: var(--light-text-color); }
+        
+        /* === DELETED old .main-nav styles === */
+        
         #menu-toggle { color: var(--light-text-color); transition: color 0.4s ease; }
         .portfolio-header.header-scrolled { top: 1rem; background-color: rgba(255, 250, 240, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 20px rgba(0,0,0,0.07); border: 1px solid rgba(0,0,0,0.08); }
         .portfolio-header.header-scrolled img { filter: none; }
         .portfolio-header.header-scrolled h1 { color: var(--primary-color); }
         .portfolio-header.header-scrolled .main-nav a, .portfolio-header.header-scrolled #user-status { color: var(--text-color); }
-        .portfolio-header.header-scrolled .main-nav a:hover { color: var(--primary-color); border-color: var(--primary-color); }
+        
+        /* === DELETED old .main-nav:hover styles === */
+        
         .portfolio-header.header-scrolled #menu-toggle { color: var(--primary-color); }
-        .portfolio-header.header-scrolled #login-nav-btn a, .portfolio-header.header-scrolled #logout-nav-btn a { border-color: var(--primary-color); }
+        .portfolio-header.header-scrolled #login-nav-btn a, .portfolio-header.header-scrolled #logout-nav-btn a,
+        .portfolio-header.header-scrolled #login-nav-btn-desktop a, .portfolio-header.header-scrolled #logout-nav-btn-desktop a {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        
         .portfolio-header-left { display: flex; align-items: center; }
-        .main-nav ul { margin: 0; padding: 0; list-style: none; display: flex; align-items: center; }
-        .main-nav li { margin-left: 2rem; transition: margin-left 0.3s ease; }
+        
+        /* === DELETED old .main-nav ul/li styles === */
+
         .header-right { display: flex; align-items: center; }
-        .login-btn { font-weight: 700; cursor: pointer; transition: all 0.2s ease-in-out; text-transform: uppercase; border-radius: 8px; text-decoration: none; }
+        .login-btn { font-weight: 700; cursor: pointer; transition: all 0.2s ease-in-out; text-transform: uppercase; border-radius: 8px; text-decoration: none; color: var(--light-text-color); }
         .login-btn:hover { transform: translateY(-2px); }
         .hero-login-btn { background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); color: var(--light-text-color); padding: 0.8rem 2.5rem; margin-top: 2.5rem; display: inline-block; }
         .hero-login-btn:hover { background: rgba(255, 255, 255, 0.3); }
@@ -60,11 +68,63 @@
         .scroll-more-indicator i { animation: bounceArrow 1.5s infinite; }
         @keyframes bounceArrow { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 60% { transform: translateY(-5px); } }
         #menu-toggle { display: none; }
+
+        /* === START: NEW STYLES FOR HEADER LAYOUT === */
+        .desktop-nav-links {
+            display: block; /* Show by default */
+        }
+        .desktop-nav-links ul {
+            margin: 0; 
+            padding: 0; 
+            list-style: none; 
+            display: flex; 
+            align-items: center;
+        }
+        .desktop-nav-links li {
+            margin-left: 2rem;
+        }
+        .desktop-nav-links a {
+            color: var(--light-text-color); 
+            text-decoration: none; 
+            font-weight: 600; 
+            padding-bottom: 5px; 
+            border-bottom: 2px solid transparent; 
+            transition: color 0.4s ease, border-color 0.3s;
+        }
+        .desktop-nav-links a:hover {
+            border-color: var(--light-text-color);
+        }
+        .portfolio-header.header-scrolled .desktop-nav-links a {
+            color: var(--text-color);
+        }
+        .portfolio-header.header-scrolled .desktop-nav-links a:hover {
+            color: var(--primary-color); 
+            border-color: var(--primary-color);
+        }
+
+        .header-controls-desktop {
+            list-style: none; 
+            margin: 0; 
+            padding: 0; 
+            display: flex; 
+            align-items: center; 
+            gap: 1.5rem; /* Spacing for login/logout */
+            margin-left: 1rem; /* Space between menu and login */
+        }
+        
+        /* Original main-nav is now mobile-only by default */
+        .main-nav {
+            display: none; /* Hide original nav on desktop */
+        }
+        /* === END: NEW STYLES FOR HEADER LAYOUT === */
+
+
         .hero-section { display: flex; justify-content: center; align-items: center; text-align: center; min-height: 100vh; padding: 2rem; position: relative; color: var(--light-text-color); background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('edit 2.jpg'); background-size: cover; background-position: center; margin-top: -130px; }
         .hero-content { z-index: 2; max-width: 800px; }
         .hero-greeting { font-size: 1.2rem; font-weight: 600; color: rgba(255, 255, 255, 0.9); margin: 0; }
         .hero-title { font-size: 4rem; font-weight: 600; color: var(--light-text-color); margin: 0.5rem 0; line-height: 1.2; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
         .hero-divider { width: 80px; height: 4px; background-color: var(--light-text-color); margin: 1.5rem auto; }
+        .hero-divider-t { width: 80px; height: 4px; background-color: #70160F; margin: 1.5rem auto; }
         .hero-description { font-size: 1.1rem; line-height: 1.7; color: rgba(255, 255, 255, 0.9); }
         .portfolio-container { max-width: 1200px; margin: auto; padding: 2rem; }
         .portfolio-section { background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.2); padding: 2.5rem; margin-bottom: 2rem; border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); }
@@ -124,66 +184,408 @@
         .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
         .animate-on-scroll.is-visible .animate-child { opacity: 1; transform: translateY(0); }
         .animate-child { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-        .testimonials-grid { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; position: relative; width: 100%; }
+        .testimonials-grid { 
+            overflow-x: auto; 
+            -webkit-overflow-scrolling: touch; 
+            scrollbar-width: none; 
+            -ms-overflow-style: none; 
+            position: relative; 
+            width: 100%; 
+            cursor: grab;
+        }
+        .testimonials-grid.active {
+            cursor: grabbing;
+            cursor: -webkit-grabbing;
+        }
+        .testimonials-grid::before,
+        .testimonials-grid::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 60px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .testimonials-grid::before {
+            left: 0;
+            background: linear-gradient(to right, var(--card-bg-color, #FFFAF0) 30%, rgba(255, 250, 240, 0));
+        }
+        .testimonials-grid::after {
+            right: 0;
+            background: linear-gradient(to left, var(--card-bg-color, #FFFAF0) 30%, rgba(255, 250, 240, 0));
+        }
         .testimonials-grid::-webkit-scrollbar { display: none; }
-        .testimonials-grid.auto-scroll {
-            overflow: hidden;
-            -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
-            mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
-        }
-        .testimonials-grid.auto-scroll .testimonials-scroller {
-            width: max-content;
-            animation: scroll-animation 160s linear infinite;
-        }
-        .testimonials-grid.auto-scroll .testimonials-scroller:hover {
-            animation-play-state: paused;
-        }
-        @keyframes scroll-animation {
-            to {
-                transform: translateX(calc(-50% - 0.75rem));
-            }
-        }
         .testimonials-scroller { display: flex; gap: 1.5rem; padding-bottom: 1rem; flex-wrap: nowrap; }
-        .testimonial-card { background: var(--card-bg-color); padding: 2rem; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; min-width: 280px; flex-basis: 280px; flex-shrink: 0; }
+        .testimonial-card { background: var(--card-bg-color); padding: 2rem; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; min-width: 280px; flex-basis: 280px; flex-shrink: 0; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
         .testimonial-card:hover { transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
         .testimonial-card img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 4px solid var(--secondary-color); margin-bottom: 1rem; }
         .testimonial-card h4 { margin: 0 0 0.5rem 0; color: var(--primary-color); }
         .testimonial-card .quote { font-style: italic; color: var(--text-light); margin: 0; position: relative; }
         .testimonial-card .quote::before { content: '“'; font-family: Georgia, serif; font-size: 2.5rem; position: absolute; top: -10px; left: -15px; color: var(--secondary-color); opacity: 0.8; }
         .testimonial-card .quote::after { content: '”'; font-family: Georgia, serif; font-size: 2.5rem; position: absolute; bottom: -25px; right: -15px; color: var(--secondary-color); opacity: 0.8; }
+        .testimonial-card h4:nth-of-type(1) {
+            margin-bottom: 0.1rem;
+        }
+        .testimonial-card h4:nth-of-type(2) {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 0;
+            font-weight: 400;
+        }
         .creators-fab { position: fixed; bottom: 20px; left: 20px; width: 50px; height: 50px; background-color: var(--primary-color); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; animation: bounce 2s infinite ease-in-out; }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
         @keyframes pulse-chat-fab { 0% { border-radius: 50%; } 50% { border-radius: 20%; } 100% { border-radius: 50%; } }
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); }
-        .modal-content-wrapper { display: flex; justify-content: center; align-items: center; min-height: 100%; }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            opacity: 0; /* Start hidden */
+            transition: opacity 0.3s ease-in-out; /* Fade transition */
+        }
+        .modal.show {
+            opacity: 1; /* Fade in */
+        }
+        .modal-content-wrapper {
+            /* This is a generic wrapper. Specific modals will style it. */
+            min-height: 100%;
+        }
+        /* Restore centering specifically for the auth modal */
+        #auth-modal .modal-content-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .auth-card { background: rgba(255, 250, 240, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1); padding: 2.5rem; border-radius: 20px; width: 100%; max-width: 420px; margin: 1rem; }
-        .close-button { position: absolute; top: 10px; right: 25px; color: #555; font-size: 32px; font-weight: bold; cursor: pointer; transition: color 0.3s; }
-        .close-button:hover { color: #000; }
+        
+        /* Reposition close button for drawer */
+        .creators-card .close-button { 
+            position: absolute; 
+            top: 15px; 
+            right: 20px; 
+            color: #555; 
+            font-size: 32px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: color 0.3s, transform 0.3s;
+            z-index: 10;
+        }
+        .creators-card .close-button:hover { color: #000; transform: rotate(90deg); }
+
         @keyframes fadeInScaleUp { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-        .modal-content-wrapper > .auth-card { animation: fadeInScaleUp 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
-        .creators-card { max-width: 900px; background: rgba(255, 250, 240, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); text-align: center; }
-        .creators-card h3 { margin-bottom: 2.5rem; font-size: 2rem; color: var(--primary-color); }
-        .developer-cards-container { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-        .developer-card { background: rgba(255, 255, 255, 0.5); padding: 1.5rem; border-radius: 15px; flex: 1; min-width: 220px; max-width: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .developer-card:hover { transform: translateY(-8px); box-shadow: 0 8px 30px rgba(140, 28, 19, 0.15), 0 0 15px rgba(140, 28, 19, 0.1); }
-        .developer-card img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid var(--secondary-color); margin-bottom: 1rem; }
-        .developer-card h4 { margin: 0 0 0.25rem 0; font-size: 1.1rem; color: var(--primary-color); }
-        .developer-card .role { font-size: 0.9rem; color: var(--text-light); margin: 0 0 1rem; border-bottom: 1px solid #eee; padding-bottom: 1rem; }
-        .dev-social-icons { display: flex; justify-content: center; gap: 1rem; }
-        .dev-social-icons a { color: var(--text-light); font-size: 1rem; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; background-color: rgba(0,0,0,0.05); border-radius: 50%; text-decoration: none; transition: all 0.3s ease; }
-        .dev-social-icons a:hover { background-color: var(--primary-color); color: white; transform: scale(1.15); }
+        /* The login modal still uses this */
+        #auth-modal .modal-content-wrapper > .auth-card { animation: fadeInScaleUp 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+
+        /* --- NEW CREATORS DRAWER STYLES --- */
+        .creators-card {
+            position: fixed;
+            top: 0;
+            right: -100%; /* Start off-screen */
+            width: 100%;
+            max-width: 380px;
+            height: 100vh;
+            margin: 0;
+            border-radius: 0;
+            background: rgba(255, 250, 240, 0.85);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: -10px 0 40px rgba(0,0,0,0.15);
+            text-align: center;
+            overflow-y: auto;
+            transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            padding: 2.5rem 1.5rem;
+        }
+
+        #creators-modal.show .creators-card {
+            right: 0; /* Slide in */
+        }
+
+        .creators-card h3 { margin-bottom: 2.5rem; font-size: 1.8rem; color: var(--primary-color); }
+        .developer-cards-container { 
+            display: flex; 
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem; 
+        }
+
+        /* --- NEW: Animated Atomic Background for Drawer --- */
+        .creators-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+            background-image: 
+                url("data:image/svg+xml,%3csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='none' stroke='%238C1C13' stroke-width='1'%3e%3ccircle cx='50' cy='50' r='5'/%3e%3cellipse cx='50' cy='50' rx='40' ry='15'/%3e%3c/g%3e%3ccircle r='3' fill='%238C1C13'%3e%3canimateMotion dur='4s' repeatCount='indefinite' path='M10,50 a40,15 0 1,0 80,0 a40,15 0 1,0 -80,0'/%3e%3c/circle%3e%3c/svg%3e"),
+                url("data:image/svg+xml,%3csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='none' stroke='%238C1C13' stroke-width='1'%3e%3ccircle cx='50' cy='50' r='5'/%3e%3cellipse cx='50' cy='50' rx='40' ry='15' transform='rotate(60 50 50)'/%3e%3c/g%3e%3ccircle r='3' fill='%238C1C13'%3e%3canimateMotion dur='3.5s' repeatCount='indefinite' path='M10,50 a40,15 0 1,0 80,0 a40,15 0 1,0 -80,0' transform='rotate(60 50 50)'/%3e%3c/circle%3e%3c/svg%3e"),
+                url("data:image/svg+xml,%3csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='none' stroke='%238C1C13' stroke-width='1'%3e%3ccircle cx='50' cy='50' r='5'/%3e%3cellipse cx='50' cy='50' rx='15' ry='40' transform='rotate(-30 50 50)'/%3e%3c/g%3e%3ccircle r='3' fill='%238C1C13'%3e%3canimateMotion dur='5s' repeatCount='indefinite' path='M50,10 a15,40 0 1,0 0,80 a15,40 0 1,0 0,-80' transform='rotate(-30 50 50)'/%3e%3c/circle%3e%3c/svg%3e");
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: 10% 20%, 80% 40%, 30% 80%;
+            background-size: 100px, 80px, 120px;
+            animation: move-atoms 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes move-atoms {
+            0% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-20px) translateX(10px); }
+            100% { transform: translateY(0) translateX(0); }
+        }
+
+        /* --- NEW: Custom Scrollbar for Drawer --- */
+        .creators-card::-webkit-scrollbar {
+            width: 8px;
+        }
+        .creators-card::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .creators-card::-webkit-scrollbar-thumb {
+            background-color: var(--secondary-color);
+            border-radius: 4px;
+        }
+        .creators-card::-webkit-scrollbar-thumb:hover {
+            background-color: var(--primary-color);
+        }
+        /* --- NEW: Accordion Styles for Developer List --- */
+        .developer-accordion-item {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: background-color 0.3s;
+        }
+        .developer-accordion-item:hover {
+            background: rgba(255, 255, 255, 0.7);
+        }
+        .developer-accordion-header {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            cursor: pointer;
+        }
+        .developer-accordion-header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+            border: 2px solid var(--secondary-color);
+        }
+        .developer-accordion-header .developer-info {
+            flex-grow: 1;
+            text-align: left;
+        }
+        .developer-accordion-header h4 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+        .developer-accordion-header .role {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        .accordion-icon {
+            font-size: 1rem;
+            color: var(--text-light);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            margin-left: auto; /* Push icon to the right */
+            padding-left: 1rem; /* Add some space */
+        }
+        .developer-accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+            color: var(--primary-color);
+        }
+        .developer-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+            padding: 0 1rem;
+        }
+        .developer-accordion-item.active .developer-accordion-content {
+            max-height: 200px; /* Adjust as needed */
+            padding-bottom: 1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        .developer-accordion-content .dev-skills {
+            padding: 0.8rem 0;
+            margin: 0;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            font-size: 1.5rem;
+        }
+        .developer-accordion-content .dev-social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding-top: 0.5rem;
+        }
+        .modal.visible .developer-card {
+            opacity: 1;
+            transform: perspective(1000px) translateY(0);
+        }
+        .modal.visible .developer-card:nth-child(1) { transition-delay: 200ms; }
+        .modal.visible .developer-card:nth-child(2) { transition-delay: 350ms; }
+        .modal.visible .developer-card:nth-child(3) { transition-delay: 500ms; }
+        .developer-card img {
+            width: 80px; /* Reduced image size */
+            height: 80px; /* Reduced image size */
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid transparent;
+            background-image: linear-gradient(white, white), linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            margin-bottom: 0.8rem; /* Reduced margin */
+            transform: translateZ(40px);
+        }
+        .developer-card h4 { transform: translateZ(30px); margin-bottom: 0.2rem; } /* Reduced margin */
+        .developer-card .role {
+            font-size: 0.85rem; /* Slightly smaller font */
+            color: var(--text-light);
+            margin: 0;
+        }
+        .dev-skills {
+            padding: 0.8rem 0; /* Reduced padding */
+            margin: 0.8rem 0; /* Reduced margin */
+            border-top: 1px solid rgba(140, 28, 19, 0.2);
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem; /* Reduced gap */
+            font-size: 1.4rem; /* Reduced font size */
+        }
+        .dev-skills i {
+            color: var(--text-light);
+            transition: color 0.3s ease, transform 0.3s ease;
+            cursor: help;
+        }
+        .dev-skills i:hover {
+            color: var(--primary-color);
+            transform: scale(1.2);
+        }
+        .dev-social-icons { display: flex; justify-content: center; gap: 0.8rem; } /* Reduced gap */
+        .dev-social-icons a { color: var(--text-light); font-size: 1.1rem; /* Slightly larger font */ width: 30px; /* Reduced width */ height: 30px; /* Reduced height */ display: flex; align-items: center; justify-content: center; background-color: rgba(0,0,0,0.05); border-radius: 50%; text-decoration: none; transition: all 0.3s ease; }
         .element-hidden { display: none; }
         .toast-notification { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background-color: var(--success-color); color: white; padding: 12px 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); font-weight: 600; z-index: 1001; visibility: hidden; opacity: 0; transition: all 0.4s ease-in-out; }
         .toast-notification.show { visibility: visible; animation: toast-in-out 3s ease-in-out forwards; }
         @keyframes toast-in-out { 0% { opacity: 0; transform: translate(-50%, -40px); } 15%, 85% { opacity: 1; transform: translate(-50%, 0); } 100% { opacity: 0; transform: translate(-50%, -40px); } }
 
+        /* --- START: Redesigned Auth Modal Styles --- */
+        #auth-modal .auth-card {
+            padding: 2rem;
+        }
+        #auth-modal #auth-form {
+            gap: 0.75rem; /* Reduce gap slightly */
+        }
+        #auth-modal input[type="email"], 
+        #auth-modal input[type="password"] {
+            background-color: #eee;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 14px 15px;
+            margin: 5px 0;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        #auth-modal input[type="email"]:focus, 
+        #auth-modal input[type="password"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(140, 28, 19, 0.15);
+        }
+        #auth-modal #auth-submit-btn {
+            border-radius: 20px;
+            border: 1px solid var(--primary-color);
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            font-size: 12px;
+            font-weight: bold;
+            padding: 14px 45px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in, background-color 0.3s;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        #auth-modal #auth-submit-btn:hover {
+            background-color: var(--primary-color-dark);
+        }
+        #auth-modal #auth-submit-btn:active {
+            transform: scale(0.95);
+        }
+        /* --- END: Redesigned Auth Modal Styles --- */
+
+        /* --- Style for the new Auth Modal Close Icon --- */
+        #auth-modal .close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            border-radius: 50%;
+            color: #888;
+            font-size: 1rem; /* Adjust icon size */
+            font-weight: normal; /* Reset bold from generic style */
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        #auth-modal .close-button:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: rotate(90deg);
+        }
+
         @media (max-width: 992px) {
+            /* === START: NEW MOBILE HEADER STYLES === */
+            .desktop-nav-links,
+            .header-controls-desktop {
+                display: none; /* Hide desktop menu and controls on mobile */
+            }
+            
+            .main-nav {
+                display: block; /* Show original nav (for mobile dropdown) */
+                /* All the existing mobile styles for .main-nav will now apply */
+                position: absolute; 
+                top: 130px; 
+                left: 0; 
+                width: 100%; 
+                background-color: rgba(255, 250, 240, 0.7); 
+                backdrop-filter: blur(25px); 
+                -webkit-backdrop-filter: blur(25px); 
+                box-shadow: 0 12px 30px rgba(0,0,0,0.2); 
+                z-index: 100; 
+                max-height: 0; 
+                opacity: 0; 
+                overflow: hidden; 
+                transition: max-height 0.4s ease-out, opacity 0.4s ease-out;
+            }
+            /* === END: NEW MOBILE HEADER STYLES === */
+
             .contact-layout { grid-template-columns: 1fr; }
-            .main-nav { position: absolute; top: 130px; left: 0; width: 100%; background-color: rgba(255, 250, 240, 0.7); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); z-index: 100; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.4s ease-out, opacity 0.4s ease-out; }
+            /* .main-nav { ... MOVED UP ... } */
             .main-nav.mobile-nav-active { max-height: 30rem; opacity: 1; }
-            .main-nav ul { flex-direction: column; padding: 1rem 0; align-items: center; }
+            .main-nav ul { flex-direction: column; padding: 1rem 0; align-items: center; margin: 0; list-style: none; }
             .main-nav li { margin: 0; text-align: center; }
-            .main-nav a { display: block; padding: 1rem; border: none; }
+            .main-nav a { display: block; padding: 1rem; border: none; text-decoration: none; font-weight: 600; }
             .portfolio-header.header-scrolled .main-nav a, .portfolio-header:not(.header-scrolled) .main-nav a, .portfolio-header.header-scrolled #user-status, .portfolio-header:not(.header-scrolled) #user-status { color: var(--text-color); }
             #login-nav-btn, #logout-nav-btn, #user-status { margin: 0.5rem 0 !important; }
             #user-email { padding-right: 1rem; }
@@ -276,6 +678,53 @@
             .message-content { max-width: 85%; }
         }
 
+        @media (max-width: 768px) {
+            .creators-card {
+                max-width: 95%;
+                margin: 1rem auto;
+                padding: 1.5rem;
+            }
+            .developer-cards-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+            .developer-card {
+                min-width: unset;
+                max-width: 300px;
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-content-wrapper {
+                align-items: flex-start; /* Align to top on very small screens */
+                padding-top: 1rem;
+            }
+            .creators-card {
+                max-width: 95%;
+                width: 95%; /* Ensure it takes up width */
+                margin: 0.5rem auto; /* Smaller margin */
+                padding: 1rem;
+            }
+            .developer-card {
+                width: 100%;
+                max-width: 280px; /* Slightly smaller max-width for cards */
+            }
+            .dev-skills {
+                font-size: 1.2rem; /* Further reduced font size */
+                gap: 0.6rem;
+            }
+            .dev-social-icons a {
+                width: 28px;
+                height: 28px;
+                font-size: 0.8rem;
+            }
+            .creators-card h3 {
+                font-size: 1.5rem; /* Smaller heading */
+            }
+        }
+
         .background-particles {
             position: fixed;
             top: 0;
@@ -361,18 +810,44 @@
     <div id="success-toast" class="toast-notification"></div>
 
     <div id="public-portfolio">
+        
         <header class="portfolio-header" id="portfolio-header">
             <div class="portfolio-header-left">
                 <img src="meroon Transparent logo prefect.png" alt="School Logo" style="height: 50px; margin-right: 15px;">
             </div>
+            
+            <nav class="desktop-nav-links">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#about-us">About Us</a></li>
+                    <li><a href="#teachers-in-charge">Teachers</a></li>
+                    <li><a href="#testimonials">Comments</a></li>
+                    <li><a href="#prefects-list">Prefects</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </nav>
+            
             <div class="header-right">
+                <ul class="header-controls-desktop">
+                    <li id="user-status-desktop" style="display: none; align-items: center; color: white;">
+                        <span id="user-email-desktop" style="font-weight: 500; font-size: 0.9rem;"></span>
+                    </li>
+                    <li id="login-nav-btn-desktop">
+                        <a href="#" class="login-btn" style="border: 1px solid white; padding: 8px 15px; border-radius: 5px;">Login</a>
+                    </li>
+                    <li id="logout-nav-btn-desktop" style="display: none;">
+                        <a href="#" class="login-btn" style="border: 1px solid white; padding: 8px 15px; border-radius: 5px;">Logout</a>
+                    </li>
+                </ul>
+                
                 <nav class="main-nav" id="main-nav">
                     <ul>
                         <li><a href="#">Home</a></li>
                         <li><a href="#about-us">About Us</a></li>
                         <li><a href="#teachers-in-charge">Teachers</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#prefects-list">Our Prefects</a></li>
+                        <li><a href="#testimonials">Comments</a></li>
+                        <li><a href="#prefects-list">Prefects</a></li>
                         <li><a href="#gallery">Gallery</a></li>
                         <li><a href="#contact">Contact Us</a></li>
                         <li id="user-status" style="display: none; align-items: center; color: white;">
@@ -384,12 +859,11 @@
                         <li id="logout-nav-btn" style="display: none;">
                             <a href="#" class="login-btn" style="border: 1px solid white; padding: 8px 15px; border-radius: 5px;">Logout</a>
                         </li>
-                        </ul>
+                    </ul>
                 </nav>
                 <button id="menu-toggle" aria-label="Toggle Menu"><span></span><span></span><span></span></button>
             </div>
         </header>
-
         <section class="hero-section animate-on-scroll" id="hero">
              <div class="hero-content">
                 <p class="hero-greeting">Welcome to the</p>
@@ -405,7 +879,7 @@
 
         <div class="portfolio-container">
             <section id="about-us" class="portfolio-section animate-on-scroll">
-                <h3>About Us: Vision & Mission</h3>
+                <h3>About Us</h3>
                 <p style="text-align: center;">As the Prefects' Guild of Eheliyagoda Central College, our primary objectives are:</p>
                 <ul class="vision-mission-list">
                     <li class="vision-mission-card animate-child">
@@ -425,6 +899,7 @@
             
             <section id="teachers-in-charge" class="portfolio-section animate-on-scroll">
                 <h3>Administrators</h3>
+                <div class="hero-divider-t"></div>
                 <h3 class="section-title">Principal</h3>
                 <div class="principal-card-container">
                     <div class="prefect-card animate-child principal-card-style">
@@ -469,179 +944,48 @@
                 <div class="testimonials-grid">
                     <div class="testimonials-scroller">
                         <div class="testimonial-card animate-child">
-                            <img src="Comment section/Piyumira.jpg" alt="Piyumira">
+                            <img src="Comment section/Piyumira.jpg" alt="Piyumira Manahari">
                             <h4>Piyumira Manahari</h4>
-                            <h4>[Head prefect In 2021 / 2022]</h4>
+                            <h4>Head prefect In 2021 / 2022</h4>
                             <p class="quote">Being part of the Prefects’ Guild was an experience that truly shaped my growth and leadership. It’s inspiring to see the Guild continue guiding and empowering students to lead with dedication, teamwork, and integrity.</p>
                         </div>
                         <div class="testimonial-card animate-child">
-                            <img src="Comment section/Ranindu.jpg" alt="Ranindu">
+                            <img src="Comment section/Ranindu.jpg" alt="Ranindu Hansaka">
                             <h4>Ranindu Hansaka</h4>
-                            <h4>[D.H.P. In 2024 / 2025]</h4>
+                            <h4>D.H.P. In 2024 / 2025</h4>
                             <p class="quote">A leader is not someone who always goes ahead...he goes with others towards the same goal, towards the same dream. We have the same goal in our hearts, to elevate the name of the school. I am honored to be a part of this board, to walk this journey with love, dedication, and unity.</p>
                         </div>
                         <div class="testimonial-card animate-child">
-                            <img src="Comment section/1323.png" alt="Sameera Dias">
+                            <img src="Comment section/1323.png" alt="Raveena Weerashinghe">
                             <h4>Raveena Weerashinghe </h4>
                             <h4>Senior probationary prefect</h4>
                             <p class="quote">Proud to be part of a prefect board that shapes leadership,discipline and teamwork. A standard of excellent that continues with new things🎀✨</p>
                         </div>
                         <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="Amal Perera">
-                            <h4>Amal Perera</h4>
-                            <p class="quote">The Prefects' Guild has always been a beacon of discipline and leadership. Their dedication to the school community is truly commendable.</p>
+                            <img src="Comment section/Akarsha.jpg" alt="Akarsha Kamburapola">
+                            <h4>Akarsha Kamburapola</h4>
+                            <h4>Head prefect in 2024</h4>
+                            <p class="quote">I was fortunate to join the prefect guild of R/Eheliyagoda Central College, which has taught me to balance all aspects with the discipline that is essential to life, work with appropriate wisdom, and strive towards goals.</p>
                         </div>
                         <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="Nimali Fernando">
-                            <h4>Nimali Fernando</h4>
-                            <p class="quote">As a parent, I'm incredibly grateful for the positive influence the prefects have on the students. They set a wonderful example for everyone.</p>
+                            <img src="Comment section/Rashmi.png" alt="Rashmi Jananjana">
+                            <h4>Rashmi Jananjana</h4>
+                            <h4>D.H.P. 2024</h4>
+                            <p class="quote">becoming a part of prefect board at Eheliyagoda Central College was a great achievement in my life and a source of pride for me, through which I learned that taking responsibility is an essential quality in life.</p>
                         </div>
                         <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="Kamal Silva">
-                            <h4>Kamal Silva</h4>
-                            <p class="quote">My time as a prefect taught me invaluable lessons in responsibility and teamwork. It's great to see the Guild continue its legacy of excellence.</p>
+                            <img src="Comment section/aritha.jpg" alt="Aritha Dasanayake">
+                            <h4>Aritha Dasanayake</h4>
+                            <h4>Head Prefect in 2024/2025</h4>
+                            <p class="quote">I’m truly proud to be a part of the Eheliyagoda Central College Prefect Guild. 💙 This guild represents leadership, discipline, and dedication in every step we take. Being a prefect isn’t just about wearing a badge — it’s about setting an example for others.</p>
                         </div>
                         <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="Saman Kumara">
-                            <h4>Saman Kumara</h4>
-                            <p class="quote">The prefects are an integral part of our school's success. Their commitment to maintaining order and supporting students is truly inspiring.</p>
+                            <img src="Comment section/nrthmi.png" alt="Nethmi Dananjana">
+                            <h4>Nethmi Dananjana</h4>
+                            <h4>Sectional Head in 2024</h4>
+                            <p class="quote">I’m truly happy and proud to represent a key position in the Student Council of Eheliyagoda National School. Every challenge we face helps us grow into stronger and more responsible leaders. We have an amazing team that carries out every task with dedication and excellence</p>
                         </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="Dilini Rajapaksha">
-                            <h4>Dilini Rajapaksha</h4>
-                            <p class="quote">The prefects are always there to help and guide us. They make school a better place for everyone.</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="Kasun Bandara">
-                            <h4>Kasun Bandara</h4>
-                            <p class="quote">The discipline and leadership shown by the prefects are exemplary. They contribute significantly to the school's positive environment.</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="Piumi Wijesinghe">
-                            <h4>Piumi Wijesinghe</h4>
-                            <p class="quote">Being a prefect was a transformative experience. The Guild fosters true leaders who are dedicated to their school and peers.</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="New Student 1">
-                            <h4>New Student Name 1</h4>
-                            <p class="quote">"The Prefects' Guild has truly transformed my school experience. Their guidance and support have been invaluable."</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="New Student 2">
-                            <h4>New Student Name 2</h4>
-                            <p class="quote">"I'm constantly inspired by the dedication and leadership shown by the prefects. They are true role models."</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="New Student 3">
-                            <h4>New Student Name 3</h4>
-                            <p class="quote">"The events organized by the Prefects' Guild are always well-planned and enjoyable. They add so much to our school life."</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="New Student 4">
-                            <h4>New Student Name 4</h4>
-                            <p class="quote">"Thanks to the prefects, our school environment is always disciplined and harmonious. They do an amazing job."</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="New Student 5">
-                            <h4>New Student Name 5</h4>
-                            <p class="quote">"Being a part of this school with such a strong Prefects' Guild makes me proud. Their commitment is outstanding."</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="New Student 6">
-                            <h4>New Student Name 6</h4>
-                            <p class="quote">"The prefects are approachable and always willing to help. They make us feel safe and supported."</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="New Student 7">
-                            <h4>New Student Name 7</h4>
-                            <p class="quote">"Their leadership skills are exceptional. I aspire to be like them one day and contribute to the school."</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="Piyumira.jpg" alt="Piyumira">
-                            <h4>Piyumira Manahari</h4>
-                            <h4>[Head prefect In 2021 / 2022]</h4>
-                            <p class="quote">Being part of the Prefects’ Guild was an experience that truly shaped my growth and leadership. It’s inspiring to see the Guild continue guiding and empowering students to lead with dedication, teamwork, and integrity.</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="Ranindu.jpg" alt="Ranindu">
-                            <h4>Ranindu Hansaka</h4>
-                            <h4>[D.H.P. In 2024 / 2025]</h4>
-                            <p class="quote">A leader is not someone who always goes ahead...he goes with others towards the same goal, towards the same dream. We have the same goal in our hearts, to elevate the name of the school. I am honored to be a part of this board, to walk this journey with love, dedication, and unity.</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="Sameera Dias"> <h4>Sameera Dias</h4>
-                            <p class="quote">Seeing the prefects manage school events so professionally is amazing. It motivates me to take on leadership roles in the future.</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="Amal Perera">
-                            <h4>Amal Perera</h4>
-                            <p class="quote">The Prefects' Guild has always been a beacon of discipline and leadership. Their dedication to the school community is truly commendable.</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="Nimali Fernando">
-                            <h4>Nimali Fernando</h4>
-                            <p class="quote">As a parent, I'm incredibly grateful for the positive influence the prefects have on the students. They set a wonderful example for everyone.</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="Kamal Silva">
-                            <h4>Kamal Silva</h4>
-                            <p class="quote">My time as a prefect taught me invaluable lessons in responsibility and teamwork. It's great to see the Guild continue its legacy of excellence.</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="Saman Kumara">
-                            <h4>Saman Kumara</h4>
-                            <p class="quote">The prefects are an integral part of our school's success. Their commitment to maintaining order and supporting students is truly inspiring.</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="Dilini Rajapaksha">
-                            <h4>Dilini Rajapaksha</h4>
-                            <p class="quote">The prefects are always there to help and guide us. They make school a better place for everyone.</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="Kasun Bandara">
-                            <h4>Kasun Bandara</h4>
-                            <p class="quote">The discipline and leadership shown by the prefects are exemplary. They contribute significantly to the school's positive environment.</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="Piumi Wijesinghe">
-                            <h4>Piumi Wijesinghe</h4>
-                            <p class="quote">Being a prefect was a transformative experience. The Guild fosters true leaders who are dedicated to their school and peers.</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="New Student 1">
-                            <h4>New Student Name 1</h4>
-                            <p class="quote">"The Prefects' Guild has truly transformed my school experience. Their guidance and support have been invaluable."</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="New Student 2">
-                            <h4>New Student Name 2</h4>
-                            <p class="quote">"I'm constantly inspired by the dedication and leadership shown by the prefects. They are true role models."</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="New Student 3">
-                            <h4>New Student Name 3</h4>
-                            <p class="quote">"The events organized by the Prefects' Guild are always well-planned and enjoyable. They add so much to our school life."</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="New Student 4">
-                            <h4>New Student Name 4</h4>
-                            <p class="quote">"Thanks to the prefects, our school environment is always disciplined and harmonious. They do an amazing job."</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="New Student 5">
-                            <h4>New Student Name 5</h4>
-                            <p class="quote">"Being a part of this school with such a strong Prefects' Guild makes me proud. Their commitment is outstanding."</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="New Student 6">
-                            <h4>New Student Name 6</h4>
-                            <p class="quote">"The prefects are approachable and always willing to help. They make us feel safe and supported."</p>
-                        </div>
-                        <div class="testimonial-card animate-child">
-                            <img src="edit 2.jpg" alt="New Student 7">
-                            <h4>New Student Name 7</h4>
-                            <p class="quote">"Their leadership skills are exceptional. I aspire to be like them one day and contribute to the school."</p>
-                        </div>
+
                     </div>
                 </div>
             </section>
@@ -682,7 +1026,7 @@
                                 <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
                                 <div class="contact-item-content">
                                     <h4>Address</h4>
-                                    <p>Eheliyagoda Central College, Eheliyagoda, Sri Lanka</p>
+                                    <p>Eheliyagoda Central College, Eheliyagoda, Rathnapura, Sri Lanka.</p>
                                 </div>
                             </li>
                             <li class="contact-item animate-child">
@@ -695,8 +1039,10 @@
                             <li class="contact-item animate-child">
                                 <div class="icon"><i class="fas fa-phone"></i></div>
                                 <div class="contact-item-content">
-                                    <h4>Phone</h4>
-                                    <p>+94 77 991 2589</p>
+                                    <h4>Phone (Only About PMS)</h4>
+                                    <p>077 991 2589 (Hansaka)</p>
+                                    <p>072 420 7000 (Adeesha)</p>
+                                    <p>071 591 0595 (Thevindu)</p>
                                 </div>
                             </li>
                         </ul>
@@ -722,41 +1068,57 @@
     <div id="creators-modal" class="modal">
         <div class="modal-content-wrapper">
              <div class="auth-card creators-card">
+                <div class="swimming-symbols-background"></div> <!-- New element for animation -->
                 <span class="close-button">×</span>
-                <h3>PMS Development Team</h3>
-                <div class="developer-cards-container">
-                    <div class="developer-card">
-                        <img src="Developer Team/Adeesha.jpg" alt="Adeesha Ravimal">
-                        <h4>Adeesha Ravimal</h4>
-                        <p class="role">UI/UX Designer & System Developer</p>
-                        <div class="dev-social-icons">
-                            <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                            <a href="mailto:adeesharavimal@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                        </div>
-                    </div>
-                    <div class="developer-card">
-                        <img src="Developer Team/thevindu.JPG" alt="Thevindu Thisev">
-                        <h4>Thevindu Thisev</h4>
-                        <p class="role">Back-End & Database</p>
-                         <div class="dev-social-icons">
-                            <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                            <a href="mailto:#" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                        </div>
-                    </div>
-                    <div class="developer-card">
-                        <img src="Developer Team/Hansaka.png" alt="Hansaka Fernando">
-                        <h4>Hansaka Fernando</h4>
-                        <p class="role">UI/UX Designer & Front-End</p>
-                         <div class="dev-social-icons">
-                            <a href="https://www.facebook.com/share/1A2sZTerYJ/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://chat.whatsapp.com/C4aXtP8cV1QD2VwJ6EgEIK" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                            <a href="mailto:emmvprefects@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <h3>PMS DEVELOPER TEAM</h3>
+                <div class="hero-divider"></div>
+                                    <div class="developer-cards-container" id="developer-accordion">
+                                        <!-- Adeesha -->
+                                        <div class="developer-accordion-item">
+                                            <div class="developer-accordion-header">
+                                                <img src="Developer Team/no-dp_16.webp" alt="Adeesha Ravimal">
+                                                <div class="developer-info">
+                                                    <h4>Adeesha Ravimal</h4>
+                                                    <p class="role">UI/UX & System Dev</p>
+                                                </div>
+                                                <i class="fas fa-chevron-down accordion-icon"></i>
+                                            </div>
+                                            <div class="developer-accordion-content">
+                                                <div class="dev-skills"><i class="fas fa-palette" title="UI/UX Design"></i><i class="fas fa-code" title="System Development"></i><i class="fab fa-python" title="Python"></i></div>
+                                                <div class="dev-social-icons"><a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="#" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a><a href="mailto:adeesharavimal@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a></div>
+                                            </div>
+                                        </div>
+                                        <!-- Thevindu -->
+                                        <div class="developer-accordion-item">
+                                            <div class="developer-accordion-header">
+                                                <img src="Developer Team/thevindu.JPG" alt="Thevindu Thisev">
+                                                <div class="developer-info">
+                                                    <h4>Thevindu Thisev</h4>
+                                                    <p class="role">Back-End & Database</p>
+                                                </div>
+                                                <i class="fas fa-chevron-down accordion-icon"></i>
+                                            </div>
+                                            <div class="developer-accordion-content">
+                                                <div class="dev-skills"><i class="fas fa-server" title="Back-End"></i><i class="fas fa-database" title="Database"></i><i class="fab fa-node-js" title="Node.js"></i></div>
+                                                <div class="dev-social-icons"><a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="#" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a><a href="mailto:#" aria-label="Email"><i class="fas fa-envelope"></i></a></div>
+                                            </div>
+                                        </div>
+                                        <!-- Hansaka -->
+                                        <div class="developer-accordion-item">
+                                            <div class="developer-accordion-header">
+                                                <img src="Developer Team/Hansaka.png" alt="Hansaka Fernando">
+                                                <div class="developer-info">
+                                                    <h4>Hansaka Fernando</h4>
+                                                    <p class="role">UI/UX & Front-End</p>
+                                                </div>
+                                                <i class="fas fa-chevron-down accordion-icon"></i>
+                                            </div>
+                                            <div class="developer-accordion-content">
+                                                <div class="dev-skills"><i class="fab fa-figma" title="Figma"></i><i class="fab fa-html5" title="HTML5"></i><i class="fab fa-css3-alt" title="CSS3"></i><i class="fab fa-js-square" title="JavaScript"></i></div>
+                                                <div class="dev-social-icons"><a href="https://www.facebook.com/share/1A2sZTerYJ/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="https://chat.whatsapp.com/C4aXtP8cV1QD2VwJ6EgEIK" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a><a href="mailto:emmvprefects@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>            </div>
         </div>
     </div>
     
@@ -770,7 +1132,7 @@
 
 <div class="chat-container" id="chatContainer">
     <div class="chat-header">
-        <h3>ECC Prefects Guild සහාය</h3>
+        <h3>PREFECTS GUILD HELP</h3>
         <button class="chat-close" id="chatClose">×</button>
     </div>
     <div class="chat-messages" id="chatMessages"></div>
@@ -779,7 +1141,7 @@
             type="text" 
             class="chat-input" 
             id="chatInput" 
-            placeholder="ඔබගේ ප්‍රශ්නය ඇසුවේ..."
+            placeholder="Type Your Message..."
             autocomplete="off"
         >
         <button class="chat-send" id="chatSend">
@@ -791,9 +1153,10 @@
 <div id="auth-modal" class="modal" style="display: none;">
     <div class="modal-content-wrapper">
         <div class="auth-card" style="text-align: center;">
-            <span class="close-button" id="auth-close-btn">×</span>
+            <span class="close-button" id="auth-close-btn"><i class="fas fa-times"></i></span>
+            <img src="meroon Transparent logo prefect.png" alt="School Logo" style="height: 70px; margin-bottom: 1rem;">
             <h3 id="auth-title">Login</h3>
-            <p id="auth-error" style="color: red; display: none;"></p>
+            <p id="auth-error" style="color: red; display: none; margin-top: 10px;"></p>
             <form id="auth-form" style="display: flex; flex-direction: column; gap: 1rem;">
                 <input type="email" id="auth-email" placeholder="Email Address" required style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;">
                 <input type="password" id="auth-password" placeholder="Password" required style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;">
@@ -831,121 +1194,361 @@
     const db = initializeFirestore(app, { experimentalForceLongPolling: true });
     const auth = getAuth(app);
 
-    // --- NEW: Config and init for the second Firebase project ---
-    const prefectsFirebaseConfig = {
-        apiKey: "AIzaSyDqreh-0DKQoQhLd69mtKNfy6MR-6_b1UA",
-        authDomain: "eccpms-web.firebaseapp.com",
-        projectId: "eccpms-web",
-        storageBucket: "eccpms-web.appspot.com",
-        messagingSenderId: "1022002075345",
-        appId: "1:1022002075345:web:bddabef4872688bc8a17f0",
-        measurementId: "G-BKDPTWYTTF"
-    };
+        // ===================================================
 
-    const prefectsApp = initializeApp(prefectsFirebaseConfig, "prefectsApp");
-    const prefectsDb = getFirestore(prefectsApp);
+        // === 1. AUTHENTICATION LOGIC & UI SETUP ===
 
-    // ===================================================
-    // === 1. AUTHENTICATION LOGIC & UI SETUP ===
-    // ===================================================
+        // ===================================================
 
-    const loginNavBtn = document.getElementById('login-nav-btn');
-    const logoutNavBtn = document.getElementById('logout-nav-btn');
-    const userStatus = document.getElementById('user-status');
-    const userEmailSpan = document.getElementById('user-email');
-    const authModal = document.getElementById('auth-modal');
-    const authCloseBtn = document.getElementById('auth-close-btn');
-    const authForm = document.getElementById('auth-form');
-    const authTitle = document.getElementById('auth-title');
-    const authError = document.getElementById('auth-error');
-    const authSubmitBtn = document.getElementById('auth-submit-btn');
-    const authToggleText = document.getElementById('auth-toggle-text');
-    const authEmailInput = document.getElementById('auth-email');
-    const authPasswordInput = document.getElementById('auth-password');
-    const chatFab = document.getElementById('chatFab');
     
-    let isLoginMode = true;
 
-    function showSuccessToast(message) {
-        const toast = document.getElementById('success-toast');
-        if (!toast) return;
-        toast.textContent = message;
-        toast.classList.add('show');
-        setTimeout(() => { toast.classList.remove('show'); }, 3000);
-    }
+        // === START: MODIFIED JS VARIABLES ===
 
-    function openAuthModal() { authModal.style.display = 'block'; }
-    function closeAuthModal() { authModal.style.display = 'none'; authForm.reset(); authError.style.display = 'none'; }
+        // Mobile controls (original)
 
-    loginNavBtn.addEventListener('click', (e) => { e.preventDefault(); openAuthModal(); });
-    authCloseBtn.addEventListener('click', closeAuthModal);
-    window.addEventListener('click', (event) => { if (event.target == authModal) { closeAuthModal(); } });
+        const loginNavBtn = document.getElementById('login-nav-btn');
 
-    authToggleText.addEventListener('click', (e) => {
-        if (e.target.id === 'auth-toggle-link') {
-            e.preventDefault();
-            isLoginMode = !isLoginMode;
-            authTitle.textContent = isLoginMode ? 'Login' : 'Sign Up';
-            authSubmitBtn.textContent = isLoginMode ? 'Login' : 'Sign Up';
-            authToggleText.innerHTML = isLoginMode 
-                ? `Don't have an account? <a href="#" id="auth-toggle-link" style="color: var(--primary-color); font-weight: 600;">Sign Up</a>`
-                : `Already have an account? <a href="#" id="auth-toggle-link" style="color: var(--primary-color); font-weight: 600;">Login</a>`;
-            authError.style.display = 'none';
+        const logoutNavBtn = document.getElementById('logout-nav-btn');
+
+        const userStatus = document.getElementById('user-status');
+
+        const userEmailSpan = document.getElementById('user-email');
+
+        
+
+        // Desktop controls (new)
+
+        const loginNavBtnDesktop = document.getElementById('login-nav-btn-desktop');
+
+        const logoutNavBtnDesktop = document.getElementById('logout-nav-btn-desktop');
+
+        const userStatusDesktop = document.getElementById('user-status-desktop');
+
+        const userEmailSpanDesktop = document.getElementById('user-email-desktop');
+
+        // === END: MODIFIED JS VARIABLES ===
+
+    
+
+        const authModal = document.getElementById('auth-modal');
+
+        const authCloseBtn = document.getElementById('auth-close-btn');
+
+        const authForm = document.getElementById('auth-form');
+
+        const authTitle = document.getElementById('auth-title');
+
+        const authError = document.getElementById('auth-error');
+
+        const authSubmitBtn = document.getElementById('auth-submit-btn');
+
+        const authToggleText = document.getElementById('auth-toggle-text');
+
+        const authEmailInput = document.getElementById('auth-email');
+
+        const authPasswordInput = document.getElementById('auth-password');
+
+        const chatFab = document.getElementById('chatFab');
+
+        
+
+        let isLoginMode = true;
+
+    
+
+        function showSuccessToast(message) {
+
+            const toast = document.getElementById('success-toast');
+
+            if (!toast) return;
+
+            toast.textContent = message;
+
+            toast.classList.add('show');
+
+            setTimeout(() => { toast.classList.remove('show'); }, 3000);
+
         }
-    });
 
-    onAuthStateChanged(auth, user => {
-        if (user) {
-            loginNavBtn.style.display = 'none';
-            logoutNavBtn.style.display = 'block';
-            userStatus.style.display = 'none';
-            userEmailSpan.textContent = user.email;
-            chatFab.style.display = 'flex';
-            closeAuthModal();
-        } else {
-            loginNavBtn.style.display = 'block';
-            logoutNavBtn.style.display = 'none';
-            userStatus.style.display = 'none';
-            userEmailSpan.textContent = '';
-            chatFab.style.display = 'none';
-            chatContainer.classList.remove('active');
-            isChatOpen = false;
-            if (chatUnsubscribe) chatUnsubscribe();
+    
+
+        function openAuthModal() {
+
+            authModal.style.display = 'block';
+
+            // Use a timeout to allow the display property to apply before starting the transition
+
+            setTimeout(() => authModal.classList.add('show'), 10);
+
         }
-    });
 
-    authForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = authEmailInput.value;
-        const password = authPasswordInput.value;
-        authError.style.display = 'none';
-        try {
-            if (isLoginMode) {
-                await signInWithEmailAndPassword(auth, email, password);
-                showSuccessToast('Login Successful!');
-            } else {
-                await createUserWithEmailAndPassword(auth, email, password);
-                showSuccessToast('Sign Up Successful!');
+        function closeAuthModal() {
+
+            authModal.classList.remove('show');
+
+            // Wait for the transition to finish before hiding the element
+
+            setTimeout(() => {
+
+                authModal.style.display = 'none';
+
+                authForm.reset();
+
+                authError.style.display = 'none';
+
+            }, 300); // Match CSS transition duration
+
+        }
+
+    
+
+        // === START: MODIFIED JS CLICK HANDLERS ===
+
+        loginNavBtn.addEventListener('click', (e) => { e.preventDefault(); openAuthModal(); });
+
+        loginNavBtnDesktop.addEventListener('click', (e) => { e.preventDefault(); openAuthModal(); }); // Add this
+
+        // === END: MODIFIED JS CLICK HANDLERS ===
+
+    
+
+        authCloseBtn.addEventListener('click', closeAuthModal);
+
+        window.addEventListener('click', (event) => { if (event.target == authModal) { closeAuthModal(); } });
+
+    
+
+        authToggleText.addEventListener('click', (e) => {
+
+            if (e.target.id === 'auth-toggle-link') {
+
+                e.preventDefault();
+
+                isLoginMode = !isLoginMode;
+
+                authTitle.textContent = isLoginMode ? 'Login' : 'Sign Up';
+
+                authSubmitBtn.textContent = isLoginMode ? 'Login' : 'Sign Up';
+
+                authToggleText.innerHTML = isLoginMode 
+
+                    ? `Don't have an account? <a href="#" id="auth-toggle-link" style="color: var(--primary-color); font-weight: 600;">Sign Up</a>`
+
+                    : `Already have an account? <a href="#" id="auth-toggle-link" style="color: var(--primary-color); font-weight: 600;">Login</a>`;
+
+                authError.style.display = 'none';
+
             }
-        } catch (error) {
-            console.error("Authentication Error:", error.message);
-            authError.textContent = error.message;
-            authError.style.display = 'block';
-        }
-    });
 
-    logoutNavBtn.addEventListener('click', async (e) => {
-        e.preventDefault();
-        try {
-            await signOut(auth);
-            showSuccessToast('You have been logged out.');
-        } catch (error) { console.error("Logout Error:", error); }
-    });
+        });
+
+    
+
+        // === START: MODIFIED onAuthStateChanged ===
+
+        onAuthStateChanged(auth, async user => {
+
+            if (user) {
+
+                // Mobile
+
+                loginNavBtn.style.display = 'none';
+
+                logoutNavBtn.style.display = 'block';
+
+                userStatus.style.display = 'none'; 
+
+                userEmailSpan.textContent = user.email;
+
+                
+
+                // Desktop
+
+                loginNavBtnDesktop.style.display = 'none';
+
+                logoutNavBtnDesktop.style.display = 'block';
+
+                userStatusDesktop.style.display = 'none'; 
+
+                userEmailSpanDesktop.textContent = user.email;
+
+                
+
+                chatFab.style.display = 'flex';
+
+                closeAuthModal();
+
+    
+
+                // Update prefects collection with display name and photo URL if not already set
+
+                try {
+
+                    const prefectsRef = collection(db, "prefects");
+
+                    const q = query(prefectsRef, where("uid", "==", user.uid));
+
+                    const querySnapshot = await getDocs(q);
+
+    
+
+                    if (!querySnapshot.empty) {
+
+                        const prefectDocRef = doc(db, "prefects", querySnapshot.docs[0].id);
+
+                        const prefectData = querySnapshot.docs[0].data();
+
+                        
+
+                        const updateData = {};
+
+                        if (!prefectData.name) {
+
+                            updateData.name = user.displayName || user.email.split('@')[0];
+
+                        }
+
+                        if (!prefectData.picture) {
+
+                            updateData.picture = user.photoURL || 'no-dp_16.webp';
+
+                        }
+
+    
+
+                        if (Object.keys(updateData).length > 0) {
+
+                            await setDoc(prefectDocRef, updateData, { merge: true });
+
+                        }
+
+                    }
+
+                } catch (error) {
+
+                    console.error("Error updating prefect profile:", error);
+
+                }
+
+    
+
+            } else {
+
+                // Mobile
+
+                loginNavBtn.style.display = 'block';
+
+                logoutNavBtn.style.display = 'none';
+
+                userStatus.style.display = 'none';
+
+                userEmailSpan.textContent = '';
+
+                
+
+                // Desktop
+
+                loginNavBtnDesktop.style.display = 'block';
+
+                logoutNavBtnDesktop.style.display = 'none';
+
+                userStatusDesktop.style.display = 'none';
+
+                userEmailSpanDesktop.textContent = '';
+
+                
+
+                chatFab.style.display = 'none';
+
+                chatContainer.classList.remove('active');
+
+                isChatOpen = false;
+
+                if (chatUnsubscribe) chatUnsubscribe();
+
+            }
+
+        });
+
+        // === END: MODIFIED onAuthStateChanged ===
+
+    
+
+        authForm.addEventListener('submit', async (e) => {
+
+            e.preventDefault();
+
+            const email = authEmailInput.value;
+
+            const password = authPasswordInput.value;
+
+            authError.style.display = 'none';
+
+            try {
+
+                if (isLoginMode) {
+
+                    await signInWithEmailAndPassword(auth, email, password);
+
+                    showSuccessToast('Login Successful!');
+
+                } else {
+
+                    await createUserWithEmailAndPassword(auth, email, password);
+
+                    showSuccessToast('Sign Up Successful!');
+
+                }
+
+            } catch (error) {
+
+                console.error("Authentication Error:", error.message);
+
+                authError.textContent = error.message;
+
+                authError.style.display = 'block';
+
+            }
+
+        });
+
+    
+
+        // === START: MODIFIED LOGOUT HANDLERS ===
+
+        logoutNavBtn.addEventListener('click', async (e) => {
+
+            e.preventDefault();
+
+            try {
+
+                await signOut(auth);
+
+                showSuccessToast('You have been logged out.');
+
+            } catch (error) { console.error("Logout Error:", error); }
+
+        });
+
+        logoutNavBtnDesktop.addEventListener('click', async (e) => { // Add this
+
+            e.preventDefault();
+
+            try {
+
+                await signOut(auth);
+
+                showSuccessToast('You have been logged out.');
+
+            } catch (error) { console.error("Logout Error:", error); }
+
+        });
+
+        // === END: MODIFIED LOGOUT HANDLERS ===
 
     // ===================================================
     // === 2. AUTH-INTEGRATED REAL-TIME CHAT BOT LOGIC ===
     // ===================================================
-    const chatContainer = document.getElementById('chatContainer');
     const chatClose = document.getElementById('chatClose');
     const chatMessages = document.getElementById('chatMessages');
     const chatInput = document.getElementById('chatInput');
@@ -1068,6 +1671,8 @@
         animatedElements.forEach(el => observer.observe(el));
     }
 
+    // === JS for mobile menu (NO CHANGES NEEDED) ===
+    // This correctly targets the mobile nav wrapper (#main-nav) and toggle
     const menuToggle = document.getElementById('menu-toggle');
     const mainNav = document.getElementById('main-nav');
     if(menuToggle && mainNav) {
@@ -1088,26 +1693,108 @@
     const creatorsFab = document.getElementById('creators-fab');
     const creatorsModal = document.getElementById('creators-modal');
     const closeCreatorsModalBtn = creatorsModal.querySelector('.close-button');
-    creatorsFab.addEventListener('click', () => { creatorsModal.style.display = 'block'; });
-    closeCreatorsModalBtn.addEventListener('click', () => { creatorsModal.style.display = 'none'; });
-    window.addEventListener('click', (event) => { if (event.target == creatorsModal) creatorsModal.style.display = "none"; });
 
-    // Auto-scrolling testimonials
-    const testimonialGridForScroll = document.querySelector('#testimonials .testimonials-grid');
-    if (testimonialGridForScroll) {
-        const scroller = testimonialGridForScroll.querySelector('.testimonials-scroller');
-        if (scroller) {
-            // To prevent re-running this logic on hot-reloads or other changes
-            if (!testimonialGridForScroll.classList.contains('auto-scroll')) {
+    const openCreatorsModal = () => {
+        creatorsModal.style.display = 'block'; // For the overlay
+        setTimeout(() => { // Timeout to allow display to apply before transition
+            creatorsModal.classList.add('show');
+            creatorsModal.classList.add('visible');
+        }, 10);
+    };
+
+    const closeCreatorsModal = () => {
+        creatorsModal.classList.remove('show');
+        creatorsModal.classList.remove('visible');
+        // Wait for the drawer slide-out animation to finish
+        setTimeout(() => {
+            creatorsModal.style.display = 'none';
+        }, 500); // Must match the CSS transition duration for the drawer
+    };
+
+    creatorsFab.addEventListener('click', openCreatorsModal);
+    // Add a null check to prevent script crash if button isn't found
+    if (closeCreatorsModalBtn) {
+        closeCreatorsModalBtn.addEventListener('click', closeCreatorsModal);
+    }
+    window.addEventListener('click', (event) => { if (event.target == creatorsModal) closeCreatorsModal(); });
+
+    // Accordion logic for Developer List
+    const accordion = document.getElementById('developer-accordion');
+    if (accordion) {
+        accordion.addEventListener('click', (e) => {
+            const header = e.target.closest('.developer-accordion-header');
+            if (header) {
+                const item = header.parentElement;
+                // Optional: Close other items when one is opened
+                // const allItems = accordion.querySelectorAll('.developer-accordion-item');
+                // allItems.forEach(i => { if (i !== item) i.classList.remove('active'); });
+                item.classList.toggle('active');
+            }
+        });
+    }
+
+    // --- Manual and Auto scroll for testimonials ---
+    const slider = document.querySelector('.testimonials-grid');
+    if (slider) {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        let autoScrollInterval;
+
+        const startAutoScroll = () => {
+            // To make it seamless, we need to duplicate the content
+            const scroller = slider.querySelector('.testimonials-scroller');
+            if (scroller && !scroller.classList.contains('duplicated')) {
                 const scrollerContent = Array.from(scroller.children);
                 scrollerContent.forEach(item => {
                     const duplicatedItem = item.cloneNode(true);
                     duplicatedItem.setAttribute('aria-hidden', true);
                     scroller.appendChild(duplicatedItem);
                 });
-                testimonialGridForScroll.classList.add('auto-scroll');
+                scroller.classList.add('duplicated');
             }
-        }
+
+            autoScrollInterval = setInterval(() => {
+                slider.scrollLeft += 1;
+                if (slider.scrollLeft >= scroller.scrollWidth / 2) {
+                    slider.scrollLeft = 0;
+                }
+            }, 25); // Adjust speed here
+        };
+
+        const stopAutoScroll = () => {
+            clearInterval(autoScrollInterval);
+        };
+
+        slider.addEventListener('mouseenter', stopAutoScroll);
+        slider.addEventListener('mouseleave', () => {
+            if (!isDown) {
+                startAutoScroll();
+            }
+        });
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            stopAutoScroll();
+            slider.classList.add('active');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; //scroll-fast
+            slider.scrollLeft = scrollLeft - walk;
+        });
+
+        startAutoScroll();
     }
 
     // --- Show More/Less for Teachers ---
@@ -1164,7 +1851,7 @@
         if (!prefectsGrid) return;
         prefectsGrid.innerHTML = '<p>Loading Prefects...</p>';
         try {
-            const querySnapshot = await getDocs(collection(prefectsDb, "prefects")); // Use prefectsDb
+            const querySnapshot = await getDocs(collection(db, "prefects"));
             fetchedPrefects = [];
             querySnapshot.forEach((doc) => fetchedPrefects.push(doc.data()));
             populateCategories();
