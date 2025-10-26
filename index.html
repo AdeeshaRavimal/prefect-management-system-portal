@@ -1,416 +1,2608 @@
 <!DOCTYPE html>
-<html lang="si">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Primary Meta Tags -->
-    <title>ECC Prefects' Guild - Eheliyagoda Central College Student Leadership</title>
-    <meta name="title" content="ECC Prefects' Guild - Eheliyagoda Central College Student Leadership">
-    <meta name="description" content="Official Prefects' Guild of Eheliyagoda Central College (ECC). Student leadership, school prefects information, and digital platform for ECC community in Sri Lanka.">
-    <meta name="keywords" content="Eheliyagoda Central College, ECC, ECC Prefects, Eheliyagoda school, central college prefects, student leadership, school prefects Sri Lanka, Ratnapura schools, Sabaragamuwa education">
-    <meta name="author" content="ECC Prefects' Guild">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="Sinhala, English">
-    <meta name="revisit-after" content="7 days">
-    
-    <!-- Geo Tags -->
-    <meta name="geo.region" content="LK-91">
-    <meta name="geo.placename" content="Eheliyagoda">
-    <meta name="geo.position" content="6.8580;80.2670">
-    <meta name="ICBM" content="6.8580, 80.2670">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://eccprefects.online/">
-    <meta property="og:title" content="ECC Prefects' Guild - Eheliyagoda Central College">
-    <meta property="og:description" content="Official Prefects' Guild of Eheliyagoda Central College. Student leadership and digital platform for ECC community.">
-    <meta property="og:image" content="https://eccprefects.online/meroon Transparent logo prefect.png">
-    <meta property="og:locale" content="si_LK">
-    <meta property="og:site_name" content="ECC Prefects' Guild">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://eccprefects.online/">
-    <meta property="twitter:title" content="ECC Prefects' Guild - Eheliyagoda Central College">
-    <meta property="twitter:description" content="Official Prefects' Guild of Eheliyagoda Central College. Student leadership and digital platform.">
-    <meta property="twitter:image" content="https://eccprefects.online/meroon Transparent logo prefect.png">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://eccprefects.online/">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="meroon Transparent logo prefect.png">
-    <link rel="apple-touch-icon" href="meroon Transparent logo prefect.png">
-    
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    
-    <!-- Schema.org structured data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
-        "name": "Eheliyagoda Central College Prefects' Guild",
-        "alternateName": "ECC Prefects Guild",
-        "url": "https://eccprefects.online",
-        "logo": "https://eccprefects.online/meroon Transparent logo prefect.png",
-        "description": "Official Prefects' Guild of Eheliyagoda Central College, providing student leadership and digital services for the ECC community.",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Eheliyagoda",
-            "addressRegion": "Ratnapura",
-            "addressCountry": "LK"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "6.8580",
-            "longitude": "80.2670"
-        },
-        "parentOrganization": {
-            "@type": "EducationalOrganization",
-            "name": "Eheliyagoda Central College"
-        },
-        "sameAs": [
-            "https://www.facebook.com/eccprefects",
-            "https://www.instagram.com/eccprefects"
-        ]
-    }
-    </script>
-    
+    <title>Admin Panel - Prefects' Guild</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
-        html, body {
-            height: 100%;
+        :root {
+            --primary-color: #8C1C13; /* Maroon Red */
+            --background-start: #FFFBF5; /* Cream */
+            --background-end: #FFF5E1; /* Yellowish Cream */
+            --glass-bg: rgba(255, 250, 240, 0.1); /* Further increased transparency for more glassiness */
+            --glass-border: 1px solid rgba(255, 255, 255, 0.5);
+            --text-color: #3b3b3b;
+            --text-light: #5f5f5f;
         }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #fdfaf6; 
-            margin: 0;
-            text-align: center;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
+        @keyframes fadeInFromTop {
+            from { opacity: 0; transform: translateY(-20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        #particles-js {
+        #particle-canvas {
             position: fixed;
-            width: 100%;
-            height: 100%;
             top: 0;
             left: 0;
-            z-index: -1;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: linear-gradient(135deg, var(--background-start), var(--background-end));
+            margin: 0; 
+            color: var(--text-color);
+            /* Removed overflow: hidden; */
+            display: flex; /* Make body a flex container */
+            flex-direction: column; /* Stack children vertically */
+            min-height: 100vh; /* Ensure body takes at least full viewport height */
+        }
+
+        .container { 
+            width: 100%; 
+            flex-grow: 1; /* Changed from height: 100vh; */
+            display: flex; 
+            flex-direction: column; 
+            padding: 1.5rem;
+            box-sizing: border-box;
+            position: relative; /* Add position */
+            z-index: 1; /* Add z-index */
+            perspective: 1500px; /* Add perspective */
         }
         
-        main {
-            flex: 1 0 auto;
+        @keyframes subtleFloat {
+            0% { transform: translateY(0px) rotateX(0deg); }
+            50% { transform: translateY(-3px) rotateX(1deg); }
+            100% { transform: translateY(0px) rotateX(0deg); }
+        }
+
+        .glass-pane {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px); /* Increased blur for stronger glass effect */
+            -webkit-backdrop-filter: blur(25px); /* Increased blur for stronger glass effect */
+            border-radius: 15px;
+            border: var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+            animation: fadeInFromTop 0.6s ease-out forwards, subtleFloat 8s ease-in-out infinite alternate; /* Added subtleFloat */
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Enhanced transition */
+        }
+        .glass-pane:hover {
+            transform: perspective(1000px) rotateX(3deg) translateY(-5px); /* Subtle 3D tilt and lift */
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+            animation-play-state: paused; /* Pause subtleFloat on hover */
+        }
+        
+        .login-wrapper { display: flex; justify-content: center; align-items: center; height: 100%; }
+        .auth-card { 
+            width: 100%; 
+            max-width: 400px; 
+            padding: 2.5rem; 
+            box-sizing: border-box;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition */
+        }
+        .auth-card:hover {
+            transform: translateY(-5px) scale(1.01); /* Lift and slight scale */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15); /* More pronounced shadow */
+        }
+        .auth-card h3 { color: var(--primary-color); text-align: center; margin-top: 0; font-weight: 600; }
+        .auth-card p { color: #d9534f; text-align: center; }
+        .auth-card input { 
+            width: 100%; padding: 12px; margin-bottom: 1rem; 
+            border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-size: 1rem; 
+            box-sizing: border-box; background-color: rgba(255,255,255,0.7);
+            color: var(--text-color);
+        }
+        .auth-card input::placeholder { color: #888; }
+        .auth-card input:focus { outline: none; border-color: var(--primary-color); }
+        .auth-card button { 
+            width: 100%; padding: 12px; background-color: var(--primary-color); 
+            color: white; border: none; border-radius: 8px; font-size: 1rem; 
+            cursor: pointer; font-weight: 600; transition: all 0.3s ease;
+        }
+        .auth-card button:hover { background-color: #a12c20; transform: translateY(-2px); }
+        
+        #admin-panel-section { 
+            display: none; 
+            height: 100%; 
+            flex-direction: column;
+            overflow: hidden;
+        }
+                .admin-header {
+                    display: flex; /* Ensure flexbox for alignment */
+                    justify-content: flex-start; /* Align content to the left */
+                    align-items: center; /* Vertically center items */
+                    padding: 1rem 2rem; flex-shrink: 0; border-bottom: var(--glass-border);
+                    /* Removed flex-direction: column; */
+                }
+                .admin-header h2 { color: var(--primary-color); margin: 0; font-size: 1.02rem; /* Adjusted to match logo height */ }
+                .admin-header p { color: var(--text-light); margin: 0; font-size: 0.9rem; }
+                .admin-header strong { color: var(--primary-color); }
+
+                .header-content-left {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem; /* Space between logo and text */
+                }
+
+                .icon-button {
+                    background: none;
+                    border: none;
+                    color: var(--primary-color);
+                    font-size: 1.5rem; /* Make icon larger */
+                    cursor: pointer;
+                    padding: 0.5rem; /* Add some padding for click area */
+                    border-radius: 50%; /* Make it circular */
+                    transition: all 0.3s ease;
+                    display: flex; /* Use flex to center icon */
+                    align-items: center;
+                    justify-content: center;
+                }
+                .icon-button:hover {
+                    background-color: rgba(140, 28, 19, 0.15); /* Slightly more pronounced background on hover */
+                    color: #a12c20; /* Slightly darker primary color on hover */
+                    transform: scale(1.1) rotate(5deg); /* Subtle scale and rotation */
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Subtle shadow */
+                }
+                .logout-absolute {
+                    position: absolute;
+                    top: 1.5rem; /* Adjust as needed, matching padding of container */
+                    right: 1.5rem; /* Adjust as needed, matching padding of container */
+                    z-index: 10; /* Ensure it's above other content */
+                }
+        
+        .admin-logo {
+            height: 40px; /* Adjust as needed */
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .admin-tabs {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: var(--glass-bg);
+            border-top: var(--glass-border);
+            flex-shrink: 0;
+            padding: 1rem 0;
+            position: relative;
+            z-index: 10;
+            transition: all 0.3s ease-in-out; /* Add transition for animation */
+            /* Removed gap as space-around handles distribution */
+        }
+        .admin-tabs.hidden {
+            opacity: 0;
+            transform: translateY(100%); /* Slide down */
+            pointer-events: none; /* Disable interactions when hidden */
+        }
+        @keyframes tabPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.01); }
+            100% { transform: scale(1); }
+        }
+
+        .admin-tabs button {
+            background: var(--glass-bg); /* Use glass background for 3D effect */
+            border: var(--glass-border); /* Add border for depth */
+            color: var(--text-light);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            border-radius: 15px; /* More rounded corners */
+            padding: 12px 18px; /* Increased padding for larger buttons */
+            position: relative;
+            flex-grow: 1;
+            min-width: auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Initial subtle shadow */
+            transform: translateY(0); /* Initial transform state */
+            animation: tabPulse 4s ease-in-out infinite; /* Subtle continuous pulse */
+        }
+        .admin-tabs button:hover {
+            background-color: rgba(255, 250, 240, 0.9); /* Lighter on hover */
+            color: var(--primary-color);
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* More pronounced shadow on hover */
+        }
+        .admin-tabs button i {
+            font-size: 1.8rem; /* Slightly larger icon */
+            margin-bottom: 6px; /* Increased margin */
+        }
+        .admin-tabs button span:not(#total-unread-badge) {
+            display: block;
+            font-weight: 500;
+        }
+        .admin-tabs button.active {
+            color: var(--primary-color);
+            background-color: rgba(255, 250, 240, 1); /* Solid background for active */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* Stronger shadow for active */
+            transform: translateY(-3px); /* Slightly lifted when active */
+            border-color: var(--primary-color); /* Highlight active border */
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(140, 28, 19, 0.4);
+            }
+            70% {
+                transform: scale(1.03); /* More subtle scale */
+                box-shadow: 0 0 0 15px rgba(140, 28, 19, 0); /* Larger, fading shadow */
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(140, 28, 19, 0);
+            }
+        }
+
+        .fab-button {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 100;
+            animation: pulse 3s infinite ease-in-out; /* Adjusted duration and easing */
+        }
+        .fab-button:hover {
+            background-color: #a12c20;
+            transform: scale(1.15) rotate(5deg); /* More pronounced scale and slight rotation */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3); /* More pronounced shadow */
+            animation: none; /* Stop pulse on hover */
+        }
+        
+        .fab-button.fab-bottom-right { /* Existing FAB for attendance */
+            bottom: 90px;
+            right: 20px;
+        }
+
+        .fab-button.fab-bottom-left { /* New FAB for prefects */
+            bottom: 90px;
+            left: 20px;
+        }
+        
+        /* NEW: Badge for total unread chats on the tab */
+        #total-unread-badge {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 10px;
+            padding: 2px 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: none; /* Hide by default */
+            position: absolute;
+            top: 2px;
+            left: calc(50% + 12px);
+        }
+
+        @keyframes tabFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes tabFadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-10px); }
+        }
+
+        @keyframes tabFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes tabFadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-10px); }
+        }
+
+        .tab-content {
+            display: none;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        .tab-content.active {
+            display: flex;
+            animation: tabFadeIn 0.4s ease-out forwards;
+        }
+
+        .tab-content.is-exiting {
+            display: flex; /* Keep it in the layout during animation */
+            animation: tabFadeOut 0.4s ease-in forwards;
+        }
+
+        .chat-layout { flex-grow: 1; overflow: hidden; position: relative; }
+        .chat-list-container { 
+            width: 30%; min-width: 280px; 
+            border-right: var(--glass-border); 
+            display: flex; flex-direction: column; transition: transform 0.4s ease-in-out;
+        }
+        .chat-list-header { padding: 1rem; border-bottom: var(--glass-border); display: flex; align-items: center; gap: 1rem; }
+        .chat-list-header h4 { margin: 0; color: var(--primary-color); }
+        .back-to-list-btn { display: none; background: none; border: none; color: var(--text-color); font-size: 1.2rem; cursor: pointer; }
+        
+        .chat-list { overflow-y: auto; flex-grow: 1; }
+                .chat-session-item {
+                    padding: 1rem; cursor: pointer; border-bottom: 1px solid rgba(0,0,0,0.05);
+                    display: flex; justify-content: space-between; align-items: center;
+                    transition: all 0.2s ease-in-out;
+                }
+                .chat-session-item:hover {
+                    background-color: rgba(0,0,0,0.05); /* Slightly darker hover */
+                    transform: translateX(5px); /* Slide effect */
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Subtle shadow */
+                }
+                .chat-session-item.active { background-color: rgba(140, 28, 19, 0.1); }
+                .chat-session-item strong { display: block; font-weight: 500; color: var(--text-color); }
+                .chat-session-item small { color: var(--text-light); }
+        
+                .chat-session-content {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+                .chat-dp {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    flex-shrink: 0;
+                }        
+        .notification-badge {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-        }
+            font-size: 0.8rem;
+                        font-weight: 600;
+                        flex-shrink: 0;
+                        margin-left: 10px;
+                    }
+            
+                    /* Chat View Header Styling */
+                    .chat-view-container .chat-list-header {
+                        background-color: var(--primary-color); /* Maroon background */
+                        color: white;
+                        padding: 0.8rem 1rem;
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        border-bottom: none; /* Remove glass border */
+                    }
+                    .chat-view-container .chat-list-header .back-to-list-btn {
+                        color: white; /* White back button icon */
+                    }
+                    .chat-view-container .chat-list-header .chat-user-info {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                    }
+                    .chat-view-container .chat-list-header .chat-user-info img {
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+                            .chat-view-container .chat-list-header h4 {
+                                color: white; /* White text for name */
+                                margin: 0;
+                                font-weight: 500;
+                                display: block; /* Ensure the name is displayed */
+                            }            
+                    .chat-view-container {
+                        flex-grow: 1; display: flex; flex-direction: column; background-color: rgba(0,0,0,0.02);
+                        transition: transform 0.4s ease-in-out;
+                    }        .messages-div { flex-grow: 1; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;}
+        .message-bubble { max-width: 70%; padding: 10px 15px; border-radius: 18px; line-height: 1.5; color: var(--text-color); }
+        .user-msg { background-color: #fff; border: 1px solid #eee; align-self: flex-start; }
+        .admin-msg { background-color: #fce4e4; align-self: flex-end; }
+        .reply-area { padding: 1rem; border-top: var(--glass-border); display: flex; gap: 10px; flex-shrink: 0; }
+        .reply-area input { flex-grow: 1; padding: 12px; border: 1px solid #ddd; border-radius: 20px; font-size: 1rem; background-color: #fff; color: var(--text-color); }
+        .reply-area button { padding: 0 20px; background-color: var(--primary-color); color: white; border: none; border-radius: 20px; cursor: pointer; }
 
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 700px;
-            width: 90%;
-            padding: 40px;
-            box-sizing: border-box;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+        .gallery-content-wrapper { width: 100%; padding: 2rem; box-sizing: border-box; overflow-y: auto;}
+        .upload-section { padding: 1.5rem; margin-bottom: 2rem; background: rgba(255,255,255,0.4); border-radius: 8px;}
+        .upload-section h4 { margin-top: 0; color: var(--primary-color); }
+        .upload-section input[type="file"] { border: 1px solid #ccc; padding: 10px; border-radius: 5px; background: white; }
+        .upload-section button { background-color: var(--primary-color); color: white; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; font-size: 1rem; }
+        #upload-status { margin-top: 1rem; }
+        .current-gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; }
+        .gallery-thumb { position: relative; }
+        .gallery-thumb:hover { transform: scale(1.05); }
+        .gallery-thumb img { width: 100%; height: 120px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; }
+        .gallery-thumb .delete-btn { 
+            position: absolute; top: 5px; right: 5px; background-color: rgba(255, 0, 0, 0.7); 
+            color: white; border: none; border-radius: 50%; width: 25px; height: 25px; 
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease;
         }
-        
-        .logo-container { perspective: 1000px; margin-bottom: 20px; }
-        .logo { width: 120px; height: 120px; background-image: url('meroon Transparent logo prefect.png'); background-size: contain; background-position: center; background-repeat: no-repeat; margin: 0 auto; animation: rotateLogo 15s infinite linear; transform-style: preserve-3d; }
-        @keyframes rotateLogo { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
-        
-        h1 { 
-            font-size: 2.5em; 
-            color: #810000; 
-            margin: 0 0 15px 0; 
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
-        }
-        
-        .subtitle {
-            font-size: 1.2em;
-            color: #810000;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        
-        p { 
-            font-size: 1.05em; 
-            line-height: 1.7; 
-            margin: 0 0 30px 0; 
-            max-width: 500px; 
-            color: #333; 
-        }
+        .gallery-thumb:hover .delete-btn { opacity: 1; }
 
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .action-button {
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-size: 1em;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .action-button.primary {
-            background-color: #810000;
-            color: white;
-            border: 2px solid #810000;
-        }
-        .action-button.primary:hover {
-            background-color: #600000;
-            border-color: #600000;
-            transform: translateY(-2px);
-        }
-
-        .action-button.secondary {
-            background-color: transparent;
-            color: #810000;
-            border: 2px solid #810000;
-        }
-        .action-button.secondary:hover {
-            background-color: #810000;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        footer {
-            flex-shrink: 0;
-            width: auto;
-            margin: 0 20px 20px 20px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            box-sizing: border-box;
-        }
-        .footer-social { padding-bottom: 15px; margin-bottom: 15px; border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
-        .footer-social a { color: #333; margin: 0 15px; font-size: 1.6em; text-decoration: none; transition: color 0.3s; }
-        .footer-social a:hover { color: #810000; }
-        .footer-copyright { color: #333; font-size: 0.85em; line-height: 1.5; }
-
-        .modal-overlay {
-            display: none;
+        /* Modal styles */
+        .modal {
             position: fixed;
             z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.6);
+            background-color: rgba(0,0,0,0.5);
+            display: none; /* Changed */
             justify-content: center;
             align-items: center;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
         .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 30px;
+            background: var(--glass-bg);
+            padding: 2.5rem;
             border-radius: 15px;
+            border: var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
             width: 90%;
-            max-width: 400px;
-            position: relative;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            animation: fadeIn 0.3s;
+            max-width: 450px;
+            max-height: 90vh; /* Limit height to 90% of viewport height */
+            overflow-y: auto; /* Enable scrolling if content exceeds max-height */
+            text-align: center;
+            animation: fadeInFromTop 0.4s ease-out forwards;
+            box-sizing: border-box; /* Added for responsiveness */
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+        #custom-modal .modal-content h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.5rem;
         }
 
-        .close-button {
+        #custom-modal .modal-content p {
+            margin: 1rem 0 2rem 0;
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* New styles for modal header, body, and footer */
+        #custom-modal .modal-content {
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh; /* Ensure modal content itself respects max height */
+        }
+
+        #custom-modal .modal-header {
+            padding: 1.5rem 2.5rem 0.5rem 2.5rem; /* Top padding, no bottom margin */
+            flex-shrink: 0; /* Prevent shrinking */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #custom-modal .modal-header h3 {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        #custom-modal .modal-body {
+            padding: 0.5rem 2.5rem 1.5rem 2.5rem; /* Vertical padding, no top margin */
+            overflow-y: auto; /* Make only the body scrollable */
+            flex-grow: 1; /* Allow body to take available space */
+        }
+
+        #custom-modal .modal-body p {
+            margin: 0;
+            text-align: center; /* Center text within the body */
+        }
+
+        #custom-modal .modal-buttons {
+            padding: 0.5rem 2.5rem 1.5rem 2.5rem; /* Bottom padding, no top margin */
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .modal-buttons button {
+            padding: 12px 35px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-buttons .confirm-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .modal-buttons .confirm-btn:hover {
+            background-color: #a12c20;
+            transform: translateY(-2px);
+        }
+
+        .modal-buttons .cancel-btn {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid #ddd;
+        }
+        .modal-buttons .cancel-btn:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+
+        .close-btn {
             color: #aaa;
-            float: right;
+            position: absolute; /* Better positioning */
+            top: 15px;
+            right: 20px;
             font-size: 28px;
             font-weight: bold;
-            position: absolute;
-            top: 10px;
-            right: 20px;
         }
 
-        .close-button:hover,
-        .close-button:focus {
+        .close-btn:hover,
+        .close-btn:focus {
             color: black;
             text-decoration: none;
             cursor: pointer;
         }
 
-        .modal-content h2 { color: #333; margin-bottom: 20px; }
-        .modal-content input[type="text"], .modal-content input[type="password"] { width: 100%; padding: 12px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        .modal-button { background-color: #810000; color: white; padding: 14px 20px; margin-top: 15px; border: none; cursor: pointer; width: 100%; border-radius: 8px; font-size: 1em; font-family: 'Poppins', sans-serif; transition: background-color 0.3s; }
-        .modal-button:hover { background-color: #600000; }
-        .error-text { color: #D8000C; font-size: 0.9em; min-height: 1.2em; }
 
-        @media (max-width: 600px) {
-            .container { padding: 25px; width: 90%; }
-            .logo { width: 100px; height: 100px; }
-            h1 { font-size: 1.8em; letter-spacing: 1px; }
-            .subtitle { font-size: 1em; }
-            p { font-size: 0.95em; }
-            .button-container { flex-direction: column; gap: 15px; }
-            footer { margin: 0 10px 10px 10px; }
+
+        /* Styles for Gallery Tab Enhancement */
+        #gallery-management.tab-content.active {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top to allow scrolling */
+            padding: 2rem;
+            box-sizing: border-box;
+            overflow-y: auto; /* Enable scrolling on the tab content itself */
+        }
+
+        #gallery-management .gallery-content-wrapper {
+            width: 100%;
+            max-width: 1100px;
+            padding: 2.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: var(--glass-border);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem; /* Add some space at the bottom */
+        }
+
+        #gallery-management .upload-section {
+            background: rgba(255,255,255,0.4);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        #gallery-management .upload-section h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        #gallery-management .upload-section button {
+            width: auto; /* Not full width */
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            /* margin-left is now handled by gap in the wrapper */
+        }
+        #gallery-management .upload-section button:hover {
+            background-color: #a12c20;
+            transform: translateY(-2px);
+        }
+
+                    #gallery-management .upload-section .file-upload-wrapper {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: stretch; /* Make children (label, button) full width */
+                        justify-content: center;
+                        gap: 1rem;
+                        margin-top: 1rem;
+                        max-width: 400px; /* Set a max-width for the upload area */
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+        #gallery-management .upload-section .file-upload-input {
+            display: none; /* Hide the default input */
+        }
+
+        #gallery-management .upload-section .file-upload-label {
+            background-color: #fff;
+            color: var(--primary-color);
+            border: 2px dashed rgba(140, 28, 19, 0.4);
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center; /* Center the icon and text */
+            gap: 0.75rem;
+        }
+
+        #gallery-management .upload-section .file-upload-label:hover {
+            background-color: rgba(140, 28, 19, 0.05);
+            border-style: solid;
+            border-color: var(--primary-color);
+        }
+
+        #gallery-management .upload-section #file-upload-filename {
+            display: inline-block;
+            max-width: 150px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            vertical-align: middle;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        #gallery-management .gallery-content-wrapper > h4,
+        #event-management .gallery-content-wrapper > h4,
+        #announcement-management .gallery-content-wrapper > h4,
+        #ideas-management .gallery-content-wrapper > h4,
+        #prefects-management .gallery-content-wrapper > h4 {
+            margin-top: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            color: var(--primary-color);
+            font-weight: 600;
+            text-align: center; /* Center the titles */
+        }
+
+        /* Styles for Attendance Tab Enhancement */
+        #attendance-management.tab-content.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #attendance-management .gallery-content-wrapper {
+            width: 100%;
+            max-width: 500px;
+            padding: 0; /* Remove padding to let the inner card handle it */
+            overflow: visible; /* Allow box shadow to be visible */
+        }
+
+        #attendance-management .upload-section {
+            text-align: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: var(--glass-border);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+            margin-bottom: 0; /* Remove margin */
+        }
+
+        #attendance-management .upload-section h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        #attendance-management #open-camera-btn,
+        #attendance-management #mark-attendance-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        #attendance-management #open-camera-btn:hover,
+        #attendance-management #mark-attendance-btn:hover {
+            background-color: #a12c20;
+            transform: translateY(-2px);
+        }
+
+        #attendance-management .manual-entry p {
+            margin-top: 2rem;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        #attendance-management .manual-entry input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            background-color: rgba(255,255,255,0.7);
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        #attendance-management #qr-reader {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--background-start), var(--background-end));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.7s ease, visibility 0.7s ease;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .loader {
+            border: 8px solid rgba(140, 28, 19, 0.2);
+            border-top: 8px solid var(--primary-color);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        #loader-wrapper p {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #loader-wrapper.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* --- Event, Announcement & Ideas Styles --- */
+        #event-management.tab-content.active,
+        #announcement-management.tab-content.active,
+        #ideas-management.tab-content.active {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Reverted to flex-start */
+            padding: 2rem;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        #event-management .gallery-content-wrapper,
+        #announcement-management .gallery-content-wrapper,
+        #ideas-management .gallery-content-wrapper {
+            width: 100%;
+            max-width: 900px;
+            padding: 2.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: var(--glass-border);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        #events-list .card,
+        #announcements-history-list ul {
+            margin-top: 1.5rem;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        #events-list .card h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        #announcements-history-list ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        #announcements-history-list li {
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            padding: 1rem 0;
+        }
+
+        #announcements-history-list li:last-child {
+            border-bottom: none;
+        }
+
+        #events-list .card .event-actions,
+        #events-list .card .add-duty-section {
+            text-align: center;
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        #events-list .card .event-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #events-list .card .event-btn:hover,
+        .idea-action-btn:hover {
+            background-color: #a12c20;
+            transform: translateY(-3px) scale(1.02); /* More pronounced lift and slight scale */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* More pronounced shadow */
+        }
+
+        #events-list .card .event-btn.danger {
+            background-color: #d9534f;
+        }
+
+        #events-list .card .event-btn.danger:hover {
+            background-color: #c9302c;
+        }
+
+        #events-list .card .add-duty-section input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .duties-list {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .duties-list ul {
+            padding-left: 20px;
+        }
+
+        #event-management textarea,
+        #announcement-management textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 1rem 0;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            background-color: rgba(255,255,255,0.7);
+            color: var(--text-color);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #event-management .upload-section input,
+        #announcement-management .upload-section input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            background-color: rgba(255,255,255,0.7);
+        }
+
+        .event-form-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center items horizontally */
+            max-width: 500px; /* Limit width for better aesthetics */
+            margin: 0 auto; /* Center the wrapper itself */
+            gap: 1rem; /* Space between form elements */
+        }
+        #event-management .upload-section input,
+        #event-management textarea,
+        #event-management .upload-section button {
+            width: 100%; /* Make form elements take full width of wrapper */
+            margin: 0; /* Remove default margins */
+        }
+
+        input[type="date"] {
+            /* Custom styling for date input */
+            -webkit-appearance: none; /* Remove default styling for WebKit browsers */
+            appearance: none; /* Remove default styling */
+            background-color: rgba(255,255,255,0.7);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 1rem;
+            color: var(--text-color);
+            cursor: pointer;
+            position: relative;
+            text-align: center; /* Center the text inside */
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            background: none;
+            z-index: 1;
+            opacity: 0; /* Hide default calendar icon */
+            cursor: pointer;
+        }
+        input[type="date"]::after {
+            content: "\f073"; /* Font Awesome calendar icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            pointer-events: none; /* Allow clicks to pass through to the picker */
+        }
+
+        /* Enhanced styling for new-event-title input */
+        #new-event-title {
+            padding: 12px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            background-color: rgba(255,255,255,0.7);
+            color: var(--text-color);
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        #new-event-title::placeholder {
+            color: #888;
+        }
+
+        #new-event-title:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(140, 28, 19, 0.2);
+        }
+
+        /* Styling for Idea Action Buttons */
+        .idea-action-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0.5rem 0 0;
+        }
+
+
+
+        /* --- Prefects List View Styles -- */
+        #admin-prefects-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .prefect-list-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 10px;
+            transition: all 0.3s ease; /* Smooth transition for all properties */
+            transform-style: preserve-3d; /* Enable 3D transforms for children */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Initial subtle shadow */
+        }
+        .prefect-list-item:hover {
+            transform: translateY(-7px) rotateX(5deg) scale(1.02); /* More pronounced lift, rotation, and scale */
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25); /* More pronounced shadow on hover */
+            background: rgba(255, 255, 255, 1); /* Solid background on hover */
+        }
+        .prefect-list-item img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+            border: 2px solid var(--secondary-color);
+        }
+        .prefect-list-info {
+            flex-grow: 1;
+        }
+        .prefect-list-info h4 {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .prefect-list-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+
+        #admin-prefect-search {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            background-color: rgba(255,255,255,0.7);
+        }
+
+        /* --- Prefect Detail Modal Styles --- */
+        #prefect-detail-modal .modal-content {
+            max-width: 500px;
+            text-align: left;
+        }
+        #prefect-detail-modal .profile-header {
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center items horizontally */
+            gap: 0.5rem; /* Reduced gap for vertical stacking */
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+            text-align: center; /* Center text content */
+        }
+        #prefect-detail-modal .profile-header img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--secondary-color);
+        }
+        #prefect-detail-modal .profile-header h3 {
+            margin: 0.5rem 0 0 0; /* Add top margin for spacing after image */
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+        #prefect-detail-modal .profile-header p {
+            margin: 0.25rem 0 0 0; /* Add top margin for spacing after name */
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        .profile-details-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .profile-details-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .profile-details-list li:last-child {
+            border-bottom: none;
+        }
+        .profile-details-list .detail-label {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        .profile-details-list .detail-value {
+            color: var(--text-light);
+            text-align: right;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0; }
+            #admin-panel-section { border-radius: 0; height: 100vh; }
+            .admin-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+            .admin-tabs {
+                padding: 0.5rem 0; /* Adjust padding for mobile */
+                /* Removed gap as space-around handles distribution */
+            }
+            .admin-tabs button {
+                min-width: auto; /* Reset min-width for mobile */
+                padding: 8px 10px; /* Adjust padding for mobile */
+                font-size: 0.7rem; /* Smaller font for mobile */
+            }
+            .admin-tabs button i {
+                font-size: 1.2rem; /* Smaller icon for mobile */
+            }
+            /* Removed attendance-specific media query styles */
+            .admin-header { padding-left: 1rem; padding-right: 1rem; }
+            .auth-card { padding: 2rem 1.5rem; }
+
+            .chat-layout.show-chat-view .chat-list-container { transform: translateX(-100%); }
+            .chat-layout.show-chat-view .chat-view-container { transform: translateX(0); } 
+            
+            .chat-list-container { width: 100%; position: absolute; height: 100%; background: var(--glass-bg); z-index: 2; }
+            .chat-view-container { width: 100%; position: absolute; height: 100%; transform: translateX(100%); z-index: 1; }
+            .back-to-list-btn { display: block; }
+            .chat-list-header h4 { display: none; }
+
+            .gallery-content-wrapper { padding: 1.5rem; }
         }
     </style>
+    <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
+
 </head>
 <body>
+    <canvas id="particle-canvas"></canvas>
 
-    <div id="particles-js"></div>
+    <div id="loader-wrapper">
+        <div class="loader"></div>
+        <p>Loading...</p>
+    </div>
 
-    <main>
-        <article class="container" itemscope itemtype="https://schema.org/WebPage">
-            <header>
-                <div class="logo-container">
-                    <div class="logo" role="img" aria-label="ECC Prefects' Guild Logo"></div>
+    <div class="container">
+        <section id="admin-login-section" class="login-wrapper">
+            <div class="auth-card glass-pane">
+                <h3>Admin Panel Login</h3>
+                <p id="admin-login-error" style="display: none;"></p>
+                <form id="admin-login-form">
+                    <input type="email" id="admin-email" placeholder="Email Address" required>
+                    <input type="password" id="admin-password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="admin-panel-section" class="glass-pane">
+            <header class="admin-header">
+                <div class="header-content-left">
+                    <img src="iny.png" alt="Logo" class="admin-logo">
+                    <h2 style="color: var(--primary-color); margin: 0;">ECC PMS<br>ADMIN PANEL</h2>
                 </div>
-                <h1 itemprop="headline">We Are Launching Soon</h1>
-                <p class="subtitle" itemprop="description">Eheliyagoda Central College Prefects' Guild</p>
             </header>
-            <p><strong>Our new digital platform is under construction.</strong> Stay connected with ECC student leadership and prefect information system.</p>
-            <nav class="button-container">
-                <a href="https://hansaka-franando-589.github.io/ECCPREFECTS/" class="action-button primary" aria-label="View ECC Prefects List">View Prefects</a>
-                <a href="#" id="admin-login-btn" class="action-button secondary" aria-label="Admin Login Portal">Login as Admin</a>
-            </nav>
-        </article>
-    </main>
+            <button id="admin-logout-btn" class="icon-button logout-absolute"><i class="fas fa-sign-out-alt"></i></button>
 
-    <footer role="contentinfo">
-        <div class="footer-social">
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook Page"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Contact"><i class="fab fa-whatsapp"></i></a>
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Email Contact"><i class="fab fa-google"></i></a>
-        </div>
-        <div class="footer-copyright">
-            © 2025 Eheliyagoda Central College Prefect Information System.<br>
-            All rights reserved.<br>
-            Designed by ECC Prefects' Guild.<br>
-            Version 1.0.0
-        </div>
-    </footer>
+            <main id="chat-management" class="tab-content chat-layout">
+                <div class="chat-list-container">
+                    <div class="chat-list-header">
+                        <h4>Chat Sessions</h4>
+                    </div>
+                    <div id="chat-list" class="chat-list"></div>
+                </div>
+                <div class="chat-view-container">
+                    <div class="chat-list-header">
+                        <button class="back-to-list-btn" id="back-to-list-btn"><i class="fas fa-arrow-left"></i></button>
+                        <div class="chat-user-info" style="display: none;">
+                            <img src="boy.png" alt="User DP">
+                            <h4 id="chat-view-user-name"></h4>
+                        </div>
+                        <h4 id="chat-view-header">Select a conversation</h4>
+                    </div>
+                    <div id="messages-div" class="messages-div">
+                        <p style="text-align: center; color: #888;">Select a conversation to view.</p>
+                    </div>
+                    <div id="reply-area" class="reply-area" style="display: none;">
+                        <input type="text" id="reply-input" placeholder="Type a reply...">
+                        <button id="send-reply-btn">Send</button>
+                    </div>
+                </div>
+            </main>
+            
+            <main id="gallery-management" class="tab-content">
+                <div class="gallery-content-wrapper">
+                    <div class="upload-section">
+                        <h4>Upload a New Image</h4>
+                        <div class="file-upload-wrapper">
+                            <input type="file" id="image-upload-input" accept="image/*" class="file-upload-input">
+                            <label for="image-upload-input" class="file-upload-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span id="file-upload-filename">Choose a file...</span>
+                            </label>
+                            <button id="upload-image-btn">Upload</button>
+                        </div>
+                        <p id="upload-status"></p>
+                    </div>
+                    <h4>Current Gallery Images</h4>
+                    <div id="current-gallery-grid" class="current-gallery-grid"></div>
+                </div>
+            </main>
+            <main id="attendance-management" class="tab-content">
+                <div class="gallery-content-wrapper">
+                    <div class="upload-section">
+                        <h4>Scan Attendance</h4>
+                        <button id="open-camera-btn">Open Camera Scanner</button>
+                        <div id="qr-reader" style="width: 100%; max-width: 500px; margin: 20px auto;"></div>
+                        <div class="manual-entry">
+                          <p>Or Enter Barcode Manually...</p>
+                          <input type="text" id="barcode-id-input" placeholder="Scan Barcode Here..." />
+                          <button id="mark-attendance-btn">Mark Attendance</button>
+                        </div>
+                        <p id="attendance-message"></p>
+                    </div>
+                </div>
+            </main>
+            <main id="event-management" class="tab-content">
+                <div class="gallery-content-wrapper">
+                    <div class="upload-section">
+                        <h4>Create New Event</h4>
+                        <div class="event-form-wrapper">
+                            <input type="text" id="new-event-title" placeholder="Event Title">
+                            <input type="date" id="new-event-date">
+                            <textarea id="new-event-description" placeholder="Event Description"></textarea>
+                            <button id="add-event-btn">Add Event</button>
+                        </div>
+                    </div>
+                    <h4>Current Events</h4>
+                    <div id="events-list"></div>
+                </div>
+            </main>
+            <main id="announcement-management" class="tab-content">
+                <div class="gallery-content-wrapper">
+                    <div class="upload-section">
+                        <h4>Publish New Announcement</h4>
+                        <p>This announcement will pop up for students when they log in.</p>
+                        <input type="text" id="new-announcement-title" placeholder="Announcement Title">
+                        <textarea id="new-announcement-content" placeholder="Announcement Content..." rows="6"></textarea>
+                        <button id="publish-announcement-btn">Publish Announcement</button>
+                        <p id="announcement-status"></p>
+                    </div>
+                    <h4>Announcement History</h4>
+                    <div id="announcements-history-list"></div>
+                </div>
+            </main>
+            <main id="ideas-management" class="tab-content">
+                <div class="gallery-content-wrapper">
+                    <div class="upload-section">
+                        <h4>Awaiting Approval</h4>
+                        <div id="ideas-pending-approval"></div>
+                    </div>
+                    <h4>Published Ideas & Proposals</h4>
+                    <div id="ideas-published"></div>
+                </div>
+            </main>
+            <main id="prefects-management" class="tab-content active">
+                <div class="gallery-content-wrapper">
+                    <h3>Prefects List</h3>
+                    <input type="search" id="admin-prefect-search" placeholder="Search by name..." style="margin-bottom: 1rem;">
+                    <div id="admin-prefects-grid"></div>
+                </div>
+            </main>
 
-    <div id="login-modal" class="modal-overlay" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+            <div class="admin-tabs">
+                <button class="tab-link" data-tab="chat-management">
+                    <i class="fas fa-comments"></i>
+                    <span id="total-unread-badge"></span>
+                </button>
+                <button class="tab-link" data-tab="gallery-management">
+                    <i class="fas fa-image"></i>
+                </button>
+                <button class="tab-link" data-tab="event-management">
+                    <i class="fas fa-calendar-alt"></i>
+                </button>
+                <button class="tab-link" data-tab="announcement-management">
+                    <i class="fas fa-bullhorn"></i>
+                </button>
+                <button class="tab-link" data-tab="ideas-management">
+                    <i class="fas fa-lightbulb"></i>
+                </button>
+            </div>
+        </section>
+
+    </div>
+
+    <button id="fab-attendance" class="fab-button fab-bottom-right">
+        <i class="fas fa-qrcode"></i>
+    </button>
+    <button id="fab-prefects" class="fab-button fab-bottom-left">
+        <i class="fas fa-users"></i>
+    </button>
+        </section>
+
+    </div>
+
+    <div id="attendance-success-modal" class="modal" style="display: none;">
         <div class="modal-content">
-            <span class="close-button" aria-label="Close">&times;</span>
-            <h2 id="modal-title">Admin Login</h2>
-            <p id="error-message" class="error-text" role="alert"></p>
-            <form id="login-form" onsubmit="return false;">
-                <label for="username" class="sr-only">Username</label>
-                <input type="text" id="username" name="username" placeholder="Username" required autocomplete="username">
-                <label for="password" class="sr-only">Password</label>
-                <input type="password" id="password" name="password" placeholder="Password" required autocomplete="current-password">
-                <button type="submit" id="login-submit-btn" class="modal-button">Login</button>
-            </form>
+            <span class="close-btn">&times;</span>
+            <img id="prefect-image" src="" alt="Prefect Image" style="width: 100px; height: 100px; border-radius: 50%;">
+            <h3 id="prefect-name"></h3>
+            <p id="attendance-status-message"></p>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
-    
-    <script>
-        // tsParticles Configuration
-        tsParticles.load("particles-js", {
-            background: { color: { value: "#fdfaf6" } },
-            fpsLimit: 60,
-            interactivity: {
-                events: { onHover: { enable: true, mode: "repulse" }, resize: true },
-                modes: { repulse: { distance: 100, duration: 0.4 } }
-            },
-            particles: {
-                color: { value: "#810000" },
-                links: { color: "#810000", distance: 150, enable: true, opacity: 0.5, width: 1 },
-                collisions: { enable: true },
-                move: { direction: "none", enable: true, outModes: { default: "bounce" }, random: false, speed: 2, straight: false },
-                number: { density: { enable: true, area: 800 }, value: 80 },
-                opacity: { value: 0.5 },
-                shape: { type: "circle" },
-                size: { value: { min: 1, max: 5 } }
-            },
-            detectRetina: true
+            <div id="custom-modal" class="modal">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+
+                        <img src="iny.png" alt="Logo" style="height: 50px; margin-bottom: 0.5rem;">
+
+                        <h3 id="custom-modal-title"></h3>
+
+                    </div>
+
+                    <div class="modal-body">
+
+                        <p id="custom-modal-message"></p>
+
+                    </div>
+
+                    <div id="custom-modal-buttons" class="modal-buttons">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+    <div id="prefect-detail-modal" class="modal">
+        <!-- Content will be injected by JavaScript -->
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc, collection, onSnapshot, query, orderBy, addDoc, serverTimestamp, deleteDoc, updateDoc, where, getDocs, limit } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js";
+
+        // --- Firebase Config (No changes) ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyCEvF1sD56pmtYlbno4QAY_Kr5xeFrTAvU",
+            authDomain: "prefect-management-syste-e1575.firebaseapp.com",
+            projectId: "prefect-management-syste-e1575",
+            storageBucket: "prefect-management-syste-e1575.appspot.com",
+            messagingSenderId: "973932803095",
+            appId: "1:973932803095:web:a7f2db386cafb53330d852",
+            measurementId: "G-FLF7R3B8J3"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // --- NEW: Config and init for the second Firebase project ---
+        const prefectsFirebaseConfig = {
+            apiKey: "AIzaSyDqreh-0DKQoQhLd69mtKNfy6MR-6_b1UA",
+            authDomain: "eccpms-web.firebaseapp.com",
+            projectId: "eccpms-web",
+            storageBucket: "eccpms-web.appspot.com",
+            messagingSenderId: "1022002075345",
+            appId: "1:1022002075345:web:bddabef4872688bc8a17f0",
+            measurementId: "G-BKDPTWYTTF"
+        };
+
+        const prefectsApp = initializeApp(prefectsFirebaseConfig, "prefectsApp");
+        const prefectsDb = getFirestore(prefectsApp);
+
+        // --- Custom Modal Logic ---
+        const customModal = document.getElementById('custom-modal');
+        const modalTitle = customModal.querySelector('#custom-modal-title');
+        const modalMessage = customModal.querySelector('#custom-modal-message');
+        const modalButtons = customModal.querySelector('#custom-modal-buttons');
+
+        function showCustomAlert(title, message) {
+            return new Promise((resolve) => {
+                modalTitle.innerHTML = title; // Use innerHTML for title as well for consistency
+                modalMessage.innerHTML = message; // Changed to innerHTML
+                modalButtons.innerHTML = '<button class="confirm-btn">OK</button>';
+                customModal.style.display = 'flex';
+
+                const okButton = modalButtons.querySelector('.confirm-btn');
+                const close = () => {
+                    customModal.style.display = 'none';
+                    okButton.removeEventListener('click', close);
+                    resolve();
+                }
+                okButton.addEventListener('click', close);
+            });
+        }
+
+        function showCustomConfirm(title, message) {
+            return new Promise((resolve) => {
+                modalTitle.innerHTML = title; // Use innerHTML for title
+                modalMessage.innerHTML = message;
+                modalButtons.innerHTML = `
+                    <button class="cancel-btn">Cancel</button>
+                    <button class="confirm-btn">Confirm</button>
+                `;
+                customModal.style.display = 'flex';
+
+                const confirmBtn = modalButtons.querySelector('.confirm-btn');
+                const cancelBtn = modalButtons.querySelector('.cancel-btn');
+
+                const close = (value) => {
+                    customModal.style.display = 'none';
+                    confirmBtn.removeEventListener('click', confirmClick);
+                    cancelBtn.removeEventListener('click', cancelClick);
+                    resolve(value);
+                }
+
+                const confirmClick = () => close(true);
+                const cancelClick = () => close(false);
+
+                confirmBtn.addEventListener('click', confirmClick);
+                cancelBtn.addEventListener('click', cancelClick);
+            });
+        }
+
+        const loginSection = document.getElementById('admin-login-section');
+        const panelSection = document.getElementById('admin-panel-section');
+        const adminUserEmail = document.getElementById('admin-user-email');
+        const logoutBtn = document.getElementById('admin-logout-btn');
+
+        // --- Auth & Init Logic (No changes) ---
+        onAuthStateChanged(auth, async (user) => {
+            const fabAttendance = document.getElementById('fab-attendance'); // Get reference here
+            if (user) {
+                try {
+                    const adminDocRef = doc(db, 'web_admins', user.uid);
+                    const adminDocSnap = await getDoc(adminDocRef);
+                    if (adminDocSnap.exists()) {
+                        loginSection.style.display = 'none';
+                        panelSection.style.display = 'flex';
+                        if (fabAttendance) fabAttendance.style.display = 'flex'; // Show FAB
+                        initializeAdminPanel();
+                    } else {
+                        await signOut(auth);
+                    }
+                } catch (error) {
+                    console.error("Auth check failed:", error);
+                    await signOut(auth);
+                }
+            } else {
+                loginSection.style.display = 'flex';
+                panelSection.style.display = 'none';
+                if (fabAttendance) fabAttendance.style.display = 'none'; // Hide FAB
+            }
+            // Hide the loader once auth state is determined and initial UI is ready
+            setTimeout(() => {
+                document.getElementById('loader-wrapper').classList.add('hidden');
+            }, 300); // A small delay to prevent flash of content
+        });
+        
+        function initializeAdminPanel() {
+            showCustomAlert("Welcome to the Admin Panel!", `
+                <p>Dear User,</p>
+                <p>Welcome to the Prefects' Guild Admin Panel! This platform has been designed to help you efficiently manage prefects, events, announcements, and more.</p>
+                <p>I hope you find it intuitive and powerful.</p>
+                <p>Best regards,</p>
+                <p><strong>Hansaka Fernando (Developer)</strong></p>
+            `);
+            setupTabs();
+            loadChatSessions();
+            loadCurrentGallery();
+            initializeAttendanceScanner();
+            initializeEventManager();
+            initializeAnnouncementManager();
+            initializeIdeasManager();
+            initializePrefectsManager(); // Add this call
+            setupResponsiveChat();
+            setupFileUploadDisplay();
+
+            // --- Intermittent Popup (Ad-like) Feature ---
+            const popupMessages = [
+                "Don't forget to check out the new event features!",
+                "Have you reviewed all pending ideas today?",
+                "Keep your prefect profiles updated for better management!",
+                "New announcements can boost student engagement!",
+                "Need help? Contact support through the chat feature!"
+            ];
+
+            function showRandomPopup() {
+                // Randomly decide if a popup should appear (e.g., 30% chance)
+                if (Math.random() < 0.3) { // Reverted to 30% chance
+                    const randomIndex = Math.floor(Math.random() * popupMessages.length);
+                    showCustomAlert("Quick Tip!", popupMessages[randomIndex]);
+                }
+            }
+
+            // Show a random popup every 420 seconds (adjust as needed)
+            setInterval(showRandomPopup, 420000);
+        }
+
+            // NEW: Event listener for the floating attendance button
+            const fabAttendance = document.getElementById('fab-attendance');
+            if (fabAttendance) {
+                fabAttendance.addEventListener('click', () => {
+                    activateTab('attendance-management'); // Directly activate the attendance tab
+                });
+            }
+
+            // NEW: Event listener for the floating prefects button
+            const fabPrefects = document.getElementById('fab-prefects');
+            if (fabPrefects) {
+                fabPrefects.addEventListener('click', () => {
+                    activateTab('prefects-management'); // Directly activate the prefects tab
+                });
+            }
+
+
+        function setupFileUploadDisplay() {
+            const fileInput = document.getElementById('image-upload-input');
+            const filenameSpan = document.getElementById('file-upload-filename');
+            if (fileInput && filenameSpan) {
+                fileInput.addEventListener('change', () => {
+                    if (fileInput.files.length > 0) {
+                        filenameSpan.textContent = fileInput.files[0].name;
+                    } else {
+                        filenameSpan.textContent = 'Choose a file...';
+                    }
+                });
+            }
+        }
+
+        document.getElementById('admin-login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('admin-email').value;
+            const password = document.getElementById('admin-password').value;
+            const errorP = document.getElementById('admin-login-error');
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                errorP.style.display = 'none';
+            } catch (error) {
+                errorP.textContent = "Invalid email, password, or permissions.";
+                errorP.style.display = 'block';
+            }
         });
 
-        // --- Login Modal Logic ---
-        const CORRECT_USERNAME = "admin";
-        const CORRECT_PASSWORD = "password123";
+        logoutBtn.addEventListener('click', () => signOut(auth));
 
-        const loginModal = document.getElementById('login-modal');
-        const adminLoginBtn = document.getElementById('admin-login-btn');
-        const closeBtn = document.querySelector('.close-button');
-        const loginSubmitBtn = document.getElementById('login-submit-btn');
-        const usernameInput = document.getElementById('username');
-        const passwordInput = document.getElementById('password');
-        const errorMessage = document.getElementById('error-message');
+        function activateTab(tabId) {
+            const currentActiveButton = document.querySelector('.tab-link.active');
+            const currentActiveTab = document.querySelector('.tab-content.active');
+            const newActiveTab = document.getElementById(tabId);
+            const newActiveButton = document.querySelector(`.tab-link[data-tab="${tabId}"]`); // Get the button for the new tab
 
-        adminLoginBtn.onclick = function(event) {
-            event.preventDefault();
-            errorMessage.textContent = '';
-            usernameInput.value = '';
-            passwordInput.value = '';
-            loginModal.style.display = "flex";
-            loginModal.setAttribute('aria-hidden', 'false');
-        }
+            if (!newActiveTab) return; // Ensure the target tab content exists
 
-        closeBtn.onclick = function() {
-            loginModal.style.display = "none";
-            loginModal.setAttribute('aria-hidden', 'true');
-        }
+            // Deactivate current button if it exists
+            if (currentActiveButton) {
+                currentActiveButton.classList.remove('active');
+            }
+            // Activate new button if it exists (for visual feedback on tab bar)
+            if (newActiveButton) {
+                newActiveButton.classList.add('active');
+            }
 
-        window.onclick = function(event) {
-            if (event.target == loginModal) {
-                loginModal.style.display = "none";
-                loginModal.setAttribute('aria-hidden', 'true');
+            // Handle tab content animation
+            if (currentActiveTab) {
+                currentActiveTab.classList.add('is-exiting');
+                currentActiveTab.addEventListener('animationend', function handler() {
+                    currentActiveTab.classList.remove('active');
+                    currentActiveTab.classList.remove('is-exiting');
+                    newActiveTab.classList.add('active');
+                    currentActiveTab.removeEventListener('animationend', handler); // Clean up listener
+                });
+            } else {
+                // If no tab was active before, just fade in the new one
+                newActiveTab.classList.add('active');
             }
         }
 
-        loginSubmitBtn.onclick = function() {
-            const enteredUser = usernameInput.value;
-            const enteredPass = passwordInput.value;
+        function setupTabs() {
+            document.querySelectorAll('.tab-link').forEach(button => {
+                button.addEventListener('click', () => {
+                    const newTabId = button.dataset.tab;
+                    activateTab(newTabId);
+                });
+            });
+        }
 
-            if (enteredUser === CORRECT_USERNAME && enteredPass === CORRECT_PASSWORD) {
-                loginModal.style.display = "none";
-                
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Login Successful!',
-                    text: 'Welcome, Admin. Redirecting...',
-                    showConfirmButton: false,
-                    timer: 2000,
-                    allowOutsideClick: false
+        // --- CHAT MANAGEMENT LOGIC (UPDATED) ---
+        const chatLayout = document.getElementById('chat-management');
+        const chatListDiv = document.getElementById('chat-list');
+        const messagesDiv = document.getElementById('messages-div');
+        const replyArea = document.getElementById('reply-area');
+        const replyInput = document.getElementById('reply-input');
+        const sendReplyBtn = document.getElementById('send-reply-btn');
+        const chatViewHeader = document.getElementById('chat-view-header');
+        let activeChatId = null;
+        let messagesUnsubscribe = null;
+
+        // JAVASCRIPT MODIFIED: This function now also calculates and displays the total unread chats.
+        function loadChatSessions() {
+            const chatsRef = collection(db, 'chats');
+            const q = query(chatsRef, orderBy('lastUpdate', 'desc'));
+
+            onSnapshot(q, async (snapshot) => { // Made async to await message queries
+                chatListDiv.innerHTML = '';
+                let totalUnreadChats = 0; // Counter for chats with unread messages
+                const totalUnreadBadge = document.getElementById('total-unread-badge');
+
+                const chatPromises = snapshot.docs.map(async docSnap => {
+                    const chatData = docSnap.data();
+                    const chatId = docSnap.id;
+
+                    // Fetch the actual last message from the subcollection
+                    const messagesRef = collection(db, 'chats', chatId, 'messages');
+                    const lastMessageQuery = query(messagesRef, orderBy('timestamp', 'desc'), limit(1));
+                    const lastMessageSnapshot = await getDocs(lastMessageQuery);
+                    
+                    let lastMessageText = '';
+                    if (!lastMessageSnapshot.empty) {
+                        const lastMsg = lastMessageSnapshot.docs[0].data();
+                        lastMessageText = `${lastMsg.sender === 'admin' ? 'You' : 'User'}: ${lastMsg.text}`;
+                    } else {
+                        lastMessageText = 'No messages yet.';
+                    }
+                    
+                    // Increment counter if this chat has unread messages
+                    if (chatData.unreadCount && chatData.unreadCount > 0) {
+                        totalUnreadChats++;
+                    }
+
+                    let badgeHTML = '';
+                    if (chatData.unreadCount && chatData.unreadCount > 0) {
+                        badgeHTML = `<span class="notification-badge">${chatData.unreadCount}</span>`;
+                    }
+                    
+                    const sessionItem = document.createElement('div');
+                    sessionItem.className = 'chat-session-item';
+                    sessionItem.dataset.id = chatId;
+                    
+                    sessionItem.innerHTML = `
+                        <div class="chat-session-content">
+                           <img src="boy.png" alt="User DP" class="chat-dp">
+                           <div>
+                               <strong>${chatData.userEmail || 'Unknown User'}</strong>
+                               <small>${lastMessageText}</small>
+                           </div>
+                        </div>
+                        ${badgeHTML}
+                    `;
+                    
+                    sessionItem.addEventListener('click', () => loadSpecificChat(chatId, chatData.userEmail));
+                    return sessionItem; // Return the created element
                 });
 
-                setTimeout(function() {
-                    window.location.href = "main.html";
-                }, 2000);
+                // Wait for all chat session items to be created
+                const sessionItems = await Promise.all(chatPromises);
+                sessionItems.forEach(item => chatListDiv.appendChild(item));
 
-            } else {
-                errorMessage.textContent = "Invalid username or password. Please try again.";
-                passwordInput.value = "";
+                // Update the total unread chats badge on the tab
+                if (totalUnreadChats > 0) {
+                    totalUnreadBadge.textContent = totalUnreadChats;
+                    totalUnreadBadge.style.display = 'inline-block';
+                } else {
+                    totalUnreadBadge.style.display = 'none';
+                }
+            });
+        }
+
+        function loadSpecificChat(userId, userEmail) {
+            activeChatId = userId;
+            chatLayout.classList.add('show-chat-view');
+            // chatViewHeader.textContent = userEmail || "Conversation"; // This line is no longer needed directly
+
+            document.querySelectorAll('.chat-session-item').forEach(item => item.classList.toggle('active', item.dataset.id === userId));
+            if (messagesUnsubscribe) messagesUnsubscribe();
+
+            const chatDocRef = doc(db, 'chats', userId);
+            updateDoc(chatDocRef, { unreadCount: 0 })
+                .catch(err => console.error("Failed to reset unread count:", err));
+            
+            messagesDiv.innerHTML = '<p>Loading messages...</p>';
+            replyArea.style.display = 'flex';
+
+            // Hide FAB and tab bar, make chat screen full width
+            const fabAttendance = document.getElementById('fab-attendance');
+            const adminTabs = document.querySelector('.admin-tabs');
+            if (fabAttendance) fabAttendance.style.display = 'none'; // FAB still instant hide for now
+
+            if (adminTabs) {
+                adminTabs.classList.add('hidden');
+                // Set display: none after the transition completes
+                adminTabs.addEventListener('transitionend', function handler() {
+                    adminTabs.style.display = 'none';
+                    adminTabs.removeEventListener('transitionend', handler);
+                });
+            }
+
+            // Update chat view header with user image and name
+            const chatViewUserDisplayName = document.getElementById('chat-view-user-name');
+            const chatViewUserInfo = document.querySelector('.chat-user-info');
+            const defaultChatViewHeader = document.getElementById('chat-view-header');
+
+            if (chatViewUserDisplayName && chatViewUserInfo && defaultChatViewHeader) {
+                chatViewUserDisplayName.textContent = userEmail || 'Unknown User';
+                chatViewUserInfo.style.display = 'flex'; // Show user info
+                defaultChatViewHeader.style.display = 'none'; // Hide default header text
+            }
+
+            const messagesRef = collection(db, 'chats', userId, 'messages');
+            const q = query(messagesRef, orderBy('timestamp'));
+            messagesUnsubscribe = onSnapshot(q, (snapshot) => {
+                messagesDiv.innerHTML = '';
+                snapshot.forEach(docSnap => {
+                    const msg = docSnap.data();
+                    const bubble = document.createElement('div');
+                    bubble.className = 'message-bubble';
+                    bubble.textContent = msg.text;
+                    const isAdminMessage = msg.sender === 'admin';
+                    bubble.classList.add(isAdminMessage ? 'admin-msg' : 'user-msg');
+                    messagesDiv.appendChild(bubble);
+                });
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            });
+        }
+        
+        async function sendReply() {
+            const replyText = replyInput.value.trim();
+            if (!replyText || !activeChatId) return;
+            const tempReplyText = replyText;
+            replyInput.value = '';
+            const messagesRef = collection(db, 'chats', activeChatId, 'messages');
+            try {
+                await addDoc(messagesRef, { text: tempReplyText, sender: 'admin', timestamp: serverTimestamp() });
+                // Update the lastMessageSnippet in the parent chat document
+                const chatDocRef = doc(db, 'chats', activeChatId);
+                await updateDoc(chatDocRef, {
+                    lastMessageSnippet: `Admin: ${tempReplyText}`,
+                    lastUpdate: serverTimestamp()
+                });
+            } catch (error) {
+                console.error("Error sending reply:", error);
+                replyInput.value = tempReplyText;
+                showCustomAlert("Error", "Could not send reply.");
             }
         }
+
+        function setupResponsiveChat() {
+            const backBtn = document.getElementById('back-to-list-btn');
+            backBtn.addEventListener('click', () => {
+                chatLayout.classList.remove('show-chat-view');
+                if (messagesUnsubscribe) messagesUnsubscribe();
+                messagesUnsubscribe = null;
+                activeChatId = null;
+                replyArea.style.display = 'none';
+                messagesDiv.innerHTML = '<p style="text-align: center; color: #888;">Select a conversation to view.</p>';
+                // chatViewHeader.textContent = "Select a conversation"; // This line is no longer needed directly
+                document.querySelectorAll('.chat-session-item').forEach(item => item.classList.remove('active'));
+
+                // Restore FAB and tab bar visibility
+                const fabAttendance = document.getElementById('fab-attendance');
+                const adminTabs = document.querySelector('.admin-tabs');
+                if (fabAttendance) fabAttendance.style.display = 'flex'; // FAB still instant show for now
+
+                if (adminTabs) {
+                    adminTabs.style.display = 'flex'; // Set display: flex before removing hidden class
+                    // Use a small timeout to allow display:flex to apply before transition starts
+                    setTimeout(() => {
+                        adminTabs.classList.remove('hidden');
+                    }, 10);
+                }
+
+                // Restore default chat view header
+                const chatViewUserDisplayName = document.getElementById('chat-view-user-name');
+                const chatViewUserInfo = document.querySelector('.chat-user-info');
+                const defaultChatViewHeader = document.getElementById('chat-view-header');
+
+                if (chatViewUserDisplayName && chatViewUserInfo && defaultChatViewHeader) {
+                    chatViewUserInfo.style.display = 'none'; // Hide user info
+                    defaultChatViewHeader.style.display = 'block'; // Show default header text
+                }
+            });
+        }
+
+        sendReplyBtn.addEventListener('click', sendReply);
+        replyInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendReply(); });
+
+        // --- GALLERY MANAGEMENT LOGIC (No changes) ---
+        const imageUploadInput = document.getElementById('image-upload-input');
+        const uploadImageBtn = document.getElementById('upload-image-btn');
+        const uploadStatus = document.getElementById('upload-status');
+        const currentGalleryGrid = document.getElementById('current-gallery-grid');
+        const IMGBB_API_KEY = "c856664606bb977c2d246f600e9feea7";
+
+        function loadCurrentGallery() {
+            const galleryRef = collection(db, 'gallery');
+            onSnapshot(query(galleryRef, orderBy('uploadedAt', 'desc')), (snapshot) => {
+                currentGalleryGrid.innerHTML = '';
+                snapshot.forEach(docSnap => {
+                    const imageData = docSnap.data();
+                    const thumb = document.createElement('div');
+                    thumb.className = 'gallery-thumb';
+                    thumb.innerHTML = `
+                        <img src="${imageData.url}" alt="Gallery image">
+                        <button class="delete-btn" data-doc-id="${docSnap.id}"><i class="fas fa-trash"></i></button>
+                    `;
+                    currentGalleryGrid.appendChild(thumb);
+                });
+            });
+        }
+        
+        async function handleImageUpload() {
+            const file = imageUploadInput.files[0];
+            if (!file) { 
+                await showCustomAlert("No Image Selected", "Please select an image file first."); 
+                return; 
+            }
+            uploadStatus.textContent = 'Uploading...';
+            const formData = new FormData();
+            formData.append('key', IMGBB_API_KEY);
+            formData.append('image', file);
+            try {
+                const response = await fetch('https://api.imgbb.com/1/upload', { method: 'POST', body: formData });
+                if (!response.ok) throw new Error(`Upload failed with status: ${response.status}`);
+                const result = await response.json();
+                if (result.success) {
+                    await addDoc(collection(db, 'gallery'), {
+                        url: result.data.url,
+                        uploadedAt: serverTimestamp()
+                    });
+                    uploadStatus.textContent = "Image added to gallery!";
+                    imageUploadInput.value = '';
+                } else {
+                    throw new Error(result.error.message || 'Unknown error from ImgBB');
+                }
+            } catch (error) {
+                console.error("Upload failed:", error);
+                uploadStatus.textContent = `Upload failed: ${error.message}`;
+            }
+        }
+
+        async function deleteImage(docId) {
+            if (!await showCustomConfirm("Confirm Deletion", "Are you sure you want to remove this image from the gallery?")) return;
+            try {
+                await deleteDoc(doc(db, 'gallery', docId));
+            } catch (error) {
+                console.error("Error removing image:", error);
+                await showCustomAlert("Error", "Could not remove the image.");
+            }
+        }
+        
+        uploadImageBtn.addEventListener('click', handleImageUpload);
+        currentGalleryGrid.addEventListener('click', (e) => {
+            const deleteButton = e.target.closest('.delete-btn');
+            if (deleteButton) {
+                deleteImage(deleteButton.dataset.docId);
+            }
+        });
+
+        // --- ATTENDANCE SCANNER LOGIC ---
+
+        // --- EVENT MANAGEMENT LOGIC ---
+
+        // --- ANNOUNCEMENT MANAGEMENT LOGIC ---
+
+        // --- IDEAS & PROPOSALS MANAGEMENT LOGIC ---
+
+        // --- PREFECTS LIST MANAGEMENT LOGIC ---
+        let adminPrefectsData = []; // Store full prefect data
+
+        function initializePrefectsManager() {
+            loadAdminPrefects(); // Fetch data once
+            
+            const prefectsGrid = document.getElementById('admin-prefects-grid');
+            const searchInput = document.getElementById('admin-prefect-search');
+
+            // Listener for clicking on a prefect to see details
+            prefectsGrid.addEventListener('click', (e) => {
+                const listItem = e.target.closest('.prefect-list-item');
+                if (listItem && listItem.dataset.id) {
+                    showPrefectDetailModal(listItem.dataset.id);
+                }
+            });
+
+            // Listener for typing in the search bar
+            searchInput.addEventListener('input', () => {
+                renderAdminPrefects(); // Re-render the list based on the search term
+            });
+        }
+
+        async function loadAdminPrefects() {
+            const prefectsGrid = document.getElementById('admin-prefects-grid');
+            if (!prefectsGrid) return;
+
+            prefectsGrid.innerHTML = '<p>Loading Prefects...</p>';
+            try {
+                const prefectsCollection = collection(prefectsDb, "prefects");
+                const querySnapshot = await getDocs(prefectsCollection);
+                
+                adminPrefectsData = []; // Clear previous data
+                querySnapshot.forEach(doc => {
+                    adminPrefectsData.push({ id: doc.id, ...doc.data() });
+                });
+
+                renderAdminPrefects(); // Initial render
+
+            } catch (error) {
+                console.error("Error fetching admin prefects list: ", error);
+                prefectsGrid.innerHTML = `<p>Error loading prefects: ${error.message}</p>`;
+            }
+        }
+
+        function renderAdminPrefects() {
+            const prefectsGrid = document.getElementById('admin-prefects-grid');
+            const searchInput = document.getElementById('admin-prefect-search');
+            const searchTerm = searchInput.value.toLowerCase();
+
+            prefectsGrid.innerHTML = ''; // Clear current list
+
+            const filteredPrefects = adminPrefectsData.filter(p => 
+                p.name && p.name.toLowerCase().includes(searchTerm)
+            );
+
+            if (filteredPrefects.length === 0) {
+                prefectsGrid.innerHTML = '<p>No prefects found matching your search.</p>';
+                return;
+            }
+
+            filteredPrefects.forEach(prefectData => {
+                const listItem = document.createElement('div');
+                listItem.className = 'prefect-list-item';
+                listItem.dataset.id = prefectData.id;
+                listItem.innerHTML = `
+                    <img src="${prefectData.picture || 'https://via.placeholder.com/150'}" alt="${prefectData.name}">
+                    <div class="prefect-list-info">
+                        <h4>${prefectData.name}</h4>
+                    </div>
+                `;
+                prefectsGrid.appendChild(listItem);
+            });
+        }
+
+        function showPrefectDetailModal(prefectId) {
+            const prefect = adminPrefectsData.find(p => p.id === prefectId);
+            if (!prefect) return;
+
+            const modal = document.getElementById('prefect-detail-modal');
+            
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <div class="profile-header">
+                        <img src="${prefect.picture || 'https://via.placeholder.com/150'}" alt="${prefect.name}">
+                        <div>
+                            <h3>${prefect.name}</h3>
+                            <p>${prefect.destiny || 'N/A'}</p>
+                        </div>
+                    </div>
+                    <ul class="profile-details-list">
+                        <li><span class="detail-label">Phone</span><span class="detail-value">${prefect.phone || 'N/A'}</span></li>
+                        <li><span class="detail-label">Parents' Phone</span><span class="detail-value">${prefect.parents_phone || 'N/A'}</span></li>
+                        <li><span class="detail-label">Current Duty</span><span class="detail-value">${prefect.current_duty || 'N/A'}</span></li>
+                        <li><span class="detail-label">Prefect ID</span><span class="detail-value">${prefect.id}</span></li>
+                    </ul>
+                </div>
+            `;
+
+            modal.style.display = 'flex';
+
+            // Add event listener to the new close button
+            modal.querySelector('.close-btn').addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+        }
+
+        // --- IDEAS & PROPOSALS MANAGEMENT LOGIC ---
+        function initializeIdeasManager() {
+            loadIdeas();
+        }
+
+        function loadIdeas() {
+            const pendingDiv = document.getElementById('ideas-pending-approval');
+            const publishedDiv = document.getElementById('ideas-published');
+            const q = query(collection(db, 'ideas_proposals'), orderBy('timestamp', 'desc'));
+
+            onSnapshot(q, (snapshot) => {
+                let pendingHtml = '';
+                let publishedHtml = '';
+
+                snapshot.forEach(docSnap => {
+                    const idea = { id: docSnap.id, ...docSnap.data() };
+                    const date = idea.timestamp ? new Date(idea.timestamp.seconds * 1000).toLocaleString() : 'N/A';
+                    const cardHtml = `
+                        <div class="card" style="margin-top: 1rem;">
+                            <h3>${idea.title}</h3>
+                            <p><em>Submitted by: ${idea.prefectName || 'Unknown'}</em></p>
+                            <p>${idea.description}</p>
+                            <small>Submitted on: ${date}</small>
+                            <div class="idea-actions" style="margin-top: 1rem;">
+                                ${getIdeaActionButtons(idea)}
+                            </div>
+                        </div>
+                    `;
+
+                    if (idea.status === 'Pending_Approval') {
+                        pendingHtml += cardHtml;
+                    } else {
+                        publishedHtml += cardHtml;
+                    }
+                });
+
+                pendingDiv.innerHTML = pendingHtml || '<p>No new ideas are awaiting approval.</p>';
+                publishedDiv.innerHTML = publishedHtml || '<p>No ideas have been published yet.</p>';
+            });
+        }
+
+        function getIdeaActionButtons(idea) {
+            switch (idea.status) {
+                case 'Pending_Approval':
+                    return `
+                        <button class="idea-action-btn" data-id="${idea.id}" data-status="Pending">Approve</button>
+                        <button class="idea-action-btn" data-id="${idea.id}" data-status="Rejected">Reject</button>
+                    `;
+                case 'Pending':
+                    return `<p>Status: <strong>Pending</strong></p><button class="idea-action-btn" data-id="${idea.id}" data-status="Approved">Mark as Approved</button>`;
+                case 'Approved':
+                    return `<p>Status: <strong>Approved</strong></p><button class="idea-action-btn" data-id="${idea.id}" data-status="Completed">Mark as Completed</button>`;
+                case 'Completed':
+                    return `<p>Status: <strong>Completed</strong></p>`;
+                case 'Rejected':
+                    return `<p>Status: <strong>Rejected</strong></p>`;
+                default:
+                    return '';
+            }
+        }
+
+        document.getElementById('ideas-management').addEventListener('click', (e) => {
+            if (e.target.classList.contains('idea-action-btn')) {
+                const id = e.target.dataset.id;
+                const newStatus = e.target.dataset.status;
+                handleIdeaStatusChange(id, newStatus);
+            }
+        });
+
+        async function handleIdeaStatusChange(id, newStatus) {
+            const ideaRef = doc(db, 'ideas_proposals', id);
+            try {
+                await updateDoc(ideaRef, { status: newStatus });
+            } catch (error) {
+                console.error("Error updating idea status: ", error);
+                await showCustomAlert('Error', `Failed to update status: ${error.message}`);
+            }
+        }
+
+        // --- ANNOUNCEMENT MANAGEMENT LOGIC ---
+        function initializeAnnouncementManager() {
+            const publishBtn = document.getElementById('publish-announcement-btn');
+            publishBtn.addEventListener('click', handlePublishAnnouncement);
+            loadAnnouncements();
+        }
+
+        function loadAnnouncements() {
+            const historyListDiv = document.getElementById('announcements-history-list');
+            const q = query(collection(db, 'announcements'), orderBy('timestamp', 'desc'));
+
+            onSnapshot(q, (snapshot) => {
+                let html = '<ul>';
+                snapshot.forEach(docSnap => {
+                    const ann = docSnap.data();
+                    const date = ann.timestamp ? new Date(ann.timestamp.seconds * 1000).toLocaleString() : 'Just now';
+                    html += `
+                        <li style="border-bottom: 1px solid #eee; padding: 1rem 0; list-style: none;">
+                            <strong>${ann.title}</strong>
+                            <p style="margin: 0.5rem 0;">${ann.content}</p>
+                            <small style="color: #888;">Published on: ${date}</small>
+                        </li>
+                    `;
+                });
+                html += '</ul>';
+                historyListDiv.innerHTML = html;
+            });
+        }
+
+        async function handlePublishAnnouncement() {
+            const titleInput = document.getElementById('new-announcement-title');
+            const contentInput = document.getElementById('new-announcement-content');
+            const statusP = document.getElementById('announcement-status');
+
+            const title = titleInput.value;
+            const content = contentInput.value;
+
+            if (!title || !content) {
+                statusP.textContent = 'Please fill out both title and content.';
+                return;
+            }
+
+            statusP.textContent = 'Publishing...';
+
+            try {
+                await addDoc(collection(db, 'announcements'), {
+                    title,
+                    content,
+                    timestamp: serverTimestamp(),
+                });
+                statusP.textContent = 'Announcement published successfully!';
+                titleInput.value = '';
+                contentInput.value = '';
+            } catch (err) {
+                statusP.textContent = `Failed to publish: ${err.message}`;
+                console.error(err);
+            } finally {
+                setTimeout(() => {
+                    statusP.textContent = '';
+                }, 4000);
+            }
+        }
+
+        // --- EVENT MANAGEMENT LOGIC ---
+        function initializeEventManager() {
+            const addEventBtn = document.getElementById('add-event-btn');
+            addEventBtn.addEventListener('click', handleAddEvent);
+            loadEvents();
+        }
+
+        function loadEvents() {
+            const eventsListDiv = document.getElementById('events-list');
+            const q = query(collection(db, 'events'), orderBy('date', 'desc'));
+
+            onSnapshot(q, (snapshot) => {
+                eventsListDiv.innerHTML = '';
+                snapshot.forEach(docSnap => {
+                    const event = { id: docSnap.id, ...docSnap.data() };
+                    const eventCard = document.createElement('div');
+                    eventCard.className = 'card'; // Re-use existing card style
+                    eventCard.innerHTML = `
+                        <h3>${event.title} (${event.date})</h3>
+                        <p>${event.description || ''}</p>
+                        <div class="event-actions">
+    
+                                <button class="event-btn danger delete-event-btn" data-id="${event.id}"><i class="fas fa-trash"></i> Delete</button>
+                            </div>
+                        <div class="duties-list" id="duties-${event.id}"></div>
+                        <div class="add-duty-section">
+                            <input type="text" id="new-duty-title-${event.id}" placeholder="New Duty Title">
+                            <button class="add-duty-btn event-btn" data-event-id="${event.id}"><i class="fas fa-plus"></i> Add Duty</button>
+                        </div>
+                    `;
+                    eventsListDiv.appendChild(eventCard);
+                    fetchDuties(event.id);
+                });
+            });
+        }
+
+        function fetchDuties(eventId) {
+            const dutiesListDiv = document.getElementById(`duties-${eventId}`);
+            const dutiesQuery = query(collection(db, 'event_duties'), where('eventId', '==', eventId));
+            onSnapshot(dutiesQuery, (snapshot) => {
+                let dutiesHtml = '<ul>';
+                snapshot.forEach(docSnap => {
+                    const duty = docSnap.data();
+                    dutiesHtml += `<li>${duty.title} - ${duty.assignedPrefectName || 'Not Taken'}</li>`;
+                });
+                dutiesHtml += '</ul>';
+                dutiesListDiv.innerHTML = dutiesHtml;
+            });
+        }
+
+        async function handleAddEvent() {
+            const newEventTitle = document.getElementById('new-event-title').value;
+            const newEventDate = document.getElementById('new-event-date').value;
+            const newEventDescription = document.getElementById('new-event-description').value;
+
+            if (!newEventTitle || !newEventDate) {
+                await showCustomAlert('Missing Information', 'Please provide a title and a date for the event.');
+                return;
+            }
+            try {
+                await addDoc(collection(db, 'events'), {
+                    title: newEventTitle,
+                    date: newEventDate,
+                    description: newEventDescription,
+                });
+                document.getElementById('new-event-title').value = '';
+                document.getElementById('new-event-date').value = '';
+                document.getElementById('new-event-description').value = '';
+                await showCustomAlert('Success', 'Event added successfully!');
+            } catch (error) {
+                console.error("Error adding event: ", error);
+                await showCustomAlert('Error', `Failed to add event: ${error.message}`);
+            }
+        }
+
+        document.getElementById('events-list').addEventListener('click', async (e) => {
+            if (e.target.classList.contains('delete-event-btn')) {
+                const eventId = e.target.dataset.eventId;
+                handleDeleteEvent(eventId);
+            }
+            if (e.target.classList.contains('add-duty-btn')) {
+                const eventId = e.target.dataset.eventId;
+                handleAddDuty(eventId);
+            }
+
+        });
+
+        async function handleAddDuty(eventId) {
+            const dutyTitleInput = document.getElementById(`new-duty-title-${eventId}`);
+            const dutyTitle = dutyTitleInput.value;
+            if (!dutyTitle) return;
+            await addDoc(collection(db, 'event_duties'), {
+                eventId: eventId,
+                title: dutyTitle,
+                assignedPrefectId: null,
+                assignedPrefectName: null,
+            });
+            dutyTitleInput.value = '';
+        }
+
+        async function handleDeleteEvent(eventId) {
+            if (!await showCustomConfirm("Confirm Deletion", "Are you sure you want to delete this event and all its duties?")) return;
+            try {
+                const dutiesQuery = query(collection(db, 'event_duties'), where('eventId', '==', eventId));
+                const dutiesSnapshot = await getDocs(dutiesQuery);
+                dutiesSnapshot.forEach(async (dutyDoc) => {
+                    await deleteDoc(doc(db, 'event_duties', dutyDoc.id));
+                });
+                await deleteDoc(doc(db, 'events', eventId));
+                await showCustomAlert('Success', 'Event and all associated duties deleted successfully!');
+            } catch (error) {
+                console.error("Error deleting event: ", error);
+                await showCustomAlert('Error', `Failed to delete event: ${error.message}`);
+            }
+        }
+
+
+
+        // --- ATTENDANCE SCANNER LOGIC ---
+        function initializeAttendanceScanner() {
+            const openCameraBtn = document.getElementById('open-camera-btn');
+            const barcodeIdInput = document.getElementById('barcode-id-input');
+            const markAttendanceBtn = document.getElementById('mark-attendance-btn');
+            const attendanceMessage = document.getElementById('attendance-message');
+            const qrReaderDiv = document.getElementById('qr-reader');
+
+            const modal = document.getElementById('attendance-success-modal');
+            const modalPrefectImage = document.getElementById('prefect-image');
+            const modalPrefectName = document.getElementById('prefect-name');
+            const modalAttendanceStatus = document.getElementById('attendance-status-message');
+            const closeBtn = modal.querySelector('.close-btn'); // More specific selector
+
+            let isCameraOpen = false;
+            // Use Html5Qrcode directly instead of Html5QrcodeScanner
+            const html5QrCode = new Html5Qrcode("qr-reader");
+
+            closeBtn.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+            const onScanSuccess = (decodedText, decodedResult) => {
+                handleScan(decodedText);
+                if (isCameraOpen) {
+                    html5QrCode.stop().then(() => {
+                        qrReaderDiv.style.display = 'none';
+                        isCameraOpen = false;
+                        openCameraBtn.textContent = 'Open Camera Scanner';
+                    }).catch(err => console.error("Failed to stop camera after scan.", err));
+                }
+            };
+
+            const onScanFailure = (error) => {
+                // Ignore scan failure, it happens continuously.
+            };
+
+            openCameraBtn.addEventListener('click', () => {
+                if (isCameraOpen) {
+                    html5QrCode.stop().then(() => {
+                        qrReaderDiv.style.display = 'none';
+                        isCameraOpen = false;
+                        openCameraBtn.textContent = 'Open Camera Scanner';
+                    }).catch(err => {
+                        console.error("Failed to stop camera", err);
+                        showCustomAlert("Camera Error", "Could not stop the camera.");
+                    });
+                    return;
+                }
+
+                qrReaderDiv.style.display = 'block';
+                openCameraBtn.textContent = 'Starting Camera...';
+                openCameraBtn.disabled = true;
+
+                Html5Qrcode.getCameras().then(cameras => {
+                    if (cameras && cameras.length) {
+                        let cameraId = cameras[0].id; // Default to the first camera
+                        // Find the back camera
+                        const backCamera = cameras.find(camera => camera.label.toLowerCase().includes('back'));
+                        if (backCamera) {
+                            cameraId = backCamera.id;
+                        } else if (cameras.length > 1) {
+                            // As a fallback for devices that don't label cameras, assume the last one is the back camera
+                            cameraId = cameras[cameras.length - 1].id;
+                        }
+
+                        html5QrCode.start(
+                            cameraId,
+                            {
+                                fps: 10,
+                                qrbox: (viewfinderWidth, viewfinderHeight) => {
+                                    const minEdge = Math.min(viewfinderWidth, viewfinderHeight);
+                                    const qrboxSize = Math.floor(minEdge * 0.7);
+                                    return { width: qrboxSize, height: qrboxSize };
+                                }
+                            },
+                            onScanSuccess,
+                            onScanFailure
+                        ).then(() => {
+                            isCameraOpen = true;
+                            openCameraBtn.textContent = 'Close Camera Scanner';
+                            openCameraBtn.disabled = false;
+                        }).catch(err => {
+                            console.error(`Failed to start camera: ${err}`);
+                            showCustomAlert("Camera Error", `Failed to start camera. Please ensure you have given permission.`);
+                            qrReaderDiv.style.display = 'none';
+                            openCameraBtn.textContent = 'Open Camera Scanner';
+                            openCameraBtn.disabled = false;
+                        });
+                    } else {
+                        console.error("No cameras found.");
+                        showCustomAlert("Camera Error", "No cameras found on this device.");
+                        openCameraBtn.textContent = 'Open Camera Scanner';
+                        openCameraBtn.disabled = false;
+                    }
+                }).catch(err => {
+                    console.error("Error getting cameras:", err);
+                    showCustomAlert("Camera Error", `Could not get camera list. Please grant camera permissions.`);
+                    openCameraBtn.textContent = 'Open Camera Scanner';
+                    openCameraBtn.disabled = false;
+                });
+            });
+
+            markAttendanceBtn.addEventListener('click', () => {
+                handleScan(barcodeIdInput.value);
+            });
+
+            barcodeIdInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    handleScan(barcodeIdInput.value);
+                }
+            });
+
+            async function handleScan(scannedId) {
+                if (!scannedId) return;
+                attendanceMessage.textContent = 'Processing...';
+
+                try {
+                    const today = new Date().toISOString().slice(0, 10);
+                    const prefectsRef = collection(db, 'prefects');
+                    const qPrefect = query(prefectsRef, where('barcode_id', '==', scannedId), limit(1));
+                    const prefectSnapshot = await getDocs(qPrefect);
+
+                    if (prefectSnapshot.empty) {
+                        await showCustomAlert("Not Found", `No prefect found with barcode ID ${scannedId}.`);
+                        attendanceMessage.textContent = '';
+                        return;
+                    }
+                    const prefectDoc = prefectSnapshot.docs[0];
+                    const prefect = { id: prefectDoc.id, ...prefectDoc.data() };
+
+                    const attendanceRef = collection(db, 'attendance');
+                    const qAttendance = query(attendanceRef, where('prefect_id', '==', prefect.id), where('date', '==', today), limit(1));
+                    const attendanceSnapshot = await getDocs(qAttendance);
+
+                    const now = new Date();
+                    const currentTime = now.toTimeString().slice(0, 5);
+
+                    const settingsDocRef = doc(db, 'settings', 'config');
+                    const settingsDocSnap = await getDoc(settingsDocRef);
+                    const settings = settingsDocSnap.exists() ? settingsDocSnap.data() : { cutoff_time: '08:00' };
+
+                    let statusMessage = '';
+
+                    if (attendanceSnapshot.empty) {
+                        const cutOffTime = settings.cutoff_time || "08:00";
+                        const status = currentTime > cutOffTime ? "Late" : "Present";
+                        await addDoc(attendanceRef, {
+                            prefect_id: prefect.id,
+                            name: prefect.name,
+                            date: today,
+                            time_in: currentTime,
+                            status: status,
+                            time_out: null,
+                            duty_duration: null,
+                        });
+                        statusMessage = `Checked in at ${currentTime}. Status: ${status}`;
+                    } else {
+                        const attendanceDoc = attendanceSnapshot.docs[0];
+                        const attendanceData = attendanceDoc.data();
+                        if (attendanceData.time_out) {
+                            statusMessage = `Already checked out today.`;
+                        } else {
+                            const timeIn = attendanceData.time_in;
+                            const [inHours, inMinutes] = timeIn.split(':').map(Number);
+                            const [outHours, outMinutes] = currentTime.split(':').map(Number);
+                            const duration = (outHours * 60 + outMinutes) - (inHours * 60 + inMinutes);
+                            await updateDoc(doc(db, 'attendance', attendanceDoc.id), {
+                                time_out: currentTime,
+                                duty_duration: duration > 0 ? duration : 0,
+                            });
+                            statusMessage = `Checked out at ${currentTime}.`;
+                        }
+                    }
+
+                    modalPrefectImage.src = prefect.picture || 'info.jpg'; // Fallback image
+                    modalPrefectName.textContent = prefect.name;
+                    modalAttendanceStatus.textContent = statusMessage;
+                    modal.style.display = 'flex'; // Use flex for centering
+
+                    setTimeout(() => {
+                        modal.style.display = 'none';
+                    }, 3000); // Increased display time
+
+                    barcodeIdInput.value = '';
+                    attendanceMessage.textContent = '';
+                } catch (error) {
+                    attendanceMessage.textContent = '';
+                    await showCustomAlert("Error", `An error occurred: ${error.message}`);
+                    console.error(error);
+                }
+            }
+        }
+
+        // 3D Tilt Effect
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            const tiltAmount = 4;
+
+            document.querySelectorAll('.glass-pane').forEach(pane => {
+                pane.style.transform = `rotateY(${x * tiltAmount}deg) rotateX(${-y * tiltAmount}deg)`;
+            });
+        });
+
+        window.addEventListener('devicemotion', (e) => {
+            if (e.accelerationIncludingGravity.x !== null) {
+                const x = e.accelerationIncludingGravity.x / 5;
+                const y = e.accelerationIncludingGravity.y / 5;
+                const tiltAmount = 6;
+
+                 document.querySelectorAll('.glass-pane').forEach(pane => {
+                    pane.style.transform = `rotateY(${-x * tiltAmount}deg) rotateX(${y * tiltAmount}deg)`;
+                });
+            }
+        });
+
+        // Particle Animation
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let particlesArray;
+
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        setCanvasSize();
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) {
+                    this.directionX = -this.directionX;
+                }
+                if (this.y > canvas.height || this.y < 0) {
+                    this.directionY = -this.directionY;
+                }
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2.5) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * .4) - .2;
+                let directionY = (Math.random() * .4) - .2;
+                let color = 'rgba(140, 28, 19, 0.6)';
+
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function connect() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+                                 + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width/8) * (canvas.height/8)) {
+                        opacityValue = 1 - (distance/18000);
+                        ctx.strokeStyle = `rgba(140, 28, 19, ${opacityValue})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+        }
+
+        window.addEventListener('resize', () => {
+            setCanvasSize();
+            init();
+        });
+
+        init();
+        animate();
+
     </script>
 </body>
 </html>
